@@ -5,7 +5,6 @@
 
 int main() 
 {
-	//
 	size_t size_elt = sizeof(int);
 	Liste L = creer_liste();
 	int c = 10210;
