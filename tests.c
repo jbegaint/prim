@@ -10,10 +10,12 @@ int main()
 
 	/* ------- TEST LISTE -------------------------------- */
 
-	// Liste L = creer_liste(); warning à la compilation
 	Liste L;
-	L = creer_liste(); // là ça marche ...
+	L = creer_liste(); 
 
+	/* pour tester d'autres types, attention pour le moment, 
+	il faut aussi changer size_elt et afficher_element */
+	
 	// int c = 10210;
 	// int d = 10000;
 	// double c = 10210;
