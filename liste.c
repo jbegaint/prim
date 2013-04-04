@@ -9,23 +9,23 @@ Liste creer_liste(void)
 	return NULL;
 }
 
-int est_vide_liste(Liste L) 
+int est_vide_liste(Liste L)
 {
 	return !L;
 }
 
-Liste ajouter_tete(void *elt, Liste L, size_t size_elt) 
+Liste ajouter_tete(void *elt, Liste L, size_t size_elt)
 {
 	Liste p;
 	p = (Liste) malloc(sizeof(*p));
 
 	if (p == NULL)
-		return NULL; // cas d'erreur d'attribution de mémoire
+		return NULL;	// cas d'erreur d'attribution de mémoire
 
 	// alloue de la mémoire pour p->val
 	p->val = malloc(size_elt);
 	if (p->val == NULL)
-		return NULL; // cas d'erreur
+		return NULL;	// cas d'erreur
 
 	memcpy(p->val, elt, size_elt);
 
@@ -33,7 +33,8 @@ Liste ajouter_tete(void *elt, Liste L, size_t size_elt)
 	return p;
 }
 
-Liste free_list(Liste L) {
+Liste free_list(Liste L)
+{
 	free(L->val);
 	free(L);
 }
@@ -44,25 +45,25 @@ Liste supprimer_tete(Liste L)
 	p = (Liste) malloc(sizeof(*p));
 	if (p == NULL)
 		return NULL;
-	p = L -> suiv;
+	p = L->suiv;
 	free_list(L);
 	return p;
 }
 
-void afficher_liste(Liste L) 
+void afficher_liste(Liste L)
 {
 	if (est_vide_liste(L)) {
 		printf("La liste est vide\n");
 	} else {
 		Liste p;
-		for (p=L; !est_vide_liste(p); p=p->suiv) {
+		for (p = L; !est_vide_liste(p); p = p->suiv) {
 			afficher_element(p->val);
 		}
 		printf("\n");
 	}
 }
 
-void afficher_element(void* elt)
+void afficher_element(void *elt)
 {
 	printf("%c |", *(char *) elt);
 }
