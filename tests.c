@@ -2,10 +2,13 @@
 #include <stdio.h>
 
 #include "liste.h"
+#include "file.h"
 
 int main() 
 {
 	size_t size_elt = sizeof(char);
+
+	/* ------- TEST LISTE -------------------------------- */
 
 	// Liste L = creer_liste(); warning à la compilation
 	Liste L = NULL; // là ça marche ...
@@ -17,6 +20,15 @@ int main()
 
 	char c = 'a';
 	char d = 'b';
+
+	printf("##########\n");
+	printf("TEST LISTE\n");
+	printf("##########\n");
+
+
+	printf("Liste: ");
+	afficher_liste(L);
+
 	L = ajouter_tete(&c, L, size_elt);
 	printf("Liste: ");
 	afficher_liste(L);
@@ -28,6 +40,24 @@ int main()
 	L = supprimer_tete(L);
 	printf("Liste: ");
 	afficher_liste(L);
+
+	/* ------- TEST FILE -------------------------------- */
+	printf("##########\n");
+	printf("TEST FILE\n");
+	printf("##########\n");
+
+	File F = NULL;
+	printf("File: ");
+	afficher_file(F);
+
+	F = enfiler(&c, F, size_elt);
+	printf("File: ");
+	afficher_file(F);
+
+	F = enfiler(&d, F, size_elt);
+	printf("File: ");
+	afficher_file(F);
+
 
 	return 0;
 }

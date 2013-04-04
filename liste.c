@@ -51,14 +51,18 @@ Liste supprimer_tete(Liste L)
 
 void afficher_liste(Liste L) 
 {
-	Liste p;
-	for (p=L; !est_vide_liste(p); p=p->suiv) {
-		afficher_element(p);
+	if (est_vide_liste(L)) {
+		printf("La liste est vide\n");
+	} else {
+		Liste p;
+		for (p=L; !est_vide_liste(p); p=p->suiv) {
+			afficher_element(p->val);
+		}
+		printf("\n");
 	}
-	printf("\n");
 }
 
-void afficher_element(Liste p)
+void afficher_element(void* elt)
 {
-	printf("%c |", *(char *) p->val);
+	printf("%c |", *(char *) elt);
 }
