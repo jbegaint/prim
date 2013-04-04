@@ -6,7 +6,7 @@ typedef struct maillon {
 	struct maillon *suiv;
 } *Liste;
 
-Liste crer_liste(void);
+Liste creer_liste(void);
 int est_vide_liste(Liste);
 Liste ajouter_tete(void *, Liste, size_t);
 void afficher_liste(Liste);

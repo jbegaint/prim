@@ -11,7 +11,8 @@ int main()
 	/* ------- TEST LISTE -------------------------------- */
 
 	// Liste L = creer_liste(); warning à la compilation
-	Liste L = NULL; // là ça marche ...
+	Liste L;
+	L = creer_liste(); // là ça marche ...
 
 	// int c = 10210;
 	// int d = 10000;
@@ -46,7 +47,7 @@ int main()
 	printf("TEST FILE\n");
 	printf("##########\n");
 
-	File F = NULL;
+	File F = creer_file();
 	printf("File: ");
 	afficher_file(F);
 
