@@ -25,7 +25,7 @@ Liste ajouter_tete(void *elt, Liste L, size_t size_elt)
 	// alloue de la mémoire pour p->val
 	p->val = malloc(size_elt);
 	if (p->val == NULL)
-		return NULL;
+		return NULL; // cas d'erreur
 
 	memcpy(p->val, elt, size_elt);
 
@@ -53,6 +53,12 @@ void afficher_liste(Liste L)
 {
 	Liste p;
 	for (p=L; !est_vide_liste(p); p=p->suiv) {
-		printf("%d\n", *(int *) p->val);
+		afficher_element(p);
 	}
+	printf("\n");
+}
+
+void afficher_element(Liste p)
+{
+	printf("%c |", *(char *) p->val);
 }
