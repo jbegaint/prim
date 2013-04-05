@@ -70,7 +70,11 @@ int main()
 	printf("File: ");
 	afficher_file(F);
 
-	defiler(&F);
+	// void *tmp = defiler(&F);
+	printf("Defile: ");
+	afficher_element(defiler(&F));
+	printf("\n");
+
 	printf("File: ");
 	afficher_file(F);
 

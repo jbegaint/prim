@@ -66,13 +66,12 @@ void* defiler(File* F)
 
 	if ((*F)->suiv != *F) {
 		File tmp = (*F)->suiv->suiv;
-		free_file((*F)->suiv);
+		free((*F)->suiv);
 		(*F)->suiv = tmp;
 	} else {
-		free_file(*F);
+		free(*F);
 		*F = NULL;
 	}
-
 	return val;
 }
 
