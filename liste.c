@@ -33,7 +33,7 @@ Liste ajouter_tete(void *elt, Liste L, size_t size_elt)
 	return p;
 }
 
-Liste free_list(Liste L)
+void free_liste(Liste L)
 {
 	free(L->val);
 	free(L);
@@ -46,7 +46,7 @@ Liste supprimer_tete(Liste L)
 	if (p == NULL)
 		return NULL;
 	p = L->suiv;
-	free_list(L);
+	free_liste(L);
 	return p;
 }
 

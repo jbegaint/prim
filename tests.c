@@ -23,6 +23,7 @@ int main()
 
 	char c = 'a';
 	char d = 'b';
+	char e = 'c';
 
 	printf("##########\n");
 	printf("TEST LISTE\n");
@@ -61,6 +62,17 @@ int main()
 	printf("File: ");
 	afficher_file(F);
 
+	defiler(&F);
+	printf("File: ");
+	afficher_file(F);
+
+	F = enfiler(&e, F, size_elt);
+	printf("File: ");
+	afficher_file(F);
+
+	defiler(&F);
+	printf("File: ");
+	afficher_file(F);
 
 	return 0;
 }

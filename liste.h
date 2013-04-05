@@ -11,7 +11,7 @@ int est_vide_liste(Liste);
 Liste ajouter_tete(void *, Liste, size_t);
 void afficher_liste(Liste);
 void afficher_element(void *);
-Liste free_list(Liste);
+void free_liste(Liste);
 Liste supprimer_tete(Liste);
 
 #endif

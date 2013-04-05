@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "file.h"
+#include "liste.h"
 
 File creer_file(void)
 {
@@ -52,4 +53,30 @@ File enfiler(void *elt, File F, size_t size_elt)
 	}
 
 	return p;
+}
+
+void* defiler(File* F)
+{
+	if (est_vide_file(*F)) {
+		fprintf((stderr), "Erreur: impossible de défiler une file vide \n");;
+		exit(EXIT_FAILURE);
+	}
+
+	void *val = (*F)->suiv->val;
+
+	if ((*F)->suiv != *F) {
+		File tmp = (*F)->suiv->suiv;
+		free_file((*F)->suiv);
+		(*F)->suiv = tmp;
+	} else {
+		free_file(*F);
+		*F = NULL;
+	}
+
+	return val;
+}
+
+void free_file(File F)
+{
+	free_liste((Liste) F);
 }
