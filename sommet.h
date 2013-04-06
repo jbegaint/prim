@@ -15,10 +15,9 @@ typedef struct {
 
 
 /* Liste de Sommet */
-struct cellule {
+typedef struct cellule {
 	Sommet val;
 	struct cellule * suiv;
-};
-typedef struct cellule* ListeSommet;
+}* ListeSommet;
 
 #endif

@@ -9,11 +9,10 @@ typedef struct {
 } Arc;
 
 /* Liste d’Arc*/
-struct cellule {
+typedef struct cellule {
 	Arc arc;
 	struct cellule * suiv;
-};
-typedef struct cellule* ListeArc;
+}* ListeArc;
 
 
 #endif
