@@ -1,10 +1,18 @@
 #ifndef ARCH_H
 #define ARCH_H
 
+#include "sommet.h"
+
 /* Arc */
+// typedef struct {
+// 	int numero_debut;
+// 	int numero_fin;
+// 	float cout;
+// } Arc;
+
 typedef struct {
-	int numero_debut;
-	int numero_fin;
+	Sommet sommet_depart;
+	Sommet sommet_arrivee;
 	float cout;
 } Arc;
 

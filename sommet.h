@@ -13,6 +13,9 @@ typedef struct {
 
 	Arc* arrive_par; // pointeur vers le meilleur arc à connecté à l’ACM
 	float PPC; // cout de l’arc arrive_par
+
+	Arbre* noeudArbreACM;
+
 } Sommet;
 
 
