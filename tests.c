@@ -4,6 +4,8 @@
 #include "liste.h"
 #include "file.h"
 
+#include "arbre.h"
+
 int main() 
 {
 	size_t size_elt = sizeof(char);

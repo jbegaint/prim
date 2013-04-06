@@ -1,23 +1,25 @@
 #ifndef SOMMET_H
 #define SOMMET_H
 
+#include "arc.h"
+
 /* Sommet */
 typedef struct {
 	int numero;
 	char* nom;
 	float coordonnee_x;
 	float coordonnee_y;
-	ListeARC voisins;
+	ListeArc voisins;
 
-	*Arc arrive_par; // pointeur vers le meilleur arc à connecté à l’ACM
+	Arc* arrive_par; // pointeur vers le meilleur arc à connecté à l’ACM
 	float PPC; // cout de l’arc arrive_par
 } Sommet;
 
 
 /* Liste de Sommet */
-typedef struct cellule {
+typedef struct cellules {
 	Sommet val;
-	struct cellule * suiv;
+	struct cellules * suiv;
 }* ListeSommet;
 
 #endif
