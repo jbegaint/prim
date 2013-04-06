@@ -5,13 +5,10 @@ CFLAGS=-c -g -O2
 
 
 tests: tests.o liste.o file.o
-	gcc -o tests liste.o tests.o file.o
+	gcc  -o $@ $^ $(LDFLAGS)
 
-liste.o: liste.c
-	gcc $(CFLAGS) liste.c
-
-file.o: file.c
-	gcc $(CFLAGS) file.c
+%.o: %.c
+	gcc $(CFLAGS) $< 
 
 clean:
 	rm *.o

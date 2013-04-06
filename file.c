@@ -48,7 +48,7 @@ File enfiler(void *elt, File F, size_t size_elt)
 		p->suiv = p;
 	} else {
 		p->suiv = F->suiv;	// F->suiv : premier elt de la file et p : nouveau dernier
-		// fifo: first in first ou
+		// fifo: first in first out
 		F->suiv = p;
 	}
 

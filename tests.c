@@ -71,8 +71,9 @@ int main()
 	afficher_file(F);
 
 	// void *tmp = defiler(&F);
-	printf("Defile: ");
 	afficher_element(defiler(&F));
+	printf("défilé ");
+
 	printf("\n");
 
 	printf("File: ");
