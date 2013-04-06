@@ -3,8 +3,10 @@
 
 #include "liste.h"
 #include "file.h"
-
+#include "arc.h"
+#include "sommet.h"
 #include "arbre.h"
+
 
 int main() 
 {

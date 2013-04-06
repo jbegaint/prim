@@ -1,9 +1,10 @@
-#ifndef ARBRE_H
-#define ARBRE_H
+#pragma once
+
+// #include "sommet.h"
+/* arbre fils-frère, arbre n-aire */
 
 #include "sommet.h"
-
-/* arbre fils-frère, arbre n-aire */
+#include "arc.h"
 
 typedef struct NoeudArbre {
 	Sommet sommet;
@@ -13,5 +14,4 @@ typedef struct NoeudArbre {
 
 
 Arbre ajouter_arbre(Arc*);
-
-#endif
+	

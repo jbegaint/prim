@@ -5,33 +5,28 @@
 
 Arbre ajouter_arbre(Arc* arc) {
 
-	if (s == NULL)
-		return NULL;
+	// // CAS SI ARBRE NUL
 
-	if( !a || )
+	// // if(!)
 
-	// CAS SI ARBRE NUL
+	// Sommet* sommetDepart = noeudArbreACM -> sommet;
+	// Sommet* sommetArrive;
 
-	if(!)
+	// if (*sommetDepart == Arc->sommet_depart)
+	// 	sommetArrive = Arc->sommet_arrive;
+	// else
+	// 	sommetArrive = Arc->sommet_depart;
 
-	Sommet* sommetDepart = noeudArbreACM -> sommet;
-	Sommet* sommetArrive;
-
-	if (*sommetDepart == Arc->sommet_depart)
-		sommetArrive = Arc->sommet_arrive;
-	else
-		sommetArrive = Arc->sommet_depart;
-
-	Arbre noeudSommetDepart = sommetDepart -> noeudArbreACM;
+	// Arbre noeudSommetDepart = sommetDepart -> noeudArbreACM;
 
 	Arbre p = (Arbre) malloc(sizeof(*p));
 
-	p->sommet = sommetArrive;
-	p->freres = noeudSommetDepart->fils;
+	// p->sommet = sommetArrive;
+	// p->freres = noeudSommetDepart->fils;
 
-	noeudSommetDepart->fils = p;
+	// noeudSommetDepart->fils = p;
 
-	sommetArrive->noeudArbreACM = p;
+	// sommetArrive->noeudArbreACM = p;
 
 	return p;
 }

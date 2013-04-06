@@ -1,7 +1,11 @@
-#ifndef SOMMET_H
-#define SOMMET_H
+#pragma once
 
-#include "arc.h"
+// #include "arc.h"
+// #include "arbre.h"
+
+struct NoeudArbre;
+struct arc;
+struct cellule;
 
 /* Sommet */
 typedef struct {
@@ -9,14 +13,15 @@ typedef struct {
 	char* nom;
 	float coordonnee_x;
 	float coordonnee_y;
-	ListeArc voisins;
+	struct cellule* voisins;
 
-	Arc* arrive_par; // pointeur vers le meilleur arc à connecté à l’ACM
+	struct arc* arrive_par; // pointeur vers le meilleur arc à connecté à l’ACM
 	float PPC; // cout de l’arc arrive_par
 
-	Arbre* noeudArbreACM;
+	struct NoeudArbre* noeudArbreACM;
 
 } Sommet;
+
 
 
 /* Liste de Sommet */
@@ -24,5 +29,3 @@ typedef struct cellules {
 	Sommet val;
 	struct cellules * suiv;
 }* ListeSommet;
-
-#endif

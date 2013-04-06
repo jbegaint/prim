@@ -1,5 +1,4 @@
-#ifndef FILE_H
-#define FILE_H
+#pragma once
 
 #include "liste.h"
 
@@ -14,5 +13,3 @@ void afficher_file(File);
 File enfiler(void *, File, size_t);
 void* defiler(File*);
 void free_file(File);
-
-#endif
