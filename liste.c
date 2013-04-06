@@ -20,17 +20,36 @@ Liste ajouter_tete(void *elt, Liste L, size_t size_elt)
 	p = (Liste) malloc(sizeof(*p));
 
 	if (p == NULL)
-		return NULL;	// cas d'erreur d'attribution de mémoire
+		return NULL;	// problème d'attribution de mémoire
 
-	// alloue de la mémoire pour p->val
+	// alloue de la mémiore pour p->val
 	p->val = malloc(size_elt);
 	if (p->val == NULL)
-		return NULL;	// cas d'erreur
+		return NULL;	// idem
 
 	memcpy(p->val, elt, size_elt);
 
 	p->suiv = L;
 	return p;
+}
+
+Liste ajouter_queue(void *elt, Liste L, size_t size_elt)
+{
+	Liste p;
+	p = (Liste) malloc(sizeof(*p));
+
+	if (p == NULL)
+		return NULL;	// problème d'attribution de mémoire
+
+	// alloue de la mémiore pour p->val
+	p->val = malloc(size_elt);
+	if (p->val == NULL)
+		return NULL;	// idem
+
+	memcpy(p->val, elt, size_elt);
+
+	L->suiv = p;
+	return L;
 }
 
 void free_liste(Liste L)

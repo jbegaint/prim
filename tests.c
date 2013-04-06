@@ -37,7 +37,7 @@ int main()
 	printf("Liste: ");
 	afficher_liste(L);
 
-	L = ajouter_tete(&d, L, size_elt);
+	L = ajouter_queue(&d, L, size_elt);
 	printf("Liste: ");
 	afficher_liste(L);
 
