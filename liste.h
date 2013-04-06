@@ -1,6 +1,8 @@
 #ifndef LISTE_H
 #define LISTE_H
 
+#include "arc.h"
+
 typedef struct maillon {
 	void *val;
 	struct maillon *suiv;
@@ -14,5 +16,10 @@ void afficher_liste(Liste);
 void afficher_element(void *);
 void free_liste(Liste);
 Liste supprimer_tete(Liste);
+
+
+void afficher_liste_arc(ListeArc);
+void afficher_element_arc(Arc);
+
 
 #endif

@@ -36,6 +36,8 @@ Liste ajouter_tete(void *elt, Liste L, size_t size_elt)
 Liste ajouter_queue(void *elt, Liste L, size_t size_elt)
 {
 	Liste p;
+	Liste q;
+
 	p = (Liste) malloc(sizeof(*p));
 
 	if (p == NULL)
@@ -48,7 +50,15 @@ Liste ajouter_queue(void *elt, Liste L, size_t size_elt)
 
 	memcpy(p->val, elt, size_elt);
 
-	L->suiv = p;
+	if (est_vide_liste(L))
+		return p;
+
+	for (q=L; !est_vide_liste(q); q=q->suiv) {
+		if (q->suiv == NULL)
+			break;
+	}
+
+	q->suiv = p;
 	return L;
 }
 
@@ -85,4 +95,22 @@ void afficher_liste(Liste L)
 void afficher_element(void *elt)
 {
 	printf("%c |", *(char *) elt);
+}
+
+void afficher_liste_arc(ListeArc L)
+{
+	if (est_vide_liste((Liste)L)) {
+		printf("La liste est vide\n");
+	} else {
+		ListeArc p;
+		for (p = L; !est_vide_liste((Liste)p); p = p->suiv) {
+			afficher_element_arc(p->arc);
+		}
+		printf("\n");
+	}
+}
+
+void afficher_element_arc(Arc a)
+{
+	printf("Arc: \n");
 }

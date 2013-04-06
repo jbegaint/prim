@@ -41,6 +41,10 @@ int main()
 	printf("Liste: ");
 	afficher_liste(L);
 
+	L = ajouter_queue(&e, L, size_elt);
+	printf("Liste: ");
+	afficher_liste(L);
+
 	L = supprimer_tete(L);
 	printf("Liste: ");
 	afficher_liste(L);
