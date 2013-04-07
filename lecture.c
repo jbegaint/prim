@@ -8,7 +8,10 @@
 int main(int argc, char *argv[])
 {
 	FILE *f;
-	if (argc != 2) {
+	int i=1;
+	int j=1;
+
+	if (argc < 2) {
 		fprintf(stderr, "Usage: %s file\n", argv[0]);
 		exit(EXIT_FAILURE);
 	}
@@ -19,8 +22,8 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	int num_sommet;
-	int num_arrete;
+	int num_sommet, total_sommet;
+	int num_arrete, total_arrete;
 
 	if (fscanf(f, "%d %d", &num_sommet, &num_arrete) != 2) {
 		fprintf(stderr, "Format de fichier invalide\n");
@@ -28,6 +31,9 @@ int main(int argc, char *argv[])
 	}
 
 	printf("%d sommets et %d arretes\n", num_sommet, num_arrete);
+
+	total_arrete = num_arrete;
+	total_sommet = num_sommet;
 
 	// on se positionne au niveau de la ligne de commentaire et on l'affiche
 	fseek(f, 1, SEEK_CUR);
@@ -46,17 +52,21 @@ int main(int argc, char *argv[])
 		     &sommet.coordonnee_x, &sommet.coordonnee_y,
 		     &sommet.nom) != 4) {
 			fprintf(stderr, "Format de fichier invalide\n");
+			printf("ligne: %d\n", i);
 			exit(EXIT_FAILURE);
 		}
 		// printf("%d %f %f \n", sommet.numero, sommet.coordonnee_x,
 		       // sommet.coordonnee_y);
 
 		liste_sommet = (ListeSommet) ajouter_queue(&sommet, (Liste) liste_sommet, sizeof(Sommet));
-
+		printf("%d/%d\r", i, total_sommet);
+        fflush(stdout);
+		i++;
 		// printf("%s\n", sommet.nom); // seg fault, va savoir pourquoi...
 
 		num_sommet--;
 	} while (num_sommet > 0);
+		printf("\n");
 
 	// idem, on se positionne au niveau de la ligne de commentaire et on l'affiche
 	fseek(f, 1, SEEK_CUR);
@@ -64,6 +74,9 @@ int main(int argc, char *argv[])
 	printf("%s", s);
 
 	Arc arc;
+	ListeArc liste_arc;
+	liste_arc = (ListeArc) creer_liste();
+
 	int arrivee, depart;
 	// structure du fichier: depart, arrivee, coût
 	do {
@@ -72,10 +85,17 @@ int main(int argc, char *argv[])
 			fprintf(stderr, "Format de fichier invalide\n");
 			exit(EXIT_FAILURE);
 		}
-		printf("%d %d %f \n", arrivee, depart, arc.cout);
+		// printf("%d %d %f \n", arrivee, depart, arc.cout);
+
+		liste_arc = (ListeArc) ajouter_queue(&arc, (Liste) liste_arc, sizeof(Arc));
+
+		printf("%d/%d\r", j, total_arrete);
+        fflush(stdout);
+		j++;
+
 		num_arrete--;
 	} while (num_arrete > 0);
-
+	printf("\n");
 
 	fclose(f);
 
