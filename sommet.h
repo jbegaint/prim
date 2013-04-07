@@ -1,8 +1,5 @@
 #pragma once
 
-// #include "arc.h"
-// #include "arbre.h"
-
 struct NoeudArbre;
 struct arc;
 struct cellule;
