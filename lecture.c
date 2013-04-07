@@ -29,6 +29,7 @@ int main(int argc, char* argv[])
 
 	printf("%d sommets et %d arretes\n", num_sommet, num_arrete);
 
+	// on se positionne au niveau de la ligne de commentaire et on l'affiche
 	fseek(f, 1, SEEK_CUR);
 	char* s;
 	fgets(s, 256, f);
@@ -47,23 +48,23 @@ int main(int argc, char* argv[])
 		num_sommet--;
 	} while(num_sommet>0);
 
+	// idem, on se positionne au niveau de la ligne de commentaire et on l'affiche
 	fseek(f, 1, SEEK_CUR);
 	fgets(s, 256, f);
 	printf("%s", s);
 
 	Arc arc;
 	int arrivee, depart;
-
-	// int e, h, g;
 	// structure du fichier: depart, arrivee, coût
 	do {
-		if (fscanf(f, "%d %d %f", &arc.sommet_depart.numero, &depart, &arc.cout) != 3) {
+		if (fscanf(f, "%d %d %f", &arrivee, &depart, &arc.cout) != 3) {
 			fprintf(stderr, "Format de fichier invalide\n");
 			exit(EXIT_FAILURE);
 		}
 		printf("%d %d %f \n", arrivee, depart, arc.cout);
 		num_arrete--;
 	} while(num_arrete>0);	
+
 
 	fclose(f);
 
