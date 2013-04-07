@@ -35,11 +35,8 @@ int main(int argc, char *argv[])
 	fgets(s, 256, f);
 	printf("%s", s);
 
-
-
 	Sommet sommet;
 	ListeSommet liste_sommet;
-
 	liste_sommet = (ListeSommet) creer_liste();
 
 	//structure du fichier: numéro, x, y, nom

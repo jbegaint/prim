@@ -13,3 +13,9 @@ typedef struct cellule {
 	Arc arc;
 	struct cellule * suiv;
 }* ListeArc;
+
+/* File d’Arc*/
+typedef struct noeud {
+	Arc arc;
+	struct noeud * suiv;
+}* FileArc;

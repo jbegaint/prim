@@ -19,8 +19,6 @@ typedef struct {
 
 } Sommet;
 
-
-
 /* Liste de Sommet */
 typedef struct cellules {
 	Sommet val;
