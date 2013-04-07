@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 #include "sommet.h"
 #include "arc.h"
+#include "liste.h"
 
 int main(int argc, char *argv[])
 {
@@ -31,11 +31,17 @@ int main(int argc, char *argv[])
 
 	// on se positionne au niveau de la ligne de commentaire et on l'affiche
 	fseek(f, 1, SEEK_CUR);
-	char *s;
+	char s[256];
 	fgets(s, 256, f);
 	printf("%s", s);
 
+
+
 	Sommet sommet;
+	ListeSommet liste_sommet;
+
+	liste_sommet = (ListeSommet) creer_liste();
+
 	//structure du fichier: numéro, x, y, nom
 	do {
 		if (fscanf
@@ -45,8 +51,11 @@ int main(int argc, char *argv[])
 			fprintf(stderr, "Format de fichier invalide\n");
 			exit(EXIT_FAILURE);
 		}
-		printf("%d %f %f \n", sommet.numero, sommet.coordonnee_x,
-		       sommet.coordonnee_y);
+		// printf("%d %f %f \n", sommet.numero, sommet.coordonnee_x,
+		       // sommet.coordonnee_y);
+
+		liste_sommet = (ListeSommet) ajouter_queue(&sommet, (Liste) liste_sommet, sizeof(Sommet));
+
 		// printf("%s\n", sommet.nom); // seg fault, va savoir pourquoi...
 
 		num_sommet--;

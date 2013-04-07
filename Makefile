@@ -7,6 +7,9 @@ CFLAGS=-c -g -O2
 tests: tests.o liste.o file.o arbre.o 
 	gcc  -o $@ $^ $(LDFLAGS)
 
+lecture: lecture.o liste.o
+	gcc  -o $@ $^ $(LDFLAGS)
+
 %.o: %.c
 	gcc $(CFLAGS) $< 
 
