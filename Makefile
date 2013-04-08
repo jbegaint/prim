@@ -3,6 +3,7 @@
 CFLAGS=-c -g -O2
 # LFLAGS=-L$(DIRSDL)/lib -lSDL -lSDL_ttf -lSDL_image  -lSDL_sound -lSDL_phelma -lSDL_draw -lm
 
+programme1: programme1.o liste.o file.o
 
 tests: tests.o liste.o file.o arbre.o 
 	gcc  -o $@ $^ $(LDFLAGS)

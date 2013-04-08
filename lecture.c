@@ -40,28 +40,6 @@ int main(int argc, char *argv[])
 	ListeSommet liste_sommet;
 	liste_sommet = (ListeSommet) creer_liste();
 
-	// do {
-
-	// 	//structure du fichier: numéro, x, y, nom
-	// 	if (fscanf(f, "%d %f %f %s", &sommet.numero, &sommet.coordonnee_x, &sommet.coordonnee_y, &sommet.nom) != 4) {
-			
-	// 		fprintf(stderr, "Format de fichier invalide\n");
-	// 		printf("ligne: %d\n", i);
-			
-	// 		exit(EXIT_FAILURE);
-	// 	}
-	// 	// printf("%d %f %f \n", sommet.numero, sommet.coordonnee_x,
-	// 	       // sommet.coordonnee_y);
-
-	// 	liste_sommet = (ListeSommet) ajouter_queue(&sommet, (Liste) liste_sommet, sizeof(Sommet));
-	// 	printf("%d/%d\r", i+1, num_sommet);
- //        fflush(stdout);
-	// 	i++;
-	// 	// printf("%s\n", sommet.nom); // seg fault, va savoir pourquoi...
-
-	// } while (i < num_sommet);
-	// 	printf("\n");
-
 	for (i=0; i<num_sommet; i++) {
 
 		//structure du fichier: numéro, x, y, nom
@@ -78,7 +56,7 @@ int main(int argc, char *argv[])
 		liste_sommet = (ListeSommet) ajouter_queue(&sommet, (Liste) liste_sommet, sizeof(Sommet));
 		printf("%d/%d\r", i+1, num_sommet);
         fflush(stdout);
-		// printf("%s\n", sommet.nom); // seg fault, va savoir pourquoi...
+		// printf("%s\n", sommet.nom); //segfault: da fuck?
 
 	} 
 	printf("\n");
