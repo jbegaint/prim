@@ -58,16 +58,6 @@ int main(int argc, char *argv[])
 		liste_sommet = (ListeSommet) ajouter_queue(&sommet, (Liste) liste_sommet, sizeof(Sommet));
 		printf("%d/%d, %s \r",i+1, num_sommet,sommet.nom);
   		 fflush(stdout);
-	
-		
- 		
-		
-		
-		
-
-        	
-		
-
 	} 
 	printf("\n");
 
