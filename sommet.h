@@ -7,7 +7,7 @@ struct cellule;
 /* Sommet */
 typedef struct {
 	int numero;
-	char* nom;
+	char nom [256];
 	float coordonnee_x;
 	float coordonnee_y;
 	struct cellule* voisins;

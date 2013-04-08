@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
 	FILE *f;
 	int i;
 	int j;
+	
 
 	if (argc < 2) {
 		fprintf(stderr, "Usage: %s file\n", argv[0]);
@@ -43,7 +44,8 @@ int main(int argc, char *argv[])
 	for (i=0; i<num_sommet; i++) {
 
 		//structure du fichier: numéro, x, y, nom
-		if (fscanf(f, "%d %f %f %s", &sommet.numero, &sommet.coordonnee_x, &sommet.coordonnee_y, &sommet.nom) != 4) {
+
+		if (fscanf(f, "%d %f %f %s", &sommet.numero, &sommet.coordonnee_x, &sommet.coordonnee_y, (sommet.nom)) != 4) {
 			
 			fprintf(stderr, "Format de fichier invalide\n");
 			printf("ligne: %d\n", i);
@@ -54,9 +56,17 @@ int main(int argc, char *argv[])
 		       // sommet.coordonnee_y);
 
 		liste_sommet = (ListeSommet) ajouter_queue(&sommet, (Liste) liste_sommet, sizeof(Sommet));
-		printf("%d/%d\r", i+1, num_sommet);
-        fflush(stdout);
-		// printf("%s\n", sommet.nom); //segfault: da fuck?
+		printf("%d/%d, %s \r",i+1, num_sommet,sommet.nom);
+  		 fflush(stdout);
+	
+		
+ 		
+		
+		
+		
+
+        	
+		
 
 	} 
 	printf("\n");

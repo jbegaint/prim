@@ -8,7 +8,7 @@ programme1: programme1.o liste.o file.o
 tests: tests.o liste.o file.o arbre.o 
 	gcc  -o $@ $^ $(LDFLAGS)
 
-lecture: lecture.o liste.o
+lecture: lecture.o liste.o file.o utils.o
 	gcc  -o $@ $^ $(LDFLAGS)
 
 %.o: %.c
