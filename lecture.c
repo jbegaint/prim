@@ -22,8 +22,8 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	int num_sommet, total_sommet;
-	int num_arrete, total_arrete;
+	int num_sommet;
+	int num_arrete;
 
 	if (fscanf(f, "%d %d", &num_sommet, &num_arrete) != 2) {
 		fprintf(stderr, "Format de fichier invalide\n");
@@ -31,9 +31,6 @@ int main(int argc, char *argv[])
 	}
 
 	printf("%d sommets et %d arretes\n", num_sommet, num_arrete);
-
-	total_arrete = num_arrete;
-	total_sommet = num_sommet;
 
 	// on se positionne au niveau de la ligne de commentaire et on l'affiche
 	fseek(f, 1, SEEK_CUR);
@@ -59,14 +56,12 @@ int main(int argc, char *argv[])
 		       // sommet.coordonnee_y);
 
 		liste_sommet = (ListeSommet) ajouter_queue(&sommet, (Liste) liste_sommet, sizeof(Sommet));
-		// tab_sommet[i] = sommet;
-		printf("%d/%d\r", i+1, total_sommet);
+		printf("%d/%d\r", i+1, num_sommet);
         fflush(stdout);
 		i++;
 		// printf("%s\n", sommet.nom); // seg fault, va savoir pourquoi...
 
-		num_sommet--;
-	} while (num_sommet > 0);
+	} while (i < num_sommet);
 		printf("\n");
 
 	// idem, on se positionne au niveau de la ligne de commentaire et on l'affiche
@@ -92,12 +87,11 @@ int main(int argc, char *argv[])
 
 		// il faut encore récupérer les sommets à mettre dans arc
 
-		printf("%d/%d\r", j+1, total_arrete);
+		printf("%d/%d\r", j+1, num_arrete);
         fflush(stdout);
 		j++;
 
-		num_arrete--;
-	} while (num_arrete > 0);
+	} while (j < num_arrete);
 	printf("\n");
 
 	fclose(f);
