@@ -58,12 +58,17 @@ FileArc algo_fileACM(void) {
 					// il faut maintenant le supprimer de la liste
 
 					// cas général
-					p->suiv = p->suiv->suiv;
+					// a voir si bug dans cas particuliers
+					ListeSommet tmp;
+					tmp = p->suiv->suiv;
 					free_liste((Liste) p->suiv);
+					p->suiv = tmp;
 				}
 			}
 		}
 
+		// si j n'est pas dans d;
+		
 	}
 
 	return fileACM;

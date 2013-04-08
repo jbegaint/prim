@@ -17,6 +17,8 @@ void afficher_element(void *);
 void free_liste(Liste);
 Liste supprimer_tete(Liste);
 
+int recherche(Liste, void*);
+
 
 void afficher_liste_arc(ListeArc);
 void afficher_element_arc(Arc);
