@@ -23,4 +23,4 @@ typedef struct {
 typedef struct cellules {
 	Sommet val;
 	struct cellules * suiv;
-}* ListeSommet;
+}* ListeSommet; // utile pour C

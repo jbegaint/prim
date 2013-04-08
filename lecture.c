@@ -8,8 +8,8 @@
 int main(int argc, char *argv[])
 {
 	FILE *f;
-	int i=1;
-	int j=1;
+	int i=0;
+	int j=0;
 
 	if (argc < 2) {
 		fprintf(stderr, "Usage: %s file\n", argv[0]);
@@ -59,7 +59,8 @@ int main(int argc, char *argv[])
 		       // sommet.coordonnee_y);
 
 		liste_sommet = (ListeSommet) ajouter_queue(&sommet, (Liste) liste_sommet, sizeof(Sommet));
-		printf("%d/%d\r", i, total_sommet);
+		// tab_sommet[i] = sommet;
+		printf("%d/%d\r", i+1, total_sommet);
         fflush(stdout);
 		i++;
 		// printf("%s\n", sommet.nom); // seg fault, va savoir pourquoi...
@@ -77,10 +78,10 @@ int main(int argc, char *argv[])
 	ListeArc liste_arc;
 	liste_arc = (ListeArc) creer_liste();
 
-	int arrivee, depart;
+	int arrive, depart;
 	// structure du fichier: depart, arrivee, coût
 	do {
-		if (fscanf(f, "%d %d %f", &arrivee, &depart, &arc.cout) !=
+		if (fscanf(f, "%d %d %f", &arrive, &depart, &arc.cout) !=
 		    3) {
 			fprintf(stderr, "Format de fichier invalide\n");
 			exit(EXIT_FAILURE);
@@ -89,7 +90,9 @@ int main(int argc, char *argv[])
 
 		liste_arc = (ListeArc) ajouter_queue(&arc, (Liste) liste_arc, sizeof(Arc));
 
-		printf("%d/%d\r", j, total_arrete);
+		// il faut encore récupérer les sommets à mettre dans arc
+
+		printf("%d/%d\r", j+1, total_arrete);
         fflush(stdout);
 		j++;
 

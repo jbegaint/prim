@@ -18,4 +18,4 @@ typedef struct cellule {
 typedef struct noeud {
 	Arc arc;
 	struct noeud * suiv;
-}* FileArc;
+}* FileArc; //utile pour fileACM
