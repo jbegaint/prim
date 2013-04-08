@@ -114,3 +114,14 @@ void afficher_element_arc(Arc a)
 {
 	printf("Arc: \n");
 }
+
+
+int recherche_elt_liste(Liste L, void* elt) 
+{
+	Liste p;
+	for (p=L; !est_vide_liste(p); p=p->suiv) {
+		if (p->val == elt)
+			return 1;
+	}
+	return 0;
+}

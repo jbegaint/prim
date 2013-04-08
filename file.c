@@ -29,7 +29,7 @@ void afficher_file(File F)
 	}
 }
 
-File enfiler(void *elt, File F, size_t size_elt)
+File enfiler(File F, void *elt, size_t size_elt)
 {
 	File p;
 	p = malloc(sizeof(*p));
