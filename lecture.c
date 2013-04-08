@@ -5,6 +5,17 @@
 #include "arc.h"
 #include "liste.h"
 
+FILE* open_file(char* file_name) {
+	FILE *f;
+
+	f = fopen(file_name, "r");
+	if (f == NULL) {
+		fprintf(stderr, "Ouverture impossible\n");
+		exit(EXIT_FAILURE);
+	}
+	return f;
+}
+
 int main(int argc, char *argv[])
 {
 	FILE *f;
@@ -16,11 +27,7 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	f = fopen(argv[1], "r");
-	if (f == NULL) {
-		fprintf(stderr, "Ouverture impossible\n");
-		exit(EXIT_FAILURE);
-	}
+	f = open_file(argv[1]);
 
 	int num_sommet;
 	int num_arrete;
@@ -44,10 +51,7 @@ int main(int argc, char *argv[])
 
 	//structure du fichier: numéro, x, y, nom
 	do {
-		if (fscanf
-		    (f, "%d %f %f %s", &sommet.numero,
-		     &sommet.coordonnee_x, &sommet.coordonnee_y,
-		     &sommet.nom) != 4) {
+		if (fscanf(f, "%d %f %f %s", &sommet.numero, &sommet.coordonnee_x, &sommet.coordonnee_y, &sommet.nom) != 4) {
 			fprintf(stderr, "Format de fichier invalide\n");
 			printf("ligne: %d\n", i);
 			exit(EXIT_FAILURE);
