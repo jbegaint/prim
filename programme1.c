@@ -47,14 +47,20 @@ FileArc algo_fileACM(void) {
 		}
 
 		// supprimer j de C;
-		for (p=C; !est_vide_liste((Liste) p); p=p->suiv) {
-			if ( p->suiv == sommet_ppc_min ) {
-				// on a trouvé j
-				// il faut maintenant le supprimer de la liste
+		if ( C->sommet.PPC == min) {
+			// cas si j premier élément de C
+			C = C->suiv;
+		} 
+		else {
+			for (p=C; !est_vide_liste((Liste) p); p=p->suiv) {
+				if ( (p->suiv->sommet).PPC == min ) {
+					// on a trouvé j
+					// il faut maintenant le supprimer de la liste
 
-				// cas général
-				p->suiv == sommet_ppc_min->suiv;
-				free_liste((Liste) p->suiv);
+					// cas général
+					p->suiv = p->suiv->suiv;
+					free_liste((Liste) p->suiv);
+				}
 			}
 		}
 
