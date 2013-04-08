@@ -116,7 +116,7 @@ void afficher_element_arc(Arc a)
 }
 
 
-int recherche(Liste L, void* elt) 
+int recherche_elt_liste(Liste L, void* elt) 
 {
 	Liste p;
 	for (p=L; !est_vide_liste(p); p=p->suiv) {

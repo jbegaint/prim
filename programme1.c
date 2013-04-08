@@ -68,7 +68,9 @@ FileArc algo_fileACM(void) {
 		}
 
 		// si j n'est pas dans d;
-		
+		if (recherche_elt_liste((Liste) C, &sommet_ppc_min) != 1) {
+			fileACM = (FileArc) enfiler((File) fileACM, &sommet_ppc_min.arrive_par, sizeof(Arc));
+		}
 	}
 
 	return fileACM;

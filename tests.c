@@ -62,11 +62,11 @@ int main()
 	printf("File: ");
 	afficher_file(F);
 
-	F = enfiler(&c, F, size_elt);
+	F = enfiler(F, &c, size_elt);
 	printf("File: ");
 	afficher_file(F);
 
-	F = enfiler(&d, F, size_elt);
+	F = enfiler(F, &d, size_elt);
 	printf("File: ");
 	afficher_file(F);
 
@@ -74,7 +74,7 @@ int main()
 	printf("File: ");
 	afficher_file(F);
 
-	F = enfiler(&e, F, size_elt);
+	F = enfiler(F, &e, size_elt);
 	printf("File: ");
 	afficher_file(F);
 
