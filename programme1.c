@@ -37,14 +37,10 @@ FileArc algo_fileACM(void) {
 		 POUR UN CODE PLUS EXPLICITE */
 
 		// sommet j de C de plus petit PPC;
-		float min = FLT_MAX;
 		Sommet sommet_ppc_min;
-		for(p=C; !est_vide_liste((Liste) p); p=p->suiv) {
-			if ( (p->sommet).PPC < min ) {
-				min = (p->sommet).PPC;
-				sommet_ppc_min = p->sommet;
-			}
-		}
+		sommet_ppc_min = trouver_min_liste_sommet(C);
+		float min = sommet_ppc_min.PPC;
+		
 
 		// supprimer j de C;
 		if ( C->sommet.PPC == min) {

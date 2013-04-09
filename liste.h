@@ -3,6 +3,7 @@
 
 #include "arc.h"
 
+
 typedef struct maillon {
 	void *val;
 	struct maillon *suiv;
@@ -22,6 +23,5 @@ int recherche_elt_liste(Liste, void*);
 
 void afficher_liste_arc(ListeArc);
 void afficher_element_arc(Arc);
-
 
 #endif

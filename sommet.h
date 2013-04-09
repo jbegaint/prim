@@ -24,3 +24,6 @@ typedef struct cellules {
 	Sommet sommet;
 	struct cellules * suiv;
 }* ListeSommet; // utile pour C
+
+
+Sommet trouver_min_liste_sommet(ListeSommet);
