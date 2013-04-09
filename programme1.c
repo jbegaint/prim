@@ -6,7 +6,6 @@
 #include "arc.h"
 #include "liste.h"
 #include "file.h"
-
 #include "utils.h"
 
 
@@ -15,7 +14,8 @@ FileArc algo_fileACM(void) {
 	FileArc fileACM;
 	Sommet d; // Sommet de départ
 
-	ListeSommet liste_sommet; //liste de tous les sommets du fichier
+	ListeSommet liste_sommet; // liste de tous les sommets du fichier
+	ListeArc liste_arc; // liste de tous les arcs du fichier
 
 	// DEBUT ALGO
 
@@ -40,7 +40,7 @@ FileArc algo_fileACM(void) {
 		Sommet sommet_ppc_min;
 		sommet_ppc_min = trouver_min_liste_sommet(C);
 		float min = sommet_ppc_min.PPC;
-		
+		// on récupère le sommet de plus petit PPC et son coût
 
 		// supprimer j de C;
 		if ( C->sommet.PPC == min) {
@@ -68,9 +68,39 @@ FileArc algo_fileACM(void) {
 			fileACM = (FileArc) enfiler((File) fileACM, &sommet_ppc_min.arrive_par, sizeof(Arc));
 		}
 
+		// il faut maintenant récupérer les adjacents à j
 
-		// SUITE ALGO ...
+		ListeSommet liste_sommet_adjacent;
+		ListeArc q;
+		for (q=liste_arc; !est_vide_liste((Liste) liste_arc); q=q->suiv) {
+			/* on a le droit au memcmp ici: il faut passé par calloc+memset, soit malloc
+			 ici on regarde a gauche et a droite de l'arc car on a juste les arcs dans un 
+			 seul sens pour le moment, il faudrait peut être les doubler lors de la lecture */
+			if ( memcmp((q->arc).sommet_depart, sommet_ppc_min ) == 1 ){
+				liste_sommet_adjacent = (ListeSommet) ajouter_queue(&(q->arc).sommet_depart, (Liste) liste_sommet_adjacent, sizeof(Sommet));
+			} 
+			else if ( memcmp((q->arc).sommet_arrive, sommet_ppc_min ) == 1) {
+				liste_sommet_adjacent = (ListeSommet) ajouter_queue(&(q->arc).sommet_arrive, (Liste) liste_sommet_adjacent, sizeof(Sommet));
+			}
+		}
 
+		// ListeSommet p
+
+		for (p=liste_sommet_adjacent; !est_vide_liste((Liste) p); p=p->suiv) {
+			if ( (p->sommet).PPC > min ) {
+
+				(p->sommet).PPC = min;
+				(p->sommet).arrive_par = sommet_ppc_min;
+
+				if (recherche_elt_liste((Liste) C), &(p->sommet)) {
+					C = (ListeSommet) ajouter_queue(&(p->sommet), (Liste) C, sizeof(Sommet));
+				}
+				else {
+					printf("nothing now \n");
+				}	
+
+			}
+		}
 	}
 
 	return fileACM;
