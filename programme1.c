@@ -90,9 +90,10 @@ FileArc algo_fileACM(void) {
 			if ( (p->sommet).PPC > min ) {
 
 				(p->sommet).PPC = min;
-				(p->sommet).arrive_par = sommet_ppc_min;
+				// (p->sommet).arrive_par = sommet_ppc_min;
+				// censé y mettre un arc pas un sommet
 
-				if (recherche_elt_liste((Liste) C), &(p->sommet)) {
+				if (recherche_elt_liste((Liste) C, &(p->sommet))) {
 					C = (ListeSommet) ajouter_queue(&(p->sommet), (Liste) C, sizeof(Sommet));
 				}
 				else {
