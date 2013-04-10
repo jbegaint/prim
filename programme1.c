@@ -97,12 +97,12 @@ FileArc algo_fileACM(void) {
 
 				/* il faut maintenant mettre l'arc j=>k dans arrive_par */
 
-				// for (q=liste_arc_adjacent; !est_vide_liste((Liste) liste_arc); q=q->suiv) {
-				// 	// if (  )
-				// 	printf("\n");;
-				// }
+				Arc arc;
+				arc.cout = (p->sommet).PPC;
+				arc.sommet_depart = &sommet_ppc_min;
+				arc.sommet_arrive = &(p->sommet);
 
-				// (p->sommet).arrive_par = 
+				(p->sommet).arrive_par = &arc;
 
 				if (recherche_elt_liste((Liste) C, &(p->sommet))) {
 					C = (ListeSommet) ajouter_queue(&(p->sommet), (Liste) C, sizeof(Sommet));
