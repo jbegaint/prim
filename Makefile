@@ -14,7 +14,7 @@ tests: tests.o liste.o file.o arbre.o
 lecture: lecture.o liste.o file.o utils.o
 	gcc  -o $@ $^ $(LDFLAGS)
 
-view :  view.o 
+view :  mainview.o view.o 
 	gcc  -o $@ $^ -lSDL
 
 %.o: %.c
