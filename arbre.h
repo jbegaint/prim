@@ -9,7 +9,7 @@
 typedef struct NoeudArbre {
 	Sommet sommet;
 	struct NoeudArbre *fils;
-	struct NoeudArbre  *freres;
+	struct NoeudArbre  *frere;
 } *Arbre;
 
 

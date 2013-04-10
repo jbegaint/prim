@@ -8,7 +8,6 @@
 #include "file.h"
 #include "utils.h"
 
-
 FileArc algo_fileACM(void) {
 	ListeSommet C;
 	FileArc fileACM;
@@ -31,7 +30,6 @@ FileArc algo_fileACM(void) {
 	C = (ListeSommet) ajouter_queue(&d, (Liste) C, sizeof(Sommet));
 
 	while( !est_vide_file((File) fileACM) ) {
-
 
 		/* POUR TOUTES LES FONCTIONS QUI SUIVENT FAUDRA LES ECRIRE DANS UN FICHIER
 		 POUR UN CODE PLUS EXPLICITE */
@@ -72,10 +70,13 @@ FileArc algo_fileACM(void) {
 
 		ListeSommet liste_sommet_adjacent;
 		ListeArc q;
+
 		for (q=liste_arc; !est_vide_liste((Liste) liste_arc); q=q->suiv) {
+
 			/* on a le droit au memcmp ici: il faut passé par calloc+memset, soit malloc
 			 ici on regarde a gauche et a droite de l'arc car on a juste les arcs dans un 
 			 seul sens pour le moment, il faudrait peut être les doubler lors de la lecture */
+
 			if ( memcmp((q->arc).sommet_depart, sommet_ppc_min ) == 1 ){
 				liste_sommet_adjacent = (ListeSommet) ajouter_queue(&(q->arc).sommet_depart, (Liste) liste_sommet_adjacent, sizeof(Sommet));
 			} 
@@ -98,7 +99,7 @@ FileArc algo_fileACM(void) {
 				}
 				else {
 					printf("nothing now \n");
-				}	
+				}
 
 			}
 		}
@@ -107,7 +108,6 @@ FileArc algo_fileACM(void) {
 	return fileACM;
 	// FIN ALGO
 }
-
 
 int main(int argc, char* argv[]) {
 
