@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
 #include "sommet.h"
 #include "arc.h"
@@ -14,7 +15,6 @@ int main(int argc, char *argv[])
 	int i;
 	int j;
 	
-
 	if (argc < 2) {
 		fprintf(stderr, "Usage: %s file\n", argv[0]);
 		exit(EXIT_FAILURE);
@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 
 		//structure du fichier: numéro, x, y, nom
 
-		if (fscanf(f, "%d %f %f %s", &sommet.numero, &sommet.coordonnee_x, &sommet.coordonnee_y, (sommet.nom)) != 4) {
+		if (fscanf(f, "%d %f %f %[^\n]s", &sommet.numero, &sommet.coordonnee_x, &sommet.coordonnee_y, (sommet.nom)) != 4) {
 			
 			fprintf(stderr, "Format de fichier invalide\n");
 			printf("ligne: %d\n", i);
@@ -76,10 +76,15 @@ int main(int argc, char *argv[])
 	for (j=0; j<num_arrete; j++) {
 		// structure du fichier: depart, arrivee, coût
 		if (fscanf(f, "%d %d %f", &arrive, &depart, &arc.cout) != 3) {
-			
+			if (fscanf(f, "%d %d %f", &arrive, &depart, &arc.cout) == EOF) {
+				printf("\n");
+				printf("EOF\n");
+				break;
+			}else {
+			printf("%d\n", i+j);
 			fprintf(stderr, "Format de fichier invalide\n");
-			
 			exit(EXIT_FAILURE);
+		}
 		}
 		// printf("%d %d %f \n", arrivee, depart, arc.cout);
 
