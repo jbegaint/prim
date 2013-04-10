@@ -2,6 +2,7 @@
 # CFLAGS=-c -g -O2 -I$(DIRSDL)/include/SDL -I$(DIRSDL)/include
 CFLAGS=-c -g -O2
 # LFLAGS=-L$(DIRSDL)/lib -lSDL -lSDL_ttf -lSDL_image  -lSDL_sound -lSDL_phelma -lSDL_draw -lm
+LFLAGS=-lSDL
 
 all: programme1 tests lecture
 
@@ -12,6 +13,9 @@ tests: tests.o liste.o file.o arbre.o
 
 lecture: lecture.o liste.o file.o utils.o
 	gcc  -o $@ $^ $(LDFLAGS)
+
+view :  view.o 
+	gcc  -o $@ $^ -lSDL
 
 %.o: %.c
 	gcc $(CFLAGS) $< 
