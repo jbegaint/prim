@@ -9,13 +9,13 @@ all: programme1 tests lecture
 programme1: programme1.o liste.o file.o sommet.o
 
 tests: tests.o liste.o file.o arbre.o 
-	gcc  -o $@ $^ $(LDFLAGS)
+	gcc  -o $@ $^ $(LFLAGS)
 
 lecture: lecture.o liste.o file.o utils.o
-	gcc  -o $@ $^ $(LDFLAGS)
+	gcc  -o $@ $^ $(LFLAGS)
 
-view :  mainview.o view.o 
-	gcc  -o $@ $^ -lSDL
+view:  mainview.o view.o 
+	gcc  -o $@ $^ $(LFLAGS)
 
 %.o: %.c
 	gcc $(CFLAGS) $< 
