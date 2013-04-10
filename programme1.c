@@ -8,16 +8,16 @@
 #include "file.h"
 #include "utils.h"
 
-FileArc algo_fileACM(void) {
+File algo_fileACM(void) {
 	// ListeSommet C;
 
 	Liste C;
 
-	FileArc fileACM;
+	File fileACM;
 	Sommet d; // Sommet de départ
 
 	Liste liste_sommet; // liste de tous les sommets du fichier
-	ListeArc liste_arc; // liste de tous les arcs du fichier
+	Liste liste_arc; // liste de tous les arcs du fichier
 
 	// DEBUT ALGO
 
@@ -29,10 +29,10 @@ FileArc algo_fileACM(void) {
 
 	d.PPC = 0;
 	d.arrive_par = NULL;
-	fileACM = (FileArc) creer_liste();
+	fileACM = creer_file();
 	C = ajouter_queue(&d, C, sizeof(Sommet));
 
-	while( !est_vide_file((File) fileACM) ) {
+	while( !est_vide_file(fileACM) ) {
 
 		/* POUR TOUTES LES FONCTIONS QUI SUIVENT FAUDRA LES ECRIRE DANS UN FICHIER
 		 POUR UN CODE PLUS EXPLICITE */
@@ -66,25 +66,25 @@ FileArc algo_fileACM(void) {
 
 		// si j n'est pas dans d;
 		if (recherche_elt_liste(C, &sommet_ppc_min) != 1) {
-			fileACM = (FileArc) enfiler((File) fileACM, &sommet_ppc_min.arrive_par, sizeof(Arc));
+			fileACM = enfiler(fileACM, &sommet_ppc_min.arrive_par, sizeof(Arc));
 		}
 
 		// il faut maintenant récupérer les adjacents à j
 
 		Liste liste_sommet_adjacent;
-		ListeArc q;
+		Liste q;
 
-		for (q=liste_arc; !est_vide_liste((Liste) liste_arc); q=q->suiv) {
+		for (q=liste_arc; !est_vide_liste(liste_arc); q=q->suiv) {
 
 			/* on a le droit au memcmp ici: il faut passé par calloc+memset, soit malloc
 			 ici on regarde a gauche et a droite de l'arc car on a juste les arcs dans un 
 			 seul sens pour le moment, il faudrait peut être les doubler lors de la lecture */
 
-			if ( memcmp((q->arc).sommet_depart, &sommet_ppc_min ) == 1 ){
-				liste_sommet_adjacent = ajouter_queue((q->arc).sommet_depart, liste_sommet_adjacent, sizeof(Sommet));
+			if ( memcmp((*(Arc*) q->val).sommet_depart, &sommet_ppc_min ) == 1 ){
+				liste_sommet_adjacent = ajouter_queue((*(Arc*) q->val).sommet_depart, liste_sommet_adjacent, sizeof(Sommet));
 			} 
-			else if ( memcmp((q->arc).sommet_arrive, &sommet_ppc_min ) == 1) {
-				liste_sommet_adjacent = ajouter_queue((q->arc).sommet_arrive, liste_sommet_adjacent, sizeof(Sommet));
+			else if ( memcmp((*(Arc*) q->val).sommet_arrive, &sommet_ppc_min ) == 1) {
+				liste_sommet_adjacent = ajouter_queue((*(Arc*) q->val).sommet_arrive, liste_sommet_adjacent, sizeof(Sommet));
 			}
 		}
 
@@ -124,7 +124,7 @@ FileArc algo_fileACM(void) {
 
 int main(int argc, char* argv[]) {
 
-	FileArc fileACM;
+	File fileACM;
 	fileACM = algo_fileACM();	
 
 	return 0;
