@@ -77,13 +77,16 @@ FileArc algo_fileACM(void) {
 			 ici on regarde a gauche et a droite de l'arc car on a juste les arcs dans un 
 			 seul sens pour le moment, il faudrait peut être les doubler lors de la lecture */
 
-			if ( memcmp((q->arc).sommet_depart, sommet_ppc_min ) == 1 ){
-				liste_sommet_adjacent = (ListeSommet) ajouter_queue(&(q->arc).sommet_depart, (Liste) liste_sommet_adjacent, sizeof(Sommet));
+			if ( memcmp((q->arc).sommet_depart, &sommet_ppc_min ) == 1 ){
+				liste_sommet_adjacent = (ListeSommet) ajouter_queue((q->arc).sommet_depart, (Liste) liste_sommet_adjacent, sizeof(Sommet));
 			} 
-			else if ( memcmp((q->arc).sommet_arrive, sommet_ppc_min ) == 1) {
-				liste_sommet_adjacent = (ListeSommet) ajouter_queue(&(q->arc).sommet_arrive, (Liste) liste_sommet_adjacent, sizeof(Sommet));
+			else if ( memcmp((q->arc).sommet_arrive, &sommet_ppc_min ) == 1) {
+				liste_sommet_adjacent = (ListeSommet) ajouter_queue((q->arc).sommet_arrive, (Liste) liste_sommet_adjacent, sizeof(Sommet));
 			}
 		}
+
+		sommet_ppc_min.voisins = liste_sommet_adjacent;
+
 
 		// ListeSommet p
 
@@ -91,8 +94,15 @@ FileArc algo_fileACM(void) {
 			if ( (p->sommet).PPC > min ) {
 
 				(p->sommet).PPC = min;
-				// (p->sommet).arrive_par = sommet_ppc_min;
-				// censé y mettre un arc pas un sommet
+
+				/* il faut maintenant mettre l'arc j=>k dans arrive_par */
+
+				// for (q=liste_arc_adjacent; !est_vide_liste((Liste) liste_arc); q=q->suiv) {
+				// 	// if (  )
+				// 	printf("\n");;
+				// }
+
+				// (p->sommet).arrive_par = 
 
 				if (recherche_elt_liste((Liste) C, &(p->sommet))) {
 					C = (ListeSommet) ajouter_queue(&(p->sommet), (Liste) C, sizeof(Sommet));

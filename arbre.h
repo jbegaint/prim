@@ -7,7 +7,7 @@
 #include "arc.h"
 
 typedef struct NoeudArbre {
-	Sommet sommet;
+	Sommet* sommet;
 	struct NoeudArbre *fils;
 	struct NoeudArbre  *frere;
 } *Arbre;
