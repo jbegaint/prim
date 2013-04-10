@@ -39,8 +39,8 @@ int main(int argc, char *argv[])
 	printf("%s", s);
 
 	Sommet sommet;
-	ListeSommet liste_sommet;
-	liste_sommet = (ListeSommet) creer_liste();
+	Liste liste_sommet;
+	liste_sommet = creer_liste();
 
 	for (i=0; i<num_sommet; i++) {
 
@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 		// printf("%d %f %f \n", sommet.numero, sommet.coordonnee_x,
 		       // sommet.coordonnee_y);
 
-		liste_sommet = (ListeSommet) ajouter_queue(&sommet, (Liste) liste_sommet, sizeof(Sommet));
+		liste_sommet = ajouter_queue(&sommet, liste_sommet, sizeof(Sommet));
 		printf("%d/%d, %s \r",i+1, num_sommet,sommet.nom);
   		 fflush(stdout);
 	} 
@@ -69,8 +69,8 @@ int main(int argc, char *argv[])
 	printf("%s", s);
 
 	Arc arc;
-	ListeArc liste_arc;
-	liste_arc = (ListeArc) creer_liste();
+	Liste liste_arc;
+	liste_arc = creer_liste();
 
 	int arrive, depart;
 	for (j=0; j<num_arrete; j++) {
@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
 		}
 		// printf("%d %d %f \n", arrivee, depart, arc.cout);
 
-		liste_arc = (ListeArc) ajouter_queue(&arc, (Liste) liste_arc, sizeof(Arc));
+		liste_arc = ajouter_queue(&arc, liste_arc, sizeof(Arc));
 
 		// il faut encore récupérer les sommets à mettre dans arc
 
