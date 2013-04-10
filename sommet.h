@@ -3,6 +3,7 @@
 struct NoeudArbre;
 struct arc;
 struct cellule;
+struct maillon;
 
 /* Sommet */
 typedef struct {
@@ -25,4 +26,4 @@ typedef struct cellules {
 }* ListeSommet; // utile pour C
 
 
-Sommet trouver_min_liste_sommet(ListeSommet);
+Sommet trouver_min_liste_sommet(struct maillon*);

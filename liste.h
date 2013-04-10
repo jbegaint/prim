@@ -5,7 +5,7 @@
 
 
 typedef struct maillon {
-	void *val;
+	void* val;
 	struct maillon *suiv;
 } *Liste;
 
