@@ -9,9 +9,9 @@
 typedef struct NoeudArbre {
 	Sommet* sommet;
 	struct NoeudArbre *fils;
-	struct NoeudArbre  *frere;
+	struct NoeudArbre  *freres;
 } *Arbre;
 
 
-Arbre ajouter_arbre(Arc*);
+Arbre ajouter_arbre(Arc*, Arbre);
 	

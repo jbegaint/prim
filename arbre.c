@@ -3,30 +3,24 @@
 #include "arbre.h"
 #include "sommet.h"
 
-Arbre ajouter_arbre(Arc* arc) {
-
-	// // CAS SI ARBRE NUL
-
-	// // if(!)
-
-	// Sommet* sommetDepart = noeudArbreACM -> sommet;
-	// Sommet* sommetArrive;
-
-	// if (*sommetDepart == Arc->sommet_depart)
-	// 	sommetArrive = Arc->sommet_arrive;
-	// else
-	// 	sommetArrive = Arc->sommet_depart;
-
-	// Arbre noeudSommetDepart = sommetDepart -> noeudArbreACM;
+Arbre ajouter_arbre(Arc* arc, Arbre r) {
 
 	Arbre p = (Arbre) malloc(sizeof(*p));
 
-	// p->sommet = sommetArrive;
-	// p->freres = noeudSommetDepart->fils;
+	Sommet* sommet_depart;
+	Sommet* sommet_arrive;
 
-	// noeudSommetDepart->fils = p;
+	sommet_depart = arc->sommet_depart;
+	sommet_arrive = arc->sommet_arrive;
 
-	// sommetArrive->noeudArbreACM = p;
+	Arbre noeudSommetDepart;
+	noeudSommetDepart = sommet_depart->noeudArbreACM;
+
+	p->sommet = sommet_arrive;
+	p->freres = noeudSommetDepart->fils;
+	noeudSommetDepart->fils = p;
+
+	sommet_arrive->noeudArbreACM = p;
 
 	return p;
 }
