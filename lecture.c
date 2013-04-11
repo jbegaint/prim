@@ -25,12 +25,21 @@ int main(int argc, char *argv[])
 	int num_sommet;
 	int num_arrete;
 
+	// Sommet tab_arc[num_arrete];
+
 	if (fscanf(f, "%d %d", &num_sommet, &num_arrete) != 2) {
 		fprintf(stderr, "Format de fichier invalide\n");
 		exit(EXIT_FAILURE);
 	}
 
 	printf("%d sommets et %d arretes\n", num_sommet, num_arrete);
+
+	Sommet* tab_sommet;
+	tab_sommet = malloc(num_sommet*sizeof(Sommet));
+	if (tab_sommet==NULL) {
+		fprintf(stderr, "Allocation impossible\n");
+		exit(EXIT_FAILURE);
+	}
 
 	// on se positionne au niveau de la ligne de commentaire et on l'affiche
 	fseek(f, 1, SEEK_CUR);
@@ -39,12 +48,15 @@ int main(int argc, char *argv[])
 	printf("%s", s);
 
 	Sommet sommet;
-	Liste liste_sommet;
-	liste_sommet = creer_liste();
+	// Liste liste_sommet;
+	// liste_sommet = creer_liste();
 
 	for (i=0; i<num_sommet; i++) {
 
-		//structure du fichier: numéro, x, y, nom
+		// structure du fichier: numéro, x, y, nom
+		// attention le nom peut être composé...
+
+		// a voir: fgets + sscanf plutôt
 
 		if (fscanf(f, "%d %f %f %[^\n]s", &sommet.numero, &sommet.coordonnee_x, &sommet.coordonnee_y, (sommet.nom)) != 4) {
 			
@@ -56,7 +68,8 @@ int main(int argc, char *argv[])
 		// printf("%d %f %f \n", sommet.numero, sommet.coordonnee_x,
 		       // sommet.coordonnee_y);
 
-		liste_sommet = ajouter_queue(&sommet, liste_sommet, sizeof(Sommet));
+		tab_sommet[i] = sommet;
+		// liste_sommet = ajouter_queue(&sommet, liste_sommet, sizeof(Sommet));
 		printf("%d/%d, %s \r",i+1, num_sommet,sommet.nom);
   		 fflush(stdout);
 	} 
@@ -69,8 +82,8 @@ int main(int argc, char *argv[])
 	printf("%s", s);
 
 	Arc arc;
-	Liste liste_arc;
-	liste_arc = creer_liste();
+	Arc* tab_arc;
+	tab_arc = malloc(num_arrete*sizeof(Arc));
 
 	int arrive, depart;
 	for (j=0; j<num_arrete; j++) {
@@ -88,11 +101,11 @@ int main(int argc, char *argv[])
 		}
 		// printf("%d %d %f \n", arrivee, depart, arc.cout);
 
-		liste_arc = ajouter_queue(&arc, liste_arc, sizeof(Arc));
+		tab_arc[j] = arc;
 
 		// il faut encore récupérer les sommets à mettre dans arc
 
-		printf("%d/%d\r", j+1, num_arrete);
+		printf("%d/%d %f\r", j+1, num_arrete, arc.cout);
         fflush(stdout);
 
 	}
