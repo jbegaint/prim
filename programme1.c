@@ -8,23 +8,27 @@
 #include "file.h"
 #include "utils.h"
 
-File algo_fileACM(void) {
+File algo_fileACM(Sommet* tab_sommet, int len_tab_sommet, Arc* tab_arc, int len_tab_arc) {
 	// ListeSommet C;
 
 	Liste C;
-
 	File fileACM;
 	Sommet d; // Sommet de départ
 
-	Liste liste_sommet; // liste de tous les sommets du fichier
-	Liste liste_arc; // liste de tous les arcs du fichier
+
 
 	// DEBUT ALGO
 
-	Liste p;
-	for(p=liste_sommet; !est_vide_liste(p); p=p->suiv) {
-		(*(Sommet*) p->val).PPC = FLT_MAX; 	//mettre un coût infini
-		(*(Sommet*) p->val).arrive_par = NULL;
+	// Liste p;
+	// for(p=liste_sommet; !est_vide_liste(p); p=p->suiv) {
+	// 	(*(Sommet*) p->val).PPC = FLT_MAX; 	//mettre un coût infini
+	// 	(*(Sommet*) p->val).arrive_par = NULL;
+	// }
+
+	Sommet* s;
+	for (s=tab_sommet; s<tab_sommet+len_tab_sommet; s++) {
+		(*s).PPC = FLT_MAX;
+		(*s).arrive_par = NULL;
 	}
 
 	d.PPC = 0;
@@ -49,7 +53,8 @@ File algo_fileACM(void) {
 			C = C->suiv;
 		} 
 		else {
-			for (p=C; !est_vide_liste((Liste) p); p=p->suiv) {
+			Liste p;
+			for (p=C; !est_vide_liste(p); p=p->suiv) {
 				if ( (*(Sommet*) p->suiv->val).PPC == min ) {
 					// on a trouvé j
 					// il faut maintenant le supprimer de la liste
@@ -72,7 +77,9 @@ File algo_fileACM(void) {
 		// il faut maintenant récupérer les adjacents à j
 
 		Liste liste_sommet_adjacent;
-		Liste q;
+		Liste q, p;
+		Liste liste_arc;
+
 
 		for (q=liste_arc; !est_vide_liste(liste_arc); q=q->suiv) {
 
@@ -125,7 +132,10 @@ File algo_fileACM(void) {
 int main(int argc, char* argv[]) {
 
 	File fileACM;
-	fileACM = algo_fileACM();	
+	Sommet tab_sommet[5];
+	Arc tab_arc[10];
+	int len_tab_sommet, len_tab_arc;
+	fileACM = algo_fileACM(tab_sommet, len_tab_sommet, tab_arc, len_tab_arc);	
 
 	return 0;
 }

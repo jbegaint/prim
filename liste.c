@@ -98,23 +98,23 @@ void afficher_element(void *elt)
 	printf("%c |", *(char *) elt);
 }
 
-void afficher_liste_arc(ListeArc L)
-{
-	if (est_vide_liste((Liste)L)) {
-		printf("La liste est vide\n");
-	} else {
-		ListeArc p;
-		for (p = L; !est_vide_liste((Liste)p); p = p->suiv) {
-			afficher_element_arc(p->arc);
-		}
-		printf("\n");
-	}
-}
+// void afficher_liste_arc(Liste L)
+// {
+// 	if (est_vide_liste(L) ){
+// 		printf("La liste est vide\n");
+// 	} else {
+// 		ListeArc p;
+// 		for (p = L; !est_vide_liste(p); p = p->suiv) {
+// 			afficher_element_arc(p->arc);
+// 		}
+// 		printf("\n");
+// 	}
+// }
 
-void afficher_element_arc(Arc a)
-{
-	printf("Arc: \n");
-}
+// void afficher_element_arc(Arc a)
+// {
+// 	printf("Arc: \n");
+// }
 
 
 int recherche_elt_liste(Liste L, void* elt) 
