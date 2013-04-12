@@ -15,8 +15,6 @@ File algo_fileACM(Sommet* tab_sommet, int len_tab_sommet, Arc* tab_arc, int len_
 	File fileACM;
 	Sommet d; // Sommet de départ
 
-
-
 	// DEBUT ALGO
 
 	// Liste p;
@@ -77,21 +75,21 @@ File algo_fileACM(Sommet* tab_sommet, int len_tab_sommet, Arc* tab_arc, int len_
 		// il faut maintenant récupérer les adjacents à j
 
 		Liste liste_sommet_adjacent;
-		Liste q, p;
-		Liste liste_arc;
+		Liste p;
+		Arc* a;
 
 
-		for (q=liste_arc; !est_vide_liste(liste_arc); q=q->suiv) {
+		for (a=tab_arc; a < tab_arc + len_tab_arc; a++) {
 
 			/* on a le droit au memcmp ici: il faut passé par calloc+memset, soit malloc
 			 ici on regarde a gauche et a droite de l'arc car on a juste les arcs dans un 
 			 seul sens pour le moment, il faudrait peut être les doubler lors de la lecture */
 
-			if ( memcmp((*(Arc*) q->val).sommet_depart, &sommet_ppc_min ) == 1 ){
-				liste_sommet_adjacent = ajouter_queue((*(Arc*) q->val).sommet_depart, liste_sommet_adjacent, sizeof(Sommet));
+			if ( memcmp((*a).sommet_depart, &sommet_ppc_min ) == 1 ){
+				liste_sommet_adjacent = ajouter_queue((*a).sommet_depart, liste_sommet_adjacent, sizeof(Sommet));
 			} 
-			else if ( memcmp((*(Arc*) q->val).sommet_arrive, &sommet_ppc_min ) == 1) {
-				liste_sommet_adjacent = ajouter_queue((*(Arc*) q->val).sommet_arrive, liste_sommet_adjacent, sizeof(Sommet));
+			else if ( memcmp((*a).sommet_arrive, &sommet_ppc_min ) == 1) {
+				liste_sommet_adjacent = ajouter_queue((*a).sommet_arrive, liste_sommet_adjacent, sizeof(Sommet));
 			}
 		}
 
