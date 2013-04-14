@@ -1,5 +1,4 @@
-#ifndef LISTE_H
-#define LISTE_H
+#pragma once
 
 #include "arc.h"
 
@@ -19,9 +18,3 @@ void free_liste(Liste);
 Liste supprimer_tete(Liste);
 
 int recherche_elt_liste(Liste, void*);
-
-
-void afficher_liste_arc(Liste);
-void afficher_element_arc(Arc);
-
-#endif

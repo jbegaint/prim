@@ -32,11 +32,12 @@ void lecture(char* filename, Sommet* tab_sommet, Arc* tab_arc, int* len_tab_somm
 	}
 
 	*len_tab_sommet = num_sommet;
-	*len_tab_arc = num_arrete; // a voir si faut pas un fois 2
+	*len_tab_arc = num_arrete; // a voir si faut pas un *2
 
 	printf("%d sommets et %d arretes\n", num_sommet, num_arrete);
 
 	tab_sommet = malloc(num_sommet*sizeof(Sommet));
+	
 	if (tab_sommet==NULL) {
 		fprintf(stderr, "Allocation impossible\n");
 		exit(EXIT_FAILURE);
@@ -70,7 +71,6 @@ void lecture(char* filename, Sommet* tab_sommet, Arc* tab_arc, int* len_tab_somm
   		 fflush(stdout);
 	} 
 	printf("\n");
-
 
 	// idem, on se positionne au niveau de la ligne de commentaire et on l'affiche
 	fseek(f, 1, SEEK_CUR);

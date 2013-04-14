@@ -39,7 +39,7 @@ Liste ajouter_queue(void *elt, Liste L, size_t size_elt)
 	Liste p;
 	Liste q;
 
-	p = (Liste) malloc(sizeof(*p));
+	p = malloc(sizeof(*p));
 
 	if (p == NULL)
 		return NULL;	// problème d'attribution de mémoire
@@ -48,19 +48,21 @@ Liste ajouter_queue(void *elt, Liste L, size_t size_elt)
 	p->val = malloc(size_elt);
 	if (p->val == NULL)
 		return NULL;	// idem
+	p->suiv = NULL;
 
 	memcpy(p->val, elt, size_elt);
+	
+	if (!est_vide_liste(L)) {
+		for (q=L; !est_vide_liste(q); q=q->suiv) {
+			if (q->suiv == NULL)
+				break;
+		}
 
-	if (est_vide_liste(L))
-		return p;
-
-	for (q=L; !est_vide_liste(q); q=q->suiv) {
-		if (q->suiv == NULL)
-			break;
+		q->suiv = p;
+		return L;
 	}
 
-	q->suiv = p;
-	return L;
+	return p;
 }
 
 void free_liste(Liste L)
@@ -87,7 +89,8 @@ void afficher_liste(Liste L)
 	} else {
 		Liste p;
 		for (p = L; !est_vide_liste(p); p = p->suiv) {
-			afficher_element(p->val);
+			// afficher_element(p->val);
+			printf("a\n");
 		}
 		printf("\n");
 	}
@@ -95,27 +98,8 @@ void afficher_liste(Liste L)
 
 void afficher_element(void *elt)
 {
-	printf("%c |", *(char *) elt);
+	printf("%f |", (*(Arc *) elt).cout );
 }
-
-// void afficher_liste_arc(Liste L)
-// {
-// 	if (est_vide_liste(L) ){
-// 		printf("La liste est vide\n");
-// 	} else {
-// 		ListeArc p;
-// 		for (p = L; !est_vide_liste(p); p = p->suiv) {
-// 			afficher_element_arc(p->arc);
-// 		}
-// 		printf("\n");
-// 	}
-// }
-
-// void afficher_element_arc(Arc a)
-// {
-// 	printf("Arc: \n");
-// }
-
 
 int recherche_elt_liste(Liste L, void* elt) 
 {

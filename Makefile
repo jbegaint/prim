@@ -6,7 +6,7 @@ LFLAGS=-lSDL
 
 all: programme1 tests lecture clean
 
-programme1: programme1.o liste.o file.o sommet.o
+programme1: programme1.o liste.o file.o sommet.o utils.o
 
 tests: tests.o liste.o file.o arbre.o 
 	gcc  -o $@ $^ $(LFLAGS)

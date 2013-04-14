@@ -2,39 +2,47 @@
 #include <stdlib.h>
 #include <float.h>
 
+#include "utils.h"
+
 #include "sommet.h"
 #include "arc.h"
 #include "liste.h"
 #include "file.h"
-#include "utils.h"
 
-File algo_fileACM(Sommet* tab_sommet, int len_tab_sommet, Arc* tab_arc, int len_tab_arc) {
-	// ListeSommet C;
+File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_tab_arc) {
 
-	Liste C;
 	File fileACM;
-	Sommet d; // Sommet de départ
+	fileACM = creer_file();
+
+	Sommet d = *tab_sommet; // Sommet de départ
+
+	// a changer en paramètre
+	d.PPC = 0;
+	d.arrive_par = NULL;
 
 	// DEBUT ALGO
 
-	// Liste p;
-	// for(p=liste_sommet; !est_vide_liste(p); p=p->suiv) {
-	// 	(*(Sommet*) p->val).PPC = FLT_MAX; 	//mettre un coût infini
-	// 	(*(Sommet*) p->val).arrive_par = NULL;
-	// }
-
-	Sommet* s;
-	for (s=tab_sommet; s<tab_sommet+len_tab_sommet; s++) {
+	Sommet* s = NULL;
+	for (s=tab_sommet; s < tab_sommet+len_tab_sommet; s++) {
 		(*s).PPC = FLT_MAX;
 		(*s).arrive_par = NULL;
 	}
 
-	d.PPC = 0;
-	d.arrive_par = NULL;
-	fileACM = creer_file();
-	C = ajouter_queue(&d, C, sizeof(Sommet));
 
-	while( !est_vide_file(fileACM) ) {
+	Liste C;
+	C = creer_liste();
+
+	C = ajouter_queue(&d, C, sizeof(Sommet));
+	// printf("Sommet %s\n", (*(Sommet*) C->val).nom );
+
+	// exit(EXIT_FAILURE);
+
+	int i=0;
+
+	while( !est_vide_liste(C) ) {
+
+		printf("Compteur algo: %d\n", i);
+		i++;
 
 		/* POUR TOUTES LES FONCTIONS QUI SUIVENT FAUDRA LES ECRIRE DANS UN FICHIER
 		 POUR UN CODE PLUS EXPLICITE */
@@ -85,18 +93,24 @@ File algo_fileACM(Sommet* tab_sommet, int len_tab_sommet, Arc* tab_arc, int len_
 			 ici on regarde a gauche et a droite de l'arc car on a juste les arcs dans un 
 			 seul sens pour le moment, il faudrait peut être les doubler lors de la lecture */
 
-			if ( memcmp((*a).sommet_depart, &sommet_ppc_min ) == 1 ){
-				liste_sommet_adjacent = ajouter_queue((*a).sommet_depart, liste_sommet_adjacent, sizeof(Sommet));
-			} 
-			else if ( memcmp((*a).sommet_arrive, &sommet_ppc_min ) == 1) {
-				liste_sommet_adjacent = ajouter_queue((*a).sommet_arrive, liste_sommet_adjacent, sizeof(Sommet));
-			}
+			// if ( memcmp((*a).sommet_depart, &sommet_ppc_min ) == 1 ){
+			// 	liste_sommet_adjacent = ajouter_queue((*a).sommet_depart, liste_sommet_adjacent, sizeof(Sommet));
+			// } 
+			// else if ( memcmp((*a).sommet_arrive, &sommet_ppc_min ) == 1) {
+			// 	liste_sommet_adjacent = ajouter_queue((*a).sommet_arrive, liste_sommet_adjacent, sizeof(Sommet));
+			// }
+
+			 if ( (* (*a).sommet_depart).numero == sommet_ppc_min.numero ) {
+			 	liste_sommet_adjacent = ajouter_queue((*a).sommet_depart, liste_sommet_adjacent, sizeof(Sommet));
+			 }
+			 else if ( (* (*a).sommet_arrive).numero == sommet_ppc_min.numero ) {
+			 	liste_sommet_adjacent = ajouter_queue((*a).sommet_arrive, liste_sommet_adjacent, sizeof(Sommet));
+			 }
 		}
 
-		// sommet_ppc_min.voisins = liste_sommet_adjacent;
 
+		sommet_ppc_min.voisins = liste_sommet_adjacent;
 
-		// ListeSommet p
 
 		for (p=liste_sommet_adjacent; !est_vide_liste( p); p=p->suiv) {
 			if ( (*(Sommet*) p->val).PPC > min ) {
@@ -116,12 +130,14 @@ File algo_fileACM(Sommet* tab_sommet, int len_tab_sommet, Arc* tab_arc, int len_
 					C = ajouter_queue((Sommet*) p->val, C, sizeof(Sommet));
 				}
 				else {
-					printf("nothing now \n");
+					printf("nothing for the moment \n");
 				}
 
 			}
 		}
 	}
+
+	printf("C est vide, fin de l'algo\n");
 
 	return fileACM;
 	// FIN ALGO
@@ -134,12 +150,25 @@ int main(int argc, char* argv[]) {
 		exit(EXIT_FAILURE);
 	}
 
+	Sommet* tab_sommet;
+	Arc* tab_arc;
+
+	tab_sommet = malloc(6*sizeof(Sommet));
+	tab_arc = malloc(7*sizeof(Arc));
+
+	int len_tab_sommet, len_tab_arc;
+
+	lecture(argv[1], tab_sommet, tab_arc, &len_tab_sommet, &len_tab_arc);
+
+	printf("-------------\n");
+	printf("Algo File\n");
+	printf("-------------\n");
 
 	File fileACM;
-	Sommet tab_sommet[5];
-	Arc tab_arc[10];
-	int len_tab_sommet, len_tab_arc;
-	fileACM = algo_fileACM(tab_sommet, len_tab_sommet, tab_arc, len_tab_arc);	
+	fileACM = algo_fileACM(tab_sommet, tab_arc, len_tab_sommet, len_tab_arc);	
+
+	printf("fileACM: \n");
+	afficher_file(fileACM);
 
 	return 0;
 }

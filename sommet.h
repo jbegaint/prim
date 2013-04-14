@@ -11,7 +11,7 @@ typedef struct {
 	char nom[256];
 	float coordonnee_x;
 	float coordonnee_y;
-	struct cellules* voisins;
+	struct maillon* voisins;
 
 	struct arc* arrive_par; // pointeur vers le meilleur arc à connecté à l’ACM
 	float PPC; // cout de l’arc arrive_par
