@@ -18,7 +18,6 @@ int est_vide_file(File F)
 void afficher_file(File F)
 {
 	if (est_vide_file(F)) {
-		printf("La file est vide \n");
 	} else {
 		File p;
 		for (p = F->suiv; p != F; p = p->suiv) {
@@ -43,6 +42,8 @@ File enfiler(File F, void *elt, size_t size_elt)
 	}
 
 	memcpy(p->val, elt, size_elt);
+	printf("Arc à ajouter: %d %d %f\n", (*(Arc*) p->val).sommet_depart,(*(Arc*) p->val).sommet_arrive,(*(Arc*) p->val).cout);
+
 
 	if (est_vide_file(F)) {
 		p->suiv = p;
@@ -51,7 +52,6 @@ File enfiler(File F, void *elt, size_t size_elt)
 		// fifo: first in first out
 		F->suiv = p;
 	}
-
 	return p;
 }
 

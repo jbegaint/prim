@@ -27,7 +27,6 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		tab_sommet[s].arrive_par = NULL;
 	}
 
-
 	Liste C;
 	C = creer_liste();
 	C = ajouter_queue(&d, C, sizeof(Sommet));
@@ -35,6 +34,7 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 	int i=0;
 
 	while( !est_vide_liste(C) ) {
+
 		printf("C: "); afficher_liste(C);
 		printf("fileACM: "); afficher_file(fileACM);
 
@@ -76,13 +76,14 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 			}
 		}
 
-		// si j n'est pas  d;
+		// si j n'est pas d;
 		if ( sommet_ppc_min.numero != d.numero ) {
-			// printf("Numéros: %d %d %d\n", 
-			// 	sommet_ppc_min.numero,
-			// 	(*(sommet_ppc_min.arrive_par)).sommet_depart,
-			// 	(*(sommet_ppc_min.arrive_par)).sommet_arrive);
+			printf("Infos arc arrive par: %d %d %f \n", 
+				(*(sommet_ppc_min.arrive_par)).sommet_depart,
+				(*(sommet_ppc_min.arrive_par)).sommet_arrive,
+				(*(sommet_ppc_min.arrive_par)).cout);
 
+			// fileACM = enfiler(fileACM, &(sommet_ppc_min.arrive_par), sizeof(Arc));
 			fileACM = enfiler(fileACM, sommet_ppc_min.arrive_par, sizeof(Arc));
 		}
 
@@ -117,6 +118,7 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 
 				Arc arc;
 				arc.cout = (*(Sommet*) p->val).PPC;
+				printf("COUTCOUT %f %f\n", arc.cout, min);
 				arc.sommet_depart = sommet_ppc_min.numero;
 				arc.sommet_arrive = (*(Sommet*) p->val).numero;
 
