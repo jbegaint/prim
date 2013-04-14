@@ -129,6 +129,12 @@ File algo_fileACM(Sommet* tab_sommet, int len_tab_sommet, Arc* tab_arc, int len_
 
 int main(int argc, char* argv[]) {
 
+	if (argc < 2) {
+		fprintf(stderr, "Usage: %s fichier\n", argv[0]);
+		exit(EXIT_FAILURE);
+	}
+
+
 	File fileACM;
 	Sommet tab_sommet[5];
 	Arc tab_arc[10];
