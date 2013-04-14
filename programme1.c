@@ -89,6 +89,8 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 
 		for (a=tab_arc; a < tab_arc + len_tab_arc; a++) {
 
+			// A voir pour la comparaison
+
 			/* on a le droit au memcmp ici: il faut passé par calloc+memset, soit malloc
 			 ici on regarde a gauche et a droite de l'arc car on a juste les arcs dans un 
 			 seul sens pour le moment, il faudrait peut être les doubler lors de la lecture */
@@ -158,7 +160,12 @@ int main(int argc, char* argv[]) {
 
 	int len_tab_sommet, len_tab_arc;
 
-	lecture(argv[1], tab_sommet, tab_arc, &len_tab_sommet, &len_tab_arc);
+	lecture(argv[1], &tab_sommet, &tab_arc, &len_tab_sommet, &len_tab_arc);
+
+	int i;
+	for (i=0; i<len_tab_sommet; i++) {
+		printf("%s\n", tab_sommet[i].nom);
+	}
 
 	printf("-------------\n");
 	printf("Algo File\n");

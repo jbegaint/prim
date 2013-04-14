@@ -17,7 +17,7 @@ FILE* open_file(char* filename)
   return f;
 }
 
-void lecture(char* filename, Sommet* tab_sommet, Arc* tab_arc, int* len_tab_sommet, int* len_tab_arc)
+void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_sommet, int* len_tab_arc)
 {
 	FILE *f;
 	int i, j; // compteurs
@@ -36,9 +36,9 @@ void lecture(char* filename, Sommet* tab_sommet, Arc* tab_arc, int* len_tab_somm
 
 	printf("%d sommets et %d arretes\n", num_sommet, num_arrete);
 
-	tab_sommet = malloc(num_sommet*sizeof(Sommet));
+	*tab_sommet = malloc(num_sommet*sizeof(Sommet));
 	
-	if (tab_sommet==NULL) {
+	if (*tab_sommet==NULL) {
 		fprintf(stderr, "Allocation impossible\n");
 		exit(EXIT_FAILURE);
 	}
@@ -66,10 +66,12 @@ void lecture(char* filename, Sommet* tab_sommet, Arc* tab_arc, int* len_tab_somm
 		// printf("%d %f %f \n", sommet.numero, sommet.coordonnee_x,
 		       // sommet.coordonnee_y);
 
-		tab_sommet[i] = sommet;
+		(*tab_sommet)[i] = sommet;
 		printf("%d/%d, %s \r",i+1, num_sommet, sommet.nom);
   		 fflush(stdout);
 	} 
+
+
 	printf("\n");
 
 	// idem, on se positionne au niveau de la ligne de commentaire et on l'affiche
@@ -78,7 +80,7 @@ void lecture(char* filename, Sommet* tab_sommet, Arc* tab_arc, int* len_tab_somm
 	printf("%s", s);
 
 	Arc arc;
-	tab_arc = malloc(num_arrete*sizeof(Arc));
+	*tab_arc = malloc(num_arrete*sizeof(Arc));
 
 	int arrive, depart;
 	for (j=0; j<num_arrete; j++) {
@@ -89,10 +91,10 @@ void lecture(char* filename, Sommet* tab_sommet, Arc* tab_arc, int* len_tab_somm
 			fprintf(stderr, "Format de fichier invalide\n");
 			exit(EXIT_FAILURE);
 		}
-		arc.sommet_depart = &tab_sommet[depart];
-		arc.sommet_arrive = &tab_sommet[arrive];
+		arc.sommet_depart = tab_sommet[depart];
+		arc.sommet_arrive = tab_sommet[arrive];
 
-		tab_arc[j] = arc;
+		(*tab_arc)[j] = arc;
 
 		// il faut encore récupérer les sommets à mettre dans arc
 		printf("%d/%d %f\r", j+1, num_arrete, arc.cout);
@@ -102,4 +104,5 @@ void lecture(char* filename, Sommet* tab_sommet, Arc* tab_arc, int* len_tab_somm
 	printf("\n");
 
 	fclose(f);
+
 }
