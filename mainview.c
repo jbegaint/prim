@@ -15,11 +15,9 @@ int main( int argc, char* args[] ) {
 
 	ecran=init_ecran(ecran);
 
-/*
-
 	pause(); // Mise en pause du programme
 
-	SDL_Quit(); //Quitter SDL*/
+	SDL_Quit(); //Quitter SDL
 	
 	return 0; 
 }

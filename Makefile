@@ -4,7 +4,7 @@ CFLAGS=-c -g -O2
 # LFLAGS=-L$(DIRSDL)/lib -lSDL -lSDL_ttf -lSDL_image  -lSDL_sound -lSDL_phelma -lSDL_draw -lm
 LFLAGS=-lSDL
 
-all: programme1 tests lecture clean
+all: programme1 tests lecture view
 
 programme1: programme1.o liste.o file.o sommet.o utils.o
 

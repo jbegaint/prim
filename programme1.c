@@ -33,6 +33,7 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 	C = creer_liste();
 
 	C = ajouter_queue(&d, C, sizeof(Sommet));
+	// printf("C:");	 afficher_liste(C);
 	// printf("Sommet %s\n", (*(Sommet*) C->val).nom );
 
 	// exit(EXIT_FAILURE);
@@ -83,12 +84,12 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		// il faut maintenant récupérer les adjacents à j
 
 		Liste liste_sommet_adjacent;
+		liste_sommet_adjacent = creer_liste();
 		Liste p;
 		Arc* a;
 
 
 		for (a=tab_arc; a < tab_arc + len_tab_arc; a++) {
-
 			// A voir pour la comparaison
 
 			/* on a le droit au memcmp ici: il faut passé par calloc+memset, soit malloc
@@ -113,7 +114,6 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 
 		sommet_ppc_min.voisins = liste_sommet_adjacent;
 
-
 		for (p=liste_sommet_adjacent; !est_vide_liste( p); p=p->suiv) {
 			if ( (*(Sommet*) p->val).PPC > min ) {
 
@@ -129,6 +129,7 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 				(*(Sommet*) p->val).arrive_par = &arc;
 
 				if (recherche_elt_liste(C, (Sommet*) p->val)) {
+					printf("C ajout\n");
 					C = ajouter_queue((Sommet*) p->val, C, sizeof(Sommet));
 				}
 				else {
