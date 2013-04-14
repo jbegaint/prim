@@ -46,7 +46,7 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 	fseek(f, 1, SEEK_CUR);
 	char s[256];
 	fgets(s, 256, f);
-	printf("%s", s);
+	// printf("%s", s);
 
 	Sommet sommet;
 	for (i=0; i<num_sommet; i++) {
@@ -67,17 +67,17 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 		       // sommet.coordonnee_y);
 
 		(*tab_sommet)[i] = sommet;
-		printf("%d/%d, %s \r",i+1, num_sommet, sommet.nom);
-  		 fflush(stdout);
+		// printf("%d/%d, %s \r",i+1, num_sommet, sommet.nom);
+  // 		 fflush(stdout);
 	} 
 
 
-	printf("\n");
+	// printf("\n");
 
 	// idem, on se positionne au niveau de la ligne de commentaire et on l'affiche
 	fseek(f, 1, SEEK_CUR);
 	fgets(s, 256, f);
-	printf("%s", s);
+	// printf("%s", s);
 
 	Arc arc;
 	*tab_arc = malloc(num_arrete*sizeof(Arc));
@@ -97,11 +97,11 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 		(*tab_arc)[j] = arc;
 
 		// il faut encore récupérer les sommets à mettre dans arc
-		printf("%d/%d %f\r", j+1, num_arrete, arc.cout);
+		// printf("%d/%d %f\r", j+1, num_arrete, arc.cout);
 
-        fflush(stdout);
+        // fflush(stdout);
 	}
-	printf("\n");
+	// printf("\n");
 
 	fclose(f);
 

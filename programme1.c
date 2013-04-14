@@ -14,13 +14,13 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 	File fileACM;
 	fileACM = creer_file();
 
-	Sommet d = tab_sommet[0]; // Sommet de départ
-	// a changer en paramètre
+	Sommet d = tab_sommet[0]; // Sommet de départ, à changer en paramètre
 	d.PPC = 0;
 	d.arrive_par = NULL;
 
-	// DEBUT ALGO
-
+	/*
+		DEBUT ALGO
+	*/
 	int s;
 	for (s=0; s<len_tab_sommet; s++) {
 		tab_sommet[s].PPC = FLT_MAX;
@@ -34,12 +34,6 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 	int i=0;
 
 	while( !est_vide_liste(C) ) {
-
-		printf("C: "); afficher_liste(C);
-		printf("fileACM: "); afficher_file(fileACM);
-
-		getchar();
-
 		// printf("Compteur algo: %d\n", i);
 		i++;
 
@@ -50,7 +44,8 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		Sommet sommet_ppc_min;
 		sommet_ppc_min = trouver_min_liste_sommet(C);
 		float min = sommet_ppc_min.PPC;
-		// printf("%f\n", min);
+		printf("C: "); afficher_liste(C);
+		printf("MIN: %f\n", min);
 
 		// on récupère le sommet de plus petit PPC et son coût
 
@@ -76,6 +71,9 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 			}
 		}
 
+		Arc arc;
+		int l;
+
 		// si j n'est pas d;
 		if ( sommet_ppc_min.numero != d.numero ) {
 			printf("Infos arc arrive par: %d %d %f \n", 
@@ -83,7 +81,6 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 				(*(sommet_ppc_min.arrive_par)).sommet_arrive,
 				(*(sommet_ppc_min.arrive_par)).cout);
 
-			// fileACM = enfiler(fileACM, &(sommet_ppc_min.arrive_par), sizeof(Arc));
 			fileACM = enfiler(fileACM, sommet_ppc_min.arrive_par, sizeof(Arc));
 		}
 
@@ -100,27 +97,41 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 			if ( (*a).sommet_depart == sommet_ppc_min.numero ) {
 				liste_sommet_adjacent = ajouter_queue(&tab_sommet[(*a).sommet_arrive], liste_sommet_adjacent, sizeof(Sommet));
 			}
-			else if ( (*a).sommet_arrive == sommet_ppc_min.numero ) {
+			if ( (*a).sommet_arrive == sommet_ppc_min.numero ) {
 				liste_sommet_adjacent = ajouter_queue(&tab_sommet[(*a).sommet_depart], liste_sommet_adjacent, sizeof(Sommet));
 			}
 		}
 
 
 		sommet_ppc_min.voisins = liste_sommet_adjacent;
+		printf("Adjacents: ");afficher_liste(liste_sommet_adjacent);
 
 		for (p=liste_sommet_adjacent; !est_vide_liste(p); p=p->suiv) {
 			// printf("%d\n", (*(Sommet*)p->val).numero);
-			if ( (*(Sommet*) p->val).PPC > min ) {
 
-				(*(Sommet*) p->val).PPC = min;
+			// on récupère l'arc qui correspond
+			// int l;
+			// Arc arc;
+			for (l=0; l<len_tab_arc; l++) {
+				if (tab_arc[i].sommet_depart == sommet_ppc_min.numero) {
+					if (tab_arc[i].sommet_arrive == (*(Sommet*) p->val).numero) {
+						arc = tab_arc[i];
+					}
+				}
+			}
+
+			// min = c(j,k) <=> cout de l'arc j,k
+
+			if ( (*(Sommet*) p->val).PPC > arc.cout ) {
+
+				(*(Sommet*) p->val).PPC = arc.cout;
 
 				/* il faut maintenant mettre l'arc j=>k dans arrive_par */
 
-				Arc arc;
-				arc.cout = (*(Sommet*) p->val).PPC;
-				printf("COUTCOUT %f %f\n", arc.cout, min);
-				arc.sommet_depart = sommet_ppc_min.numero;
-				arc.sommet_arrive = (*(Sommet*) p->val).numero;
+				// arc.cout = (*(Sommet*) p->val).PPC;
+				// printf("COUTCOUT %f %f\n", arc.cout, min);
+				// arc.sommet_depart = sommet_ppc_min.numero;
+				// arc.sommet_arrive = (*(Sommet*) p->val).numero;
 
 				(*(Sommet*) p->val).arrive_par = &arc;
 
@@ -135,6 +146,10 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 
 			}
 		}
+		printf("C: "); afficher_liste(C);
+		printf("fileACM: "); afficher_file(fileACM);
+		printf("--------------\n");
+		getchar();
 	}
 
 	printf("C est vide, fin de l'algo\n");
@@ -158,11 +173,13 @@ int main(int argc, char* argv[]) {
 
 	int len_tab_sommet, len_tab_arc;
 
+	printf("Fichier: ");
+
 	lecture(argv[1], &tab_sommet, &tab_arc, &len_tab_sommet, &len_tab_arc);
 
-	printf("-------------\n");
-	printf("Algo File\n");
-	printf("-------------\n");
+	printf("--------------\n");
+	printf(" Algo FileACM \n");
+	printf("--------------\n");
 
 	File fileACM;
 	fileACM = algo_fileACM(tab_sommet, tab_arc, len_tab_sommet, len_tab_arc);	
