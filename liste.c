@@ -90,10 +90,16 @@ void afficher_liste(Liste L)
 		Liste p;
 		for (p = L; !est_vide_liste(p); p = p->suiv) {
 			// afficher_element(p->val);
-			printf("a\n");
+			// printf("a\n");
+			afficher_sommet(*(Sommet *) p->val);
 		}
 		printf("\n");
 	}
+}
+
+void afficher_sommet(Sommet s)
+{
+	printf("%d | ", s.numero);
 }
 
 void afficher_element(void *elt)

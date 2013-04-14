@@ -41,8 +41,10 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 	int i=0;
 
 	while( !est_vide_liste(C) ) {
-
-		printf("Compteur algo: %d\n", i);
+		afficher_file(fileACM);
+		afficher_liste(C);
+		getchar();
+		// printf("Compteur algo: %d\n", i);
 		i++;
 
 		/* POUR TOUTES LES FONCTIONS QUI SUIVENT FAUDRA LES ECRIRE DANS UN FICHIER
@@ -52,6 +54,7 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		Sommet sommet_ppc_min;
 		sommet_ppc_min = trouver_min_liste_sommet(C);
 		float min = sommet_ppc_min.PPC;
+
 		// on récupère le sommet de plus petit PPC et son coût
 
 		// supprimer j de C;
@@ -75,6 +78,7 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 				}
 			}
 		}
+
 
 		// si j n'est pas dans d;
 		if (recherche_elt_liste(C, &sommet_ppc_min) != 1) {
@@ -128,7 +132,7 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 
 				(*(Sommet*) p->val).arrive_par = &arc;
 
-				if (recherche_elt_liste(C, (Sommet*) p->val)) {
+				if (recherche_elt_liste(C, (Sommet*) p->val) != 1) {
 					printf("C ajout\n");
 					C = ajouter_queue((Sommet*) p->val, C, sizeof(Sommet));
 				}

@@ -14,6 +14,7 @@ Liste ajouter_tete(void *, Liste, size_t);
 Liste ajouter_queue(void *, Liste, size_t);
 void afficher_liste(Liste);
 void afficher_element(void *);
+void afficher_sommet(Sommet);
 void free_liste(Liste);
 Liste supprimer_tete(Liste);
 

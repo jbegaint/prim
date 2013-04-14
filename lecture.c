@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 	int len_tab_arc, len_tab_sommet;
 	// lecture(argv[1], tab_sommet, tab_arc, &len_tab_sommet, &len_tab_arc);
 
-	printf("%d sommets et %d arcs \n", len_tab_sommet, len_tab_arc);
+	// printf("%d sommets et %d arcs \n", len_tab_sommet, len_tab_arc);
 
 	return 0;
 }
