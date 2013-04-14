@@ -11,13 +11,6 @@
 
 File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_tab_arc) {
 
-	int k;
-	for (k= 0; k < len_tab_sommet; k++)
-	{
-		printf("%s\n", tab_sommet[k].nom);
-	}
-
-
 	File fileACM;
 	fileACM = creer_file();
 
