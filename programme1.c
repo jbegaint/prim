@@ -35,8 +35,9 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 	int i=0;
 
 	while( !est_vide_liste(C) ) {
-		printf("fileACM: "); afficher_file(fileACM);
 		printf("C: "); afficher_liste(C);
+		printf("fileACM: "); afficher_file(fileACM);
+
 		getchar();
 
 		// printf("Compteur algo: %d\n", i);
@@ -49,13 +50,12 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		Sommet sommet_ppc_min;
 		sommet_ppc_min = trouver_min_liste_sommet(C);
 		float min = sommet_ppc_min.PPC;
-		printf("%f\n", min);
+		// printf("%f\n", min);
 
 		// on récupère le sommet de plus petit PPC et son coût
 
 		// supprimer j de C;
 		if ( (*(Sommet*) C->val).PPC == min) {
-			printf("supprimer\n");
 			// cas si j premier élément de C
 			C = C->suiv;
 		} 
@@ -63,7 +63,6 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 			Liste p;
 			for (p=C; !est_vide_liste(p); p=p->suiv) {
 				if ( (*(Sommet*) p->suiv->val).PPC == min ) {
-					printf("supprimer j\n");
 					// on a trouvé j
 					// il faut maintenant le supprimer de la liste
 
@@ -77,10 +76,14 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 			}
 		}
 
+		// si j n'est pas  d;
+		if ( sommet_ppc_min.numero != d.numero ) {
+			// printf("Numéros: %d %d %d\n", 
+			// 	sommet_ppc_min.numero,
+			// 	(*(sommet_ppc_min.arrive_par)).sommet_depart,
+			// 	(*(sommet_ppc_min.arrive_par)).sommet_arrive);
 
-		// si j n'est pas dans d;
-		if (recherche_elt_liste(C, &sommet_ppc_min) != 1) {
-			fileACM = enfiler(fileACM, &(sommet_ppc_min.arrive_par), sizeof(Arc));
+			fileACM = enfiler(fileACM, sommet_ppc_min.arrive_par, sizeof(Arc));
 		}
 
 		// il faut maintenant récupérer les adjacents à j
@@ -103,11 +106,9 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 
 
 		sommet_ppc_min.voisins = liste_sommet_adjacent;
-		printf("adjacents\n");
-		afficher_liste(liste_sommet_adjacent);
 
 		for (p=liste_sommet_adjacent; !est_vide_liste(p); p=p->suiv) {
-			printf("%d\n", (*(Sommet*)p->val).numero);
+			// printf("%d\n", (*(Sommet*)p->val).numero);
 			if ( (*(Sommet*) p->val).PPC > min ) {
 
 				(*(Sommet*) p->val).PPC = min;
@@ -122,12 +123,12 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 				(*(Sommet*) p->val).arrive_par = &arc;
 
 				if (recherche_elt_liste(C, (Sommet*) p->val) != 1) {
-					printf("C ajout\n");
+					// printf("C ajout\n");
 					C = ajouter_queue((Sommet*) p->val, C, sizeof(Sommet));
 				}
 				else {
 					// printf("nothing for the moment \n");
-					printf("");
+					// printf("");
 				}
 
 			}

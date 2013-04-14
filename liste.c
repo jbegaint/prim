@@ -111,7 +111,8 @@ int recherche_elt_liste(Liste L, void* elt)
 {
 	Liste p;
 	for (p=L; !est_vide_liste(p); p=p->suiv) {
-		if (p->val == elt)
+		//memcmp ??
+		if ( (*(Sommet*) p->val).numero == (*(Sommet*) elt).numero)
 			return 1;
 	}
 	return 0;
