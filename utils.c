@@ -91,8 +91,8 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 			fprintf(stderr, "Format de fichier invalide\n");
 			exit(EXIT_FAILURE);
 		}
-		arc.sommet_depart = &(*tab_sommet)[depart];
-		arc.sommet_arrive = &(*tab_sommet)[arrive];
+		arc.sommet_depart = depart;
+		arc.sommet_arrive = arrive;
 
 		(*tab_arc)[j] = arc;
 

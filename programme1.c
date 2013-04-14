@@ -14,36 +14,31 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 	File fileACM;
 	fileACM = creer_file();
 
-	Sommet d = *tab_sommet; // Sommet de départ
-
+	Sommet d = tab_sommet[0]; // Sommet de départ
 	// a changer en paramètre
 	d.PPC = 0;
 	d.arrive_par = NULL;
 
 	// DEBUT ALGO
 
-	Sommet* s = NULL;
-	for (s=tab_sommet; s < tab_sommet+len_tab_sommet; s++) {
-		(*s).PPC = FLT_MAX;
-		(*s).arrive_par = NULL;
+	int s;
+	for (s=0; s<len_tab_sommet; s++) {
+		tab_sommet[s].PPC = FLT_MAX;
+		tab_sommet[s].arrive_par = NULL;
 	}
 
 
 	Liste C;
 	C = creer_liste();
-
 	C = ajouter_queue(&d, C, sizeof(Sommet));
-	// printf("C:");	 afficher_liste(C);
-	// printf("Sommet %s\n", (*(Sommet*) C->val).nom );
-
-	// exit(EXIT_FAILURE);
 
 	int i=0;
 
 	while( !est_vide_liste(C) ) {
-		afficher_file(fileACM);
-		afficher_liste(C);
+		printf("fileACM: "); afficher_file(fileACM);
+		printf("C: "); afficher_liste(C);
 		getchar();
+
 		// printf("Compteur algo: %d\n", i);
 		i++;
 
@@ -54,11 +49,13 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		Sommet sommet_ppc_min;
 		sommet_ppc_min = trouver_min_liste_sommet(C);
 		float min = sommet_ppc_min.PPC;
+		printf("%f\n", min);
 
 		// on récupère le sommet de plus petit PPC et son coût
 
 		// supprimer j de C;
 		if ( (*(Sommet*) C->val).PPC == min) {
+			printf("supprimer\n");
 			// cas si j premier élément de C
 			C = C->suiv;
 		} 
@@ -66,6 +63,7 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 			Liste p;
 			for (p=C; !est_vide_liste(p); p=p->suiv) {
 				if ( (*(Sommet*) p->suiv->val).PPC == min ) {
+					printf("supprimer j\n");
 					// on a trouvé j
 					// il faut maintenant le supprimer de la liste
 
@@ -82,43 +80,34 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 
 		// si j n'est pas dans d;
 		if (recherche_elt_liste(C, &sommet_ppc_min) != 1) {
-			fileACM = enfiler(fileACM, &sommet_ppc_min.arrive_par, sizeof(Arc));
+			fileACM = enfiler(fileACM, &(sommet_ppc_min.arrive_par), sizeof(Arc));
 		}
 
 		// il faut maintenant récupérer les adjacents à j
 
 		Liste liste_sommet_adjacent;
-		liste_sommet_adjacent = creer_liste();
 		Liste p;
 		Arc* a;
 
+		liste_sommet_adjacent = creer_liste();
 
 		for (a=tab_arc; a < tab_arc + len_tab_arc; a++) {
 			// A voir pour la comparaison
-
-			/* on a le droit au memcmp ici: il faut passé par calloc+memset, soit malloc
-			 ici on regarde a gauche et a droite de l'arc car on a juste les arcs dans un 
-			 seul sens pour le moment, il faudrait peut être les doubler lors de la lecture */
-
-			// if ( memcmp((*a).sommet_depart, &sommet_ppc_min ) == 1 ){
-			// 	liste_sommet_adjacent = ajouter_queue((*a).sommet_depart, liste_sommet_adjacent, sizeof(Sommet));
-			// } 
-			// else if ( memcmp((*a).sommet_arrive, &sommet_ppc_min ) == 1) {
-			// 	liste_sommet_adjacent = ajouter_queue((*a).sommet_arrive, liste_sommet_adjacent, sizeof(Sommet));
-			// }
-
-			 if ( (* (*a).sommet_depart).numero == sommet_ppc_min.numero ) {
-			 	liste_sommet_adjacent = ajouter_queue((*a).sommet_depart, liste_sommet_adjacent, sizeof(Sommet));
-			 }
-			 else if ( (* (*a).sommet_arrive).numero == sommet_ppc_min.numero ) {
-			 	liste_sommet_adjacent = ajouter_queue((*a).sommet_arrive, liste_sommet_adjacent, sizeof(Sommet));
-			 }
+			if ( (*a).sommet_depart == sommet_ppc_min.numero ) {
+				liste_sommet_adjacent = ajouter_queue(&tab_sommet[(*a).sommet_arrive], liste_sommet_adjacent, sizeof(Sommet));
+			}
+			else if ( (*a).sommet_arrive == sommet_ppc_min.numero ) {
+				liste_sommet_adjacent = ajouter_queue(&tab_sommet[(*a).sommet_depart], liste_sommet_adjacent, sizeof(Sommet));
+			}
 		}
 
 
 		sommet_ppc_min.voisins = liste_sommet_adjacent;
+		printf("adjacents\n");
+		afficher_liste(liste_sommet_adjacent);
 
-		for (p=liste_sommet_adjacent; !est_vide_liste( p); p=p->suiv) {
+		for (p=liste_sommet_adjacent; !est_vide_liste(p); p=p->suiv) {
+			printf("%d\n", (*(Sommet*)p->val).numero);
 			if ( (*(Sommet*) p->val).PPC > min ) {
 
 				(*(Sommet*) p->val).PPC = min;
@@ -127,8 +116,8 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 
 				Arc arc;
 				arc.cout = (*(Sommet*) p->val).PPC;
-				arc.sommet_depart = &sommet_ppc_min;
-				arc.sommet_arrive = (Sommet*) p->val;
+				arc.sommet_depart = sommet_ppc_min.numero;
+				arc.sommet_arrive = (*(Sommet*) p->val).numero;
 
 				(*(Sommet*) p->val).arrive_par = &arc;
 
@@ -137,7 +126,8 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 					C = ajouter_queue((Sommet*) p->val, C, sizeof(Sommet));
 				}
 				else {
-					printf("nothing for the moment \n");
+					// printf("nothing for the moment \n");
+					printf("");
 				}
 
 			}
