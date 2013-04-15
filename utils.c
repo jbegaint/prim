@@ -80,7 +80,7 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 	// printf("%s", s);
 
 	Arc arc;
-	*tab_arc = malloc(num_arrete*sizeof(Arc));
+	*tab_arc = malloc(2*num_arrete*sizeof(Arc));
 
 	int arrive, depart;
 	for (j=0; j<num_arrete; j++) {

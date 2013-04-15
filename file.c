@@ -30,6 +30,7 @@ void afficher_file(File F)
 
 File enfiler(File F, void *elt, size_t size_elt)
 {
+
 	File p;
 	p = malloc(sizeof(*p));
 	if (p == NULL) {
@@ -42,8 +43,6 @@ File enfiler(File F, void *elt, size_t size_elt)
 	}
 
 	memcpy(p->val, elt, size_elt);
-	printf("Arc à ajouter: %d %d %f\n", (*(Arc*) p->val).sommet_depart,(*(Arc*) p->val).sommet_arrive,(*(Arc*) p->val).cout);
-
 
 	if (est_vide_file(F)) {
 		p->suiv = p;

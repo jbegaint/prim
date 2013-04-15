@@ -12,11 +12,9 @@
 File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_tab_arc) {
 
 	File fileACM;
-	fileACM = creer_file();
+	Liste C;
 
 	Sommet d = tab_sommet[0]; // Sommet de départ, à changer en paramètre
-	d.PPC = 0;
-	d.arrive_par = NULL;
 
 	/*
 		DEBUT ALGO
@@ -27,14 +25,23 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		tab_sommet[s].arrive_par = NULL;
 	}
 
-	Liste C;
+	d.PPC = 0;
+	d.arrive_par = NULL;
+
+	fileACM = creer_file();
 	C = creer_liste();
 	C = ajouter_queue(&d, C, sizeof(Sommet));
 
-	int i=0;
+	int i=0; //compteur étapes
 
 	while( !est_vide_liste(C) ) {
-		// printf("Compteur algo: %d\n", i);
+
+		// blabla itératif
+		printf("Étape: %d\n", i);
+		printf("C: "); afficher_liste(C);
+		printf("fileACM: "); afficher_file(fileACM);
+		printf("--------------\n");
+		getchar();
 		i++;
 
 		/* POUR TOUTES LES FONCTIONS QUI SUIVENT FAUDRA LES ECRIRE DANS UN FICHIER
@@ -42,10 +49,16 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 
 		// sommet j de C de plus petit PPC;
 		Sommet sommet_ppc_min;
+		printf("Liste C: "); afficher_liste(C);
+
+		Liste ss;
+		for (ss=C; !est_vide_liste(ss); ss=ss->suiv) {
+			printf("%f\n", (*(Sommet*)ss->val).PPC);
+		}
+
 		sommet_ppc_min = trouver_min_liste_sommet(C);
+		printf("Sommet le moins cher: %s\n", sommet_ppc_min.nom);
 		float min = sommet_ppc_min.PPC;
-		printf("C: "); afficher_liste(C);
-		printf("MIN: %f\n", min);
 
 		// on récupère le sommet de plus petit PPC et son coût
 
@@ -71,15 +84,15 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 			}
 		}
 
-		Arc arc;
 		int l;
+		Arc arc;
 
 		// si j n'est pas d;
 		if ( sommet_ppc_min.numero != d.numero ) {
-			printf("Infos arc arrive par: %d %d %f \n", 
-				(*(sommet_ppc_min.arrive_par)).sommet_depart,
-				(*(sommet_ppc_min.arrive_par)).sommet_arrive,
-				(*(sommet_ppc_min.arrive_par)).cout);
+			//	printf("Infos arc arrive par: %d %d %f \n", 
+			// 	(*(sommet_ppc_min.arrive_par)).sommet_depart,
+			// 	(*(sommet_ppc_min.arrive_par)).sommet_arrive,
+			// 	(*(sommet_ppc_min.arrive_par)).cout);
 
 			fileACM = enfiler(fileACM, sommet_ppc_min.arrive_par, sizeof(Arc));
 		}
@@ -107,15 +120,12 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		printf("Adjacents: ");afficher_liste(liste_sommet_adjacent);
 
 		for (p=liste_sommet_adjacent; !est_vide_liste(p); p=p->suiv) {
-			// printf("%d\n", (*(Sommet*)p->val).numero);
 
 			// on récupère l'arc qui correspond
-			// int l;
-			// Arc arc;
 			for (l=0; l<len_tab_arc; l++) {
-				if (tab_arc[i].sommet_depart == sommet_ppc_min.numero) {
-					if (tab_arc[i].sommet_arrive == (*(Sommet*) p->val).numero) {
-						arc = tab_arc[i];
+				if (tab_arc[l].sommet_depart == sommet_ppc_min.numero) {
+					if (tab_arc[l].sommet_arrive == (*(Sommet*) p->val).numero) {
+						arc = tab_arc[l];
 					}
 				}
 			}
@@ -123,37 +133,27 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 			// min = c(j,k) <=> cout de l'arc j,k
 
 			if ( (*(Sommet*) p->val).PPC > arc.cout ) {
-
 				(*(Sommet*) p->val).PPC = arc.cout;
+				printf("COUT: %f\n", arc.cout);
+
 
 				/* il faut maintenant mettre l'arc j=>k dans arrive_par */
 
-				// arc.cout = (*(Sommet*) p->val).PPC;
-				// printf("COUTCOUT %f %f\n", arc.cout, min);
-				// arc.sommet_depart = sommet_ppc_min.numero;
-				// arc.sommet_arrive = (*(Sommet*) p->val).numero;
 
 				(*(Sommet*) p->val).arrive_par = &arc;
 
 				if (recherche_elt_liste(C, (Sommet*) p->val) != 1) {
-					// printf("C ajout\n");
 					C = ajouter_queue((Sommet*) p->val, C, sizeof(Sommet));
 				}
 				else {
 					// printf("nothing for the moment \n");
-					// printf("");
 				}
 
 			}
 		}
-		printf("C: "); afficher_liste(C);
-		printf("fileACM: "); afficher_file(fileACM);
-		printf("--------------\n");
-		getchar();
 	}
 
 	printf("C est vide, fin de l'algo\n");
-
 	return fileACM;
 	// FIN ALGO
 }
@@ -167,9 +167,6 @@ int main(int argc, char* argv[]) {
 
 	Sommet* tab_sommet;
 	Arc* tab_arc;
-
-	tab_sommet = malloc(6*sizeof(Sommet));
-	tab_arc = malloc(7*sizeof(Arc));
 
 	int len_tab_sommet, len_tab_arc;
 

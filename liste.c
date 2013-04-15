@@ -99,7 +99,7 @@ void afficher_liste(Liste L)
 
 void afficher_sommet(Sommet s)
 {
-	printf("%d | ", s.numero);
+	printf("%s | ", s.nom);
 }
 
 void afficher_element(void *elt)
