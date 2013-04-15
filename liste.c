@@ -117,3 +117,12 @@ int recherche_elt_liste(Liste L, void* elt)
 	}
 	return 0;
 }
+
+int len_liste(Liste L) 
+{
+	Liste p;
+	int i=0;
+	for (p=L; !est_vide_liste(p); p=p->suiv)
+		i++;
+	return i;
+}

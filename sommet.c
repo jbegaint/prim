@@ -12,7 +12,6 @@ Sommet trouver_min_liste_sommet(Liste L)
 	float min = FLT_MAX; // ou prendre le premier
 
 	for(p=L; !est_vide_liste(p); p=p->suiv) {
-		printf("%f | ", (*(Sommet*) p->val).PPC);
 		if ( (*(Sommet*) p->val).PPC < min ) {
 			min = (*(Sommet*) p->val).PPC;
 			sommet_ppc_min = (*(Sommet*) p->val);

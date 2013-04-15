@@ -63,27 +63,23 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		// on récupère le sommet de plus petit PPC et son coût
 
 		// supprimer j de C;
-		if ( (*(Sommet*) C->val).PPC == min) {
-			// cas si j premier élément de C
-			C = C->suiv;
-		} 
-		else {
-			Liste p;
+		Liste p;
+		// printf("LEN: %d\n", len_liste(C));
+		if (len_liste(C) > 1) {
 			for (p=C; !est_vide_liste(p); p=p->suiv) {
-				if ( (*(Sommet*) p->suiv->val).PPC == min ) {
-					// on a trouvé j
-					// il faut maintenant le supprimer de la liste
-
-					// cas général
-					// a voir si bug dans cas particuliers
+				if ( sommet_ppc_min.numero == (*(Sommet*) p->val).numero ) {
+					printf("égalité\n");
 					Liste tmp;
-					tmp = p->suiv->suiv;
-					free_liste(p->suiv);
-					p->suiv = tmp;
+					tmp = p->suiv;
+					p->suiv = p->suiv->suiv;
+					free(tmp);
 				}
 			}
 		}
-
+		else {
+			free(C);
+		}
+	
 		int l;
 		Arc arc;
 
@@ -100,7 +96,6 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		// il faut maintenant récupérer les adjacents à j
 
 		Liste liste_sommet_adjacent;
-		Liste p;
 		Arc* a;
 
 		liste_sommet_adjacent = creer_liste();
@@ -134,11 +129,8 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 
 			if ( (*(Sommet*) p->val).PPC > arc.cout ) {
 				(*(Sommet*) p->val).PPC = arc.cout;
-				printf("COUT: %f\n", arc.cout);
-
 
 				/* il faut maintenant mettre l'arc j=>k dans arrive_par */
-
 
 				(*(Sommet*) p->val).arrive_par = &arc;
 

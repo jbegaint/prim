@@ -19,3 +19,4 @@ void free_liste(Liste);
 Liste supprimer_tete(Liste);
 
 int recherche_elt_liste(Liste, void*);
+int len_liste(Liste);
