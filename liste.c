@@ -104,7 +104,9 @@ void afficher_sommet(Sommet s)
 
 void afficher_element(void *elt)
 {
-	printf("%f |", (*(Arc *) elt).cout );
+	// printf("%f |", (*(Arc *) elt).cout );
+	printf("a%d_%d |", (*(Arc *) elt).sommet_depart, (*(Arc *) elt).sommet_arrive );
+
 }
 
 int recherche_elt_liste(Liste L, void* elt) 

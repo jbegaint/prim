@@ -57,33 +57,39 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 			printf("%d %f\n", (*(Sommet*)ss->val).numero, (*(Sommet*)ss->val).PPC);
 		}
 
+		// on récupère le sommet de plus petit PPC et son coût
 		sommet_ppc_min = trouver_min_liste_sommet(C);
 		printf("Sommet le moins cher: %s %d\n", sommet_ppc_min.nom, sommet_ppc_min.numero);
 		float min = sommet_ppc_min.PPC;
 
-		/*
-			Problème à partir d'ici...	
-		*/
-
-		// on récupère le sommet de plus petit PPC et son coût
-
 		// supprimer j de C;
-		// printf("Liste C: "); afficher_liste(C);
 		Liste p;
-		// printf("LEN: %d\n", len_liste(C));
+
 		if (len_liste(C) > 1) {
 			printf("Liste C: "); afficher_liste(C);
-			for (p=C; !est_vide_liste(p); p=p->suiv) {
-				if ( (*(Sommet*) p->val).numero == sommet_ppc_min.numero ) {
-					printf("égalité\n");
-					Liste tmp;
-					tmp = p->suiv;
-					p->suiv = p->suiv->suiv;
-					free(tmp);
+
+			// cas premier élément de C = sommet_ppc_min
+			if ( (*(Sommet*)C->val).numero == sommet_ppc_min.numero ) {
+				C = C->suiv;
+			}
+
+			else {
+				for (p=C; !est_vide_liste(p->suiv); p=p->suiv) {
+					if ( (*(Sommet*) p->suiv->val).numero == sommet_ppc_min.numero ) {
+						Liste tmp;
+						tmp = p->suiv;
+
+						if (est_vide_liste(p->suiv->suiv)) {
+							p->suiv=NULL;
+							break;
+						} else {
+							p->suiv = p->suiv->suiv; 
+						}
+						free(tmp);
+					}
 				}
 			}
 			printf("Liste C: "); afficher_liste(C);
-
 		}
 		else {
 			free(C);
