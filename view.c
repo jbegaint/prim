@@ -53,7 +53,7 @@ SDL_Surface* init_ecran (SDL_Surface* ecran)
 
 SDL_Surface* edit_point(SDL_Surface* ecran, Sommet* sommet, int len_tab_sommet)
 {
-int i=0;
+i=0;
 SDL_Surface *point = NULL;
 
 SDL_Rect position;
@@ -61,6 +61,7 @@ SDL_Rect position;
 	point = SDL_CreateRGBSurface(SDL_HWSURFACE, 2, 2, 32, 0, 0, 0, 0);//Point 
 
 	SDL_FillRect(point, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
+
 for (i=0;i<len_tab_sommet;i++){
 	position.x=sommet[i].coordonnee_x*700;
 	position.y=sommet[i].coordonnee_y*700;
