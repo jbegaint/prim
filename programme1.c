@@ -53,21 +53,32 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		// printf("Liste C: "); afficher_liste(C);
 
 		Liste ss;
-		for (ss=C; !est_vide_liste(ss); ss=ss->suiv) {
-			printf("%d %f\n", (*(Sommet*)ss->val).numero, (*(Sommet*)ss->val).PPC);
-		}
+		// for (ss=C; !est_vide_liste(ss); ss=ss->suiv) {
+		// 	printf("%d %f\n", (*(Sommet*)ss->val).numero, (*(Sommet*)ss->val).PPC);
+
+		// 	if(len_liste(C) > 1) {
+		// 				printf("Infos ARRIE : %s %d %d %f \n", 
+		// 			(*(Sommet *) ss->val).nom,
+		// 		(*((*(Sommet*) ss->val).arrive_par)).sommet_depart,
+		// 		(*((*(Sommet*) ss->val).arrive_par)).sommet_arrive,
+		// 		(*((*(Sommet*) ss->val).arrive_par)).cout);
+		// 	}
+
+		
+		// }
 
 		// on récupère le sommet de plus petit PPC et son coût
 		sommet_ppc_min = trouver_min_liste_sommet(C);
 		printf("Sommet le moins cher: %s %d\n", sommet_ppc_min.nom, sommet_ppc_min.numero);
 		float min = sommet_ppc_min.PPC;
 
+
 		// supprimer j de C;
 		Liste p;
 
+		// Grosse fonction dégeu qui semble fonctionner mais à changer
 		if (len_liste(C) > 1) {
 			printf("Liste C: "); afficher_liste(C);
-
 			// cas premier élément de C = sommet_ppc_min
 			if ( (*(Sommet*)C->val).numero == sommet_ppc_min.numero ) {
 				C = C->suiv;
@@ -96,16 +107,15 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		}
 
 		int l;
-		Arc arc;
 
 		// si j n'est pas d;
 		if ( sommet_ppc_min.numero != d.numero ) {
-			//	printf("Infos arc arrive par: %d %d %f \n", 
-			// 	(*(sommet_ppc_min.arrive_par)).sommet_depart,
-			// 	(*(sommet_ppc_min.arrive_par)).sommet_arrive,
-			// 	(*(sommet_ppc_min.arrive_par)).cout);
+				// printf("Infos arc arrive par: %d %d %f \n", 
+				// (*(sommet_ppc_min.arrive_par)).sommet_depart,
+				// (*(sommet_ppc_min.arrive_par)).sommet_arrive,
+				// (*(sommet_ppc_min.arrive_par)).cout);
 
-			printf("%f %d\n", (*(sommet_ppc_min.arrive_par)).cout, sommet_ppc_min.numero);
+			// printf("%f %d\n", (*(sommet_ppc_min.arrive_par)).cout, sommet_ppc_min.numero);
 			fileACM = enfiler(fileACM, sommet_ppc_min.arrive_par, sizeof(Arc));
 		}
 
@@ -126,29 +136,30 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 			}
 		}
 
+		// Arc arc;
 
 		sommet_ppc_min.voisins = liste_sommet_adjacent;
 		printf("Adjacents: ");afficher_liste(liste_sommet_adjacent);
 
 		for (p=liste_sommet_adjacent; !est_vide_liste(p); p=p->suiv) {
-
 			// on récupère l'arc qui correspond
 			for (l=0; l<len_tab_arc; l++) {
 				if (tab_arc[l].sommet_depart == sommet_ppc_min.numero) {
 					if (tab_arc[l].sommet_arrive == (*(Sommet*) p->val).numero) {
-						arc = tab_arc[l];
+						// arc = tab_arc[l];
+						break;
 					}
 				}
 			}
 
 			// min = c(j,k) <=> cout de l'arc j,k
 
-			if ( (*(Sommet*) p->val).PPC > arc.cout ) {
-				(*(Sommet*) p->val).PPC = arc.cout;
+			if ( (*(Sommet*) p->val).PPC > tab_arc[l].cout ) {
+				(*(Sommet*) p->val).PPC = tab_arc[l].cout;
 
 				/* il faut maintenant mettre l'arc j=>k dans arrive_par */
 
-				(*(Sommet*) p->val).arrive_par = &arc;
+				(*(Sommet*) p->val).arrive_par = &tab_arc[l];
 
 				if (recherche_elt_liste(C, (Sommet*) p->val) != 1) {
 					C = ajouter_queue((Sommet*) p->val, C, sizeof(Sommet));
