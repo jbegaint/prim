@@ -14,6 +14,8 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 	File fileACM;
 	Liste C;
 
+	float cout = 0;
+
 	Liste liste_sommet_atteint;
 	liste_sommet_atteint = creer_liste();
 
@@ -44,12 +46,14 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 
 		// blabla itératif
 		// très moche
-		printf("Étape: %d\n", i);
-		printf("C: "); afficher_liste(C);
-		printf("D: "); afficher_liste(liste_sommet_atteint);
-		printf("fileACM: "); afficher_file(fileACM);
-		printf("--------------\n");
-		getchar();
+
+		// printf("Étape: %d\n", i);
+		// printf("C: "); afficher_liste(C);
+		// printf("D: "); afficher_liste(liste_sommet_atteint);
+		// printf("fileACM: "); afficher_file(fileACM);
+		// printf("--------------\n");
+		// getchar();
+
 		i++;
 
 		/* POUR TOUTES LES FONCTIONS QUI SUIVENT FAUDRA LES ECRIRE DANS UN FICHIER
@@ -99,6 +103,7 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 
 		// si j n'est pas d;
 		if ( sommet_ppc_min.numero != tab_sommet[num_depart].numero ) {
+			cout += sommet_ppc_min.PPC;
 			fileACM = enfiler(fileACM, sommet_ppc_min.arrive_par, sizeof(Arc));
 			liste_sommet_atteint = ajouter_queue(&sommet_ppc_min, liste_sommet_atteint, sizeof(Sommet));
 		}
@@ -161,6 +166,9 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 			}
 		}
 	}
+
+	printf("Cout de l'acm: %f\n", cout);
+
 	return fileACM;
 	// FIN ALGO
 }
@@ -185,10 +193,15 @@ int main(int argc, char* argv[]) {
 	printf(" Algo FileACM \n");
 	printf("##############\n");
 
-	int num_depart;
 
-	printf("Entrez le numéro du sommet de départ: [0,%d]\n", len_tab_sommet);
-	scanf("%d", &num_depart);
+	// penser à générer une erreur si num_depart pas dans le bon intervalle
+	int num_depart;
+	if (argc > 2)
+		num_depart = atoi(argv[2]);
+	else {
+		printf("Entrez le numéro du sommet de départ: [0,%d]\n", len_tab_sommet);
+		scanf("%d", &num_depart);
+	}
 
 	File fileACM;
 	fileACM = algo_fileACM(tab_sommet, tab_arc, len_tab_sommet, len_tab_arc, num_depart);	
