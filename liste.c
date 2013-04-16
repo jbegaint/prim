@@ -86,11 +86,10 @@ void afficher_liste(Liste L)
 {
 	if (est_vide_liste(L)) {
 		printf("La liste est vide\n");
-	} else {
+	} 
+	else {
 		Liste p;
 		for (p = L; !est_vide_liste(p); p = p->suiv) {
-			// afficher_element(p->val);
-			// printf("a\n");
 			afficher_sommet(*(Sommet *) p->val);
 		}
 		printf("\n");
@@ -113,7 +112,6 @@ int recherche_elt_liste(Liste L, void* elt)
 {
 	Liste p;
 	for (p=L; !est_vide_liste(p); p=p->suiv) {
-		//memcmp ??
 		if ( (*(Sommet*) p->val).numero == (*(Sommet*) elt).numero)
 			return 1;
 	}

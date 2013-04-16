@@ -14,11 +14,15 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 	File fileACM;
 	Liste C;
 
+	Liste liste_sommet_atteint;
+	liste_sommet_atteint = creer_liste();
+
 	Sommet d = tab_sommet[0]; // Sommet de départ, à changer en paramètre
 
 	/*
 		DEBUT ALGO
 	*/
+
 	int s;
 	for (s=0; s<len_tab_sommet; s++) {
 		tab_sommet[s].PPC = FLT_MAX;
@@ -32,6 +36,8 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 	C = creer_liste();
 	C = ajouter_queue(&d, C, sizeof(Sommet));
 
+	liste_sommet_atteint = ajouter_queue(&d, liste_sommet_atteint, sizeof(Sommet));
+
 	int i=0; //compteur étapes
 
 	while( !est_vide_liste(C) ) {
@@ -40,6 +46,7 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		printf("--------------\n");
 		printf("Étape: %d\n", i);
 		printf("C: "); afficher_liste(C);
+		printf("D: "); afficher_liste(liste_sommet_atteint);
 		printf("fileACM: "); afficher_file(fileACM);
 		printf("--------------\n");
 		getchar();
@@ -50,22 +57,6 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 
 		// sommet j de C de plus petit PPC;
 		Sommet sommet_ppc_min;
-		// printf("Liste C: "); afficher_liste(C);
-
-		Liste ss;
-		// for (ss=C; !est_vide_liste(ss); ss=ss->suiv) {
-		// 	printf("%d %f\n", (*(Sommet*)ss->val).numero, (*(Sommet*)ss->val).PPC);
-
-		// 	if(len_liste(C) > 1) {
-		// 				printf("Infos ARRIE : %s %d %d %f \n", 
-		// 			(*(Sommet *) ss->val).nom,
-		// 		(*((*(Sommet*) ss->val).arrive_par)).sommet_depart,
-		// 		(*((*(Sommet*) ss->val).arrive_par)).sommet_arrive,
-		// 		(*((*(Sommet*) ss->val).arrive_par)).cout);
-		// 	}
-
-		
-		// }
 
 		// on récupère le sommet de plus petit PPC et son coût
 		sommet_ppc_min = trouver_min_liste_sommet(C);
@@ -77,8 +68,8 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		Liste p;
 
 		// Grosse fonction dégeu qui semble fonctionner mais à changer
+		("Liste C: "); afficher_liste(C);
 		if (len_liste(C) > 1) {
-			printf("Liste C: "); afficher_liste(C);
 			// cas premier élément de C = sommet_ppc_min
 			if ( (*(Sommet*)C->val).numero == sommet_ppc_min.numero ) {
 				C = C->suiv;
@@ -100,23 +91,17 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 					}
 				}
 			}
-			printf("Liste C: "); afficher_liste(C);
 		}
 		else {
-			free(C);
+			C = creer_liste();
 		}
 
 		int l;
 
 		// si j n'est pas d;
 		if ( sommet_ppc_min.numero != d.numero ) {
-				// printf("Infos arc arrive par: %d %d %f \n", 
-				// (*(sommet_ppc_min.arrive_par)).sommet_depart,
-				// (*(sommet_ppc_min.arrive_par)).sommet_arrive,
-				// (*(sommet_ppc_min.arrive_par)).cout);
-
-			// printf("%f %d\n", (*(sommet_ppc_min.arrive_par)).cout, sommet_ppc_min.numero);
 			fileACM = enfiler(fileACM, sommet_ppc_min.arrive_par, sizeof(Arc));
+			liste_sommet_atteint = ajouter_queue(&sommet_ppc_min, liste_sommet_atteint, sizeof(Sommet));
 		}
 
 		// il faut maintenant récupérer les adjacents à j
@@ -139,40 +124,37 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		// Arc arc;
 
 		sommet_ppc_min.voisins = liste_sommet_adjacent;
-		printf("Adjacents: ");afficher_liste(liste_sommet_adjacent);
+		// printf("Adjacents: "); afficher_liste(liste_sommet_adjacent);
 
 		for (p=liste_sommet_adjacent; !est_vide_liste(p); p=p->suiv) {
-			// on récupère l'arc qui correspond
 			for (l=0; l<len_tab_arc; l++) {
 				if (tab_arc[l].sommet_depart == sommet_ppc_min.numero) {
 					if (tab_arc[l].sommet_arrive == (*(Sommet*) p->val).numero) {
-						// arc = tab_arc[l];
 						break;
 					}
 				}
 			}
-
 			// min = c(j,k) <=> cout de l'arc j,k
-
 			if ( (*(Sommet*) p->val).PPC > tab_arc[l].cout ) {
+
 				(*(Sommet*) p->val).PPC = tab_arc[l].cout;
 
 				/* il faut maintenant mettre l'arc j=>k dans arrive_par */
 
 				(*(Sommet*) p->val).arrive_par = &tab_arc[l];
-
-				if (recherche_elt_liste(C, (Sommet*) p->val) != 1) {
-					C = ajouter_queue((Sommet*) p->val, C, sizeof(Sommet));
-				}
-				else {
+				
+				if (recherche_elt_liste(liste_sommet_atteint, (Sommet*) p->val) != 1) {
+					if (recherche_elt_liste(C, (Sommet*) p->val) != 1) {
+						C = ajouter_queue((Sommet*) p->val, C, sizeof(Sommet));
+					}
+					else {
 					// printf("nothing for the moment \n");
-				}
+					}
+				}			
 
 			}
 		}
 	}
-
-	printf("C est vide, fin de l'algo\n");
 	return fileACM;
 	// FIN ALGO
 }
