@@ -37,6 +37,7 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 	while( !est_vide_liste(C) ) {
 
 		// blabla itératif
+		printf("--------------\n");
 		printf("Étape: %d\n", i);
 		printf("C: "); afficher_liste(C);
 		printf("fileACM: "); afficher_file(fileACM);
@@ -49,16 +50,20 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 
 		// sommet j de C de plus petit PPC;
 		Sommet sommet_ppc_min;
-		printf("Liste C: "); afficher_liste(C);
+		// printf("Liste C: "); afficher_liste(C);
 
 		Liste ss;
 		for (ss=C; !est_vide_liste(ss); ss=ss->suiv) {
-			printf("%f\n", (*(Sommet*)ss->val).PPC);
+			printf("%d %f\n", (*(Sommet*)ss->val).numero, (*(Sommet*)ss->val).PPC);
 		}
 
 		sommet_ppc_min = trouver_min_liste_sommet(C);
-		printf("Sommet le moins cher: %s\n", sommet_ppc_min.nom);
+		printf("Sommet le moins cher: %s %d\n", sommet_ppc_min.nom, sommet_ppc_min.numero);
 		float min = sommet_ppc_min.PPC;
+
+		/*
+			Problème à partir d'ici...
+		*/
 
 		// on récupère le sommet de plus petit PPC et son coût
 
@@ -90,6 +95,7 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 			// 	(*(sommet_ppc_min.arrive_par)).sommet_arrive,
 			// 	(*(sommet_ppc_min.arrive_par)).cout);
 
+			printf("%f %d\n", (*(sommet_ppc_min.arrive_par)).cout, sommet_ppc_min.numero);
 			fileACM = enfiler(fileACM, sommet_ppc_min.arrive_par, sizeof(Arc));
 		}
 
@@ -166,9 +172,9 @@ int main(int argc, char* argv[]) {
 
 	lecture(argv[1], &tab_sommet, &tab_arc, &len_tab_sommet, &len_tab_arc);
 
-	printf("--------------\n");
+	printf("##############\n");
 	printf(" Algo FileACM \n");
-	printf("--------------\n");
+	printf("##############\n");
 
 	File fileACM;
 	fileACM = algo_fileACM(tab_sommet, tab_arc, len_tab_sommet, len_tab_arc);	
