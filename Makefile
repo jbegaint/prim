@@ -11,10 +11,10 @@ programme1: programme1.o liste.o file.o sommet.o utils.o
 tests: tests.o liste.o file.o arbre.o 
 	gcc  -o $@ $^ $(LFLAGS)
 
-lecture: lecture.o liste.o file.o utils.o
+lecture: lecture.o liste.o file.o utils.o 
 	gcc  -o $@ $^ $(LFLAGS)
 
-view:  mainview.o view.o 
+view:  mainview.o view.o utils.o liste.o file.o sommet.o
 	gcc  -o $@ $^ $(LFLAGS)
 
 %.o: %.c
