@@ -17,15 +17,17 @@ int est_vide_file(File F)
 
 void afficher_file(File F)
 {
+	printf("{");
 	if (est_vide_file(F)) {
 	} else {
 		File p;
 		for (p = F->suiv; p != F; p = p->suiv) {
 			afficher_element(p->val);
+			printf(", ");
 		}
 		afficher_element(F->val);	// affichage du dernier
-		printf("\n");
 	}
+	printf("}\n");
 }
 
 File enfiler(File F, void *elt, size_t size_elt)

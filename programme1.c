@@ -43,7 +43,6 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 	while( !est_vide_liste(C) ) {
 
 		// blabla itératif
-		printf("--------------\n");
 		printf("Étape: %d\n", i);
 		printf("C: "); afficher_liste(C);
 		printf("D: "); afficher_liste(liste_sommet_atteint);
@@ -60,7 +59,6 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 
 		// on récupère le sommet de plus petit PPC et son coût
 		sommet_ppc_min = trouver_min_liste_sommet(C);
-		printf("Sommet le moins cher: %s %d\n", sommet_ppc_min.nom, sommet_ppc_min.numero);
 		float min = sommet_ppc_min.PPC;
 
 
@@ -68,7 +66,6 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		Liste p;
 
 		// Grosse fonction dégeu qui semble fonctionner mais à changer
-		("Liste C: "); afficher_liste(C);
 		if (len_liste(C) > 1) {
 			// cas premier élément de C = sommet_ppc_min
 			if ( (*(Sommet*)C->val).numero == sommet_ppc_min.numero ) {
@@ -182,7 +179,7 @@ int main(int argc, char* argv[]) {
 	File fileACM;
 	fileACM = algo_fileACM(tab_sommet, tab_arc, len_tab_sommet, len_tab_arc);	
 
-	printf("fileACM: \n");
+	printf("Résultat, fileACM: ");
 	afficher_file(fileACM);
 
 	return 0;

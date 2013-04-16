@@ -84,27 +84,29 @@ Liste supprimer_tete(Liste L)
 
 void afficher_liste(Liste L)
 {
+	printf("{");
 	if (est_vide_liste(L)) {
-		printf("La liste est vide\n");
 	} 
 	else {
 		Liste p;
 		for (p = L; !est_vide_liste(p); p = p->suiv) {
 			afficher_sommet(*(Sommet *) p->val);
+			if (!est_vide_liste(p->suiv))
+				printf(", ");
 		}
-		printf("\n");
 	}
+	printf("}\n");
 }
 
 void afficher_sommet(Sommet s)
 {
-	printf("%s | ", s.nom);
+	printf("%s", s.nom);
 }
 
 void afficher_element(void *elt)
 {
 	// printf("%f |", (*(Arc *) elt).cout );
-	printf("a%d_%d |", (*(Arc *) elt).sommet_depart, (*(Arc *) elt).sommet_arrive );
+	printf("a%d_%d", (*(Arc *) elt).sommet_depart, (*(Arc *) elt).sommet_arrive );
 
 }
 
