@@ -9,7 +9,7 @@
 #include "liste.h"
 #include "file.h"
 
-File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_tab_arc) {
+File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_tab_arc, int num_depart) {
 
 	File fileACM;
 	Liste C;
@@ -17,7 +17,7 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 	Liste liste_sommet_atteint;
 	liste_sommet_atteint = creer_liste();
 
-	Sommet d = tab_sommet[0]; // Sommet de départ, à changer en paramètre
+	// Sommet d = tab_sommet[num_depart]; // Sommet de départ, à changer en paramètre
 
 	/*
 		DEBUT ALGO
@@ -28,21 +28,22 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		tab_sommet[s].PPC = FLT_MAX;
 		tab_sommet[s].arrive_par = NULL;
 	}
-
-	d.PPC = 0;
-	d.arrive_par = NULL;
+	
+	tab_sommet[num_depart].PPC = 0;
+	tab_sommet[num_depart].arrive_par = NULL;
 
 	fileACM = creer_file();
 	C = creer_liste();
-	C = ajouter_queue(&d, C, sizeof(Sommet));
+	C = ajouter_queue(&tab_sommet[num_depart], C, sizeof(Sommet));
 
-	liste_sommet_atteint = ajouter_queue(&d, liste_sommet_atteint, sizeof(Sommet));
+	liste_sommet_atteint = ajouter_queue(&tab_sommet[num_depart], liste_sommet_atteint, sizeof(Sommet));
 
 	int i=0; //compteur étapes
 
 	while( !est_vide_liste(C) ) {
 
 		// blabla itératif
+		// très moche
 		printf("Étape: %d\n", i);
 		printf("C: "); afficher_liste(C);
 		printf("D: "); afficher_liste(liste_sommet_atteint);
@@ -59,6 +60,7 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 
 		// on récupère le sommet de plus petit PPC et son coût
 		sommet_ppc_min = trouver_min_liste_sommet(C);
+
 		float min = sommet_ppc_min.PPC;
 
 
@@ -96,7 +98,7 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		int l;
 
 		// si j n'est pas d;
-		if ( sommet_ppc_min.numero != d.numero ) {
+		if ( sommet_ppc_min.numero != tab_sommet[num_depart].numero ) {
 			fileACM = enfiler(fileACM, sommet_ppc_min.arrive_par, sizeof(Arc));
 			liste_sommet_atteint = ajouter_queue(&sommet_ppc_min, liste_sommet_atteint, sizeof(Sommet));
 		}
@@ -124,13 +126,20 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		// printf("Adjacents: "); afficher_liste(liste_sommet_adjacent);
 
 		for (p=liste_sommet_adjacent; !est_vide_liste(p); p=p->suiv) {
+
 			for (l=0; l<len_tab_arc; l++) {
 				if (tab_arc[l].sommet_depart == sommet_ppc_min.numero) {
 					if (tab_arc[l].sommet_arrive == (*(Sommet*) p->val).numero) {
 						break;
 					}
 				}
+				if (tab_arc[l].sommet_arrive == sommet_ppc_min.numero) {
+					if (tab_arc[l].sommet_depart == (*(Sommet*) p->val).numero) {
+						break;
+					}
+				}
 			}
+
 			// min = c(j,k) <=> cout de l'arc j,k
 			if ( (*(Sommet*) p->val).PPC > tab_arc[l].cout ) {
 
@@ -176,8 +185,13 @@ int main(int argc, char* argv[]) {
 	printf(" Algo FileACM \n");
 	printf("##############\n");
 
+	int num_depart;
+
+	printf("Entrez le numéro du sommet de départ: [0,%d]\n", len_tab_sommet);
+	scanf("%d", &num_depart);
+
 	File fileACM;
-	fileACM = algo_fileACM(tab_sommet, tab_arc, len_tab_sommet, len_tab_arc);	
+	fileACM = algo_fileACM(tab_sommet, tab_arc, len_tab_sommet, len_tab_arc, num_depart);	
 
 	printf("Résultat, fileACM: ");
 	afficher_file(fileACM);
