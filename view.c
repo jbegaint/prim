@@ -53,7 +53,7 @@ SDL_Surface* init_ecran (SDL_Surface* ecran)
 
 SDL_Surface* edit_point(SDL_Surface* ecran, Sommet* sommet, int len_tab_sommet)
 {
-i=0;
+int i=0;
 SDL_Surface *point = NULL;
 
 SDL_Rect position;

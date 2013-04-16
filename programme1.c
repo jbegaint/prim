@@ -62,17 +62,19 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		float min = sommet_ppc_min.PPC;
 
 		/*
-			Problème à partir d'ici...
+			Problème à partir d'ici...	
 		*/
 
 		// on récupère le sommet de plus petit PPC et son coût
 
 		// supprimer j de C;
+		// printf("Liste C: "); afficher_liste(C);
 		Liste p;
 		// printf("LEN: %d\n", len_liste(C));
 		if (len_liste(C) > 1) {
+			printf("Liste C: "); afficher_liste(C);
 			for (p=C; !est_vide_liste(p); p=p->suiv) {
-				if ( sommet_ppc_min.numero == (*(Sommet*) p->val).numero ) {
+				if ( (*(Sommet*) p->val).numero == sommet_ppc_min.numero ) {
 					printf("égalité\n");
 					Liste tmp;
 					tmp = p->suiv;
@@ -80,11 +82,13 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 					free(tmp);
 				}
 			}
+			printf("Liste C: "); afficher_liste(C);
+
 		}
 		else {
 			free(C);
 		}
-	
+
 		int l;
 		Arc arc;
 
