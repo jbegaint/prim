@@ -2,13 +2,11 @@
 
 #include "arc.h"
 
-
 typedef struct maillon {
 	void* val;
 	struct maillon *suiv;
 } *Liste;
 
-Liste creer_liste(void);
 int est_vide_liste(Liste);
 Liste ajouter_tete(void *, Liste, size_t);
 Liste ajouter_queue(void *, Liste, size_t);
@@ -20,3 +18,5 @@ Liste supprimer_tete(Liste);
 
 int recherche_elt_liste(Liste, void*);
 int len_liste(Liste);
+
+Liste ajout_tri(Sommet, Liste);

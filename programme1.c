@@ -11,41 +11,36 @@
 
 File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_tab_arc, int num_depart) {
 
-	File fileACM;
-	Liste C;
+	File fileACM = NULL;
+	Liste C = NULL;
 
 	float cout = 0;
 
-	Liste liste_sommet_atteint;
-	liste_sommet_atteint = creer_liste();
+	Liste liste_sommet_atteint = NULL;
 
-	// Sommet d = tab_sommet[num_depart]; // Sommet de départ, à changer en paramètre
+	Sommet d = tab_sommet[num_depart];
 
 	/*
 		DEBUT ALGO
 	*/
 
-	int s;
-	for (s=0; s<len_tab_sommet; s++) {
-		tab_sommet[s].PPC = FLT_MAX;
-		tab_sommet[s].arrive_par = NULL;
+	int l;
+	for (l=0; l<len_tab_sommet; l++) {
+		tab_sommet[l].PPC = FLT_MAX;
+		tab_sommet[l].arrive_par = NULL;
 	}
 	
-	tab_sommet[num_depart].PPC = 0;
-	tab_sommet[num_depart].arrive_par = NULL;
+	d.PPC = 0;
+	d.arrive_par = NULL;
 
-	fileACM = creer_file();
-	C = creer_liste();
-	C = ajouter_queue(&tab_sommet[num_depart], C, sizeof(Sommet));
+	C = ajouter_queue(&d, C, sizeof(Sommet));
+	liste_sommet_atteint = ajouter_queue(&d, liste_sommet_atteint, sizeof(Sommet));
 
-	liste_sommet_atteint = ajouter_queue(&tab_sommet[num_depart], liste_sommet_atteint, sizeof(Sommet));
-
-	int i=0; //compteur étapes
+	// int i=0; //compteur étapes
 
 	while( !est_vide_liste(C) ) {
 
 		// blabla itératif
-		// très moche
 
 		// printf("Étape: %d\n", i);
 		// printf("C: "); afficher_liste(C);
@@ -53,20 +48,14 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		// printf("fileACM: "); afficher_file(fileACM);
 		// printf("--------------\n");
 		// getchar();
+		// i++;
 
-		i++;
-
-		/* POUR TOUTES LES FONCTIONS QUI SUIVENT FAUDRA LES ECRIRE DANS UN FICHIER
-		 POUR UN CODE PLUS EXPLICITE */
-
-		// sommet j de C de plus petit PPC;
+		// sommet de C de plus petit PPC;
 		Sommet sommet_ppc_min;
 
 		// on récupère le sommet de plus petit PPC et son coût
 		sommet_ppc_min = trouver_min_liste_sommet(C);
-
 		float min = sommet_ppc_min.PPC;
-
 
 		// supprimer j de C;
 		Liste p;
@@ -96,13 +85,13 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 			}
 		}
 		else {
-			C = creer_liste();
+			C = NULL;
 		}
 
 		int l;
 
 		// si j n'est pas d;
-		if ( sommet_ppc_min.numero != tab_sommet[num_depart].numero ) {
+		if ( sommet_ppc_min.numero != d.numero ) {
 			cout += sommet_ppc_min.PPC;
 			fileACM = enfiler(fileACM, sommet_ppc_min.arrive_par, sizeof(Arc));
 			liste_sommet_atteint = ajouter_queue(&sommet_ppc_min, liste_sommet_atteint, sizeof(Sommet));
@@ -113,7 +102,7 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		Liste liste_sommet_adjacent;
 		Arc* a;
 
-		liste_sommet_adjacent = creer_liste();
+		liste_sommet_adjacent = NULL;
 
 		for (a=tab_arc; a < tab_arc + len_tab_arc; a++) {
 			// A voir pour la comparaison
@@ -125,10 +114,7 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 			}
 		}
 
-		// Arc arc;
-
 		sommet_ppc_min.voisins = liste_sommet_adjacent;
-		// printf("Adjacents: "); afficher_liste(liste_sommet_adjacent);
 
 		for (p=liste_sommet_adjacent; !est_vide_liste(p); p=p->suiv) {
 
@@ -151,7 +137,6 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 				(*(Sommet*) p->val).PPC = tab_arc[l].cout;
 
 				/* il faut maintenant mettre l'arc j=>k dans arrive_par */
-
 				(*(Sommet*) p->val).arrive_par = &tab_arc[l];
 				
 				if (recherche_elt_liste(liste_sommet_atteint, (Sommet*) p->val) != 1) {
@@ -189,9 +174,9 @@ int main(int argc, char* argv[]) {
 
 	lecture(argv[1], &tab_sommet, &tab_arc, &len_tab_sommet, &len_tab_arc);
 
-	printf("##############\n");
-	printf(" Algo FileACM \n");
-	printf("##############\n");
+	printf("----------------\n");
+	printf("| Algo FileACM |\n");
+	printf("----------------\n");
 
 
 	// penser à générer une erreur si num_depart pas dans le bon intervalle

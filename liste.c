@@ -5,11 +5,6 @@
 
 #include "liste.h"
 
-Liste creer_liste(void)
-{
-	return NULL;
-}
-
 int est_vide_liste(Liste L)
 {
 	return !L;
@@ -61,6 +56,13 @@ Liste ajouter_queue(void *elt, Liste L, size_t size_elt)
 		q->suiv = p;
 		return L;
 	}
+
+	return p;
+}
+
+Liste ajout_tri(Sommet s, Liste L) {
+	Liste p;
+	p = malloc(sizeof(*p));
 
 	return p;
 }

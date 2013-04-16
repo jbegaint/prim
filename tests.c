@@ -14,8 +14,7 @@ int main()
 
 	/* ------- TEST LISTE -------------------------------- */
 
-	Liste L;
-	L = creer_liste(); 
+	Liste L = NULL; 
 
 	/* pour tester d'autres types, attention pour le moment, 
 	il faut aussi changer size_elt et afficher_element */
@@ -58,7 +57,7 @@ int main()
 	printf("TEST FILE\n");
 	printf("##########\n");
 
-	File F = creer_file();
+	File F = NULL;
 	printf("File: ");
 	afficher_file(F);
 

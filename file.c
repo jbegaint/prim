@@ -5,11 +5,6 @@
 #include "file.h"
 #include "liste.h"
 
-File creer_file(void)
-{
-	return (File) creer_liste();
-}
-
 int est_vide_file(File F)
 {
 	return est_vide_liste((Liste) F);
