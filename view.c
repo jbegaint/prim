@@ -61,7 +61,7 @@ SDL_Rect position;
 SDL_Rect position_progression;
 
 	point = SDL_CreateRGBSurface(SDL_HWSURFACE, 2, 2, 32, 0, 0, 0, 0);//Point 
-	progression = SDL_CreateRGBSurface(SDL_HWSURFACE, 50, 10, 32, 0, 0, 0, 0);//Point
+	progression = SDL_CreateRGBSurface(SDL_HWSURFACE, 10, 10, 32, 0, 0, 0, 0);//Point
 
 
 for (i=0;i<len_tab_sommet;i++){
