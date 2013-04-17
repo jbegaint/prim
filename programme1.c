@@ -55,7 +55,6 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 
 		// on récupère le sommet de plus petit PPC et son coût
 		sommet_ppc_min = trouver_min_liste_sommet(C);
-		float min = sommet_ppc_min.PPC;
 
 		// supprimer j de C;
 		Liste p;
