@@ -24,10 +24,10 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		DEBUT ALGO
 	*/
 
-	int l;
-	for (l=0; l<len_tab_sommet; l++) {
-		tab_sommet[l].PPC = FLT_MAX;
-		tab_sommet[l].arrive_par = NULL;
+	Sommet* smt;
+	for (smt=tab_sommet; smt < tab_sommet+len_tab_sommet; smt++) {
+		(*smt).PPC = FLT_MAX;
+		(*smt).arrive_par = NULL;
 	}
 	
 	d.PPC = 0;
@@ -55,7 +55,6 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 
 		// on récupère le sommet de plus petit PPC et son coût
 		sommet_ppc_min = trouver_min_liste_sommet(C);
-		float min = sommet_ppc_min.PPC;
 
 		// supprimer j de C;
 		Liste p;
