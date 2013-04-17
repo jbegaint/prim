@@ -61,11 +61,13 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 
 		if (fscanf(f, "%d %f %f %[^\n]s", &sommet.numero, &sommet.coordonnee_x, &sommet.coordonnee_y, (sommet.nom)) != 4) {
 			
+
 			fprintf(stderr, "Format de fichier invalide\n");
 			printf("ligne: %d\n", i);
 			
 			exit(EXIT_FAILURE);
 		}
+		(*tab_sommet)[i] = sommet;
 
 		/*printf("%d %f %f \n", sommet.numero, sommet.coordonnee_x, sommet.coordonnee_y);*/
 		/*printf("%d/%d, %s \r",i+1, num_sommet, sommet.nom);*/

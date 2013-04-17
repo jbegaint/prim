@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -21,6 +22,5 @@ int main(int argc, char *argv[])
 	Arc* tab_arc;
 	int len_tab_arc, len_tab_sommet;
 	lecture(argv[1], &tab_sommet, &tab_arc, &len_tab_sommet, &len_tab_arc);
-
 	return 0;
 }

@@ -171,6 +171,11 @@ int main(int argc, char* argv[]) {
 
 	printf("Fichier: ");
 
+	int k=0;
+	for (k=0; k<len_tab_sommet; k++) {
+		printf("%s", tab_sommet[k].nom);
+	}
+
 	lecture(argv[1], &tab_sommet, &tab_arc, &len_tab_sommet, &len_tab_arc);
 
 	printf("----------------\n");
