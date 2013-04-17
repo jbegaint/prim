@@ -15,7 +15,7 @@
 
 int main( int argc, char* argv[] ) { 
 	
-   	int i;
+   	
 	Sommet* tab_sommet;
 	Arc* tab_arc;
 	int len_tab_arc, len_tab_sommet;
