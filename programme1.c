@@ -36,32 +36,32 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 	C = ajouter_queue(&d, C, sizeof(Sommet));
 	liste_sommet_atteint = ajouter_queue(&d, liste_sommet_atteint, sizeof(Sommet));
 
-	// int i=0; //compteur étapes
+	/*int i=0; compteur étapes*/
 
 	while( !est_vide_liste(C) ) {
 
-		// blabla itératif
+		/* blabla itératif
 
-		// printf("Étape: %d\n", i);
-		// printf("C: "); afficher_liste(C);
-		// printf("D: "); afficher_liste(liste_sommet_atteint);
-		// printf("fileACM: "); afficher_file(fileACM);
-		// printf("--------------\n");
-		// getchar();
-		// i++;
+		 printf("Étape: %d\n", i);
+		 printf("C: "); afficher_liste(C);
+		 printf("D: "); afficher_liste(liste_sommet_atteint);
+		 printf("fileACM: "); afficher_file(fileACM);
+		 printf("--------------\n");
+		 getchar();
+		 i++;*/
 
-		// sommet de C de plus petit PPC;
+		/*sommet de C de plus petit PPC;*/
 		Sommet sommet_ppc_min;
 
-		// on récupère le sommet de plus petit PPC et son coût
+		/*on récupère le sommet de plus petit PPC et son coût*/
 		sommet_ppc_min = trouver_min_liste_sommet(C);
 
-		// supprimer j de C;
+		/*supprimer j de C*/
 		Liste p;
 
-		// Grosse fonction dégeu qui semble fonctionner mais à changer
+		/*Grosse fonction dégeu qui semble fonctionner mais à changer*/
 		if (len_liste(C) > 1) {
-			// cas premier élément de C = sommet_ppc_min
+			/*cas premier élément de C = sommet_ppc_min*/
 			if ( (*(Sommet*)C->val).numero == sommet_ppc_min.numero ) {
 				C = C->suiv;
 			}
@@ -87,16 +87,14 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 			C = NULL;
 		}
 
-		int l;
-
-		// si j n'est pas d;
+		/*si j n'est pas d*/
 		if ( sommet_ppc_min.numero != d.numero ) {
 			cout += sommet_ppc_min.PPC;
 			fileACM = enfiler(fileACM, sommet_ppc_min.arrive_par, sizeof(Arc));
 			liste_sommet_atteint = ajouter_queue(&sommet_ppc_min, liste_sommet_atteint, sizeof(Sommet));
 		}
 
-		// il faut maintenant récupérer les adjacents à j
+		/* il faut maintenant récupérer les adjacents à j*/
 
 		Liste liste_sommet_adjacent = NULL;
 		Arc* a;
@@ -105,7 +103,7 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		Liste ll;
 
 		for (a=tab_arc; a < tab_arc + len_tab_arc; a++) {
-			// A voir pour la comparaison
+			/* A voir pour la comparaison */
 			if ( (*a).sommet_depart == sommet_ppc_min.numero ) {
 				liste_sommet_adjacent = ajouter_queue(&tab_sommet[(*a).sommet_arrive], liste_sommet_adjacent, sizeof(Sommet));
 			
@@ -119,8 +117,6 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		}
 		/*sommet_ppc_min.voisins = liste_sommet_adjacent;*/
 		sommet_ppc_min.voisins = liste_arc_sortant;
-
-		Sommet st;
 
 		for (ll=liste_arc_sortant; !est_vide_liste(ll); ll=ll->suiv) {
 
@@ -136,7 +132,7 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 						C = ajouter_queue(&tab_sommet[(*a).sommet_arrive], C, sizeof(Sommet));
 					}
 					else {
-					// printf("nothing for the moment \n");
+					/* printf("nothing for the moment \n");*/
 					}
 				}	
 			}
@@ -151,52 +147,18 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 						C = ajouter_queue(&tab_sommet[(*a).sommet_depart], C, sizeof(Sommet));
 					}
 					else {
-					// printf("nothing for the moment \n");
+					/* printf("nothing for the moment \n");*/
 					}
 				}	
 			}
 		}
 
-		/*for (p=liste_sommet_adjacent; !est_vide_liste(p); p=p->suiv) {
-
-			for (l=0; l<len_tab_arc; l++) {
-				if (tab_arc[l].sommet_depart == sommet_ppc_min.numero) {
-					if (tab_arc[l].sommet_arrive == (*(Sommet*) p->val).numero) {
-						break;
-					}
-				}
-				if (tab_arc[l].sommet_arrive == sommet_ppc_min.numero) {
-					if (tab_arc[l].sommet_depart == (*(Sommet*) p->val).numero) {
-						break;
-					}
-				}
-			}
-
-			// min = c(j,k) <=> cout de l'arc j,k
-			if ( (*(Sommet*) p->val).PPC > tab_arc[l].cout ) {
-
-				(*(Sommet*) p->val).PPC = tab_arc[l].cout;
-
-				/* il faut maintenant mettre l'arc j=>k dans arrive_par */
-				/*(*(Sommet*) p->val).arrive_par = &tab_arc[l];
-				
-				if (recherche_elt_liste(liste_sommet_atteint, (Sommet*) p->val) != 1) {
-					if (recherche_elt_liste(C, (Sommet*) p->val) != 1) {
-						C = ajouter_queue((Sommet*) p->val, C, sizeof(Sommet));
-					}
-					else {
-					// printf("nothing for the moment \n");
-					}
-				}			
-
-			}
-		}*/
 	}
 
 	printf("Cout de l'acm: %f\n", cout);
 
 	return fileACM;
-	// FIN ALGO
+	/*FIN ALGO*/
 }
 
 int main(int argc, char* argv[]) {
@@ -225,7 +187,8 @@ int main(int argc, char* argv[]) {
 	printf("----------------\n");
 
 
-	// penser à générer une erreur si num_depart pas dans le bon intervalle
+/*	penser à générer une erreur si num_depart pas dans le bon intervalle
+*/	
 	int num_depart;
 	if (argc > 2)
 		num_depart = atoi(argv[2]);
@@ -243,7 +206,7 @@ int main(int argc, char* argv[]) {
 	return 0;
 }
 
-// A faire 
+/*// A faire 
 // relié les points
 //Afficher nom sommet
-//Afficher le cout
+//Afficher le cout*/

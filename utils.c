@@ -49,9 +49,6 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 
 	Sommet sommet;
 		
-	int a = 0;
-	int b = 0;
-
 	for (i=0; i<num_sommet; i++) {
 
 		/*structure du fichier: numéro, x, y, nom*/

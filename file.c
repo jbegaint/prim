@@ -20,7 +20,7 @@ void afficher_file(File F)
 			afficher_element(p->val);
 			printf(", ");
 		}
-		afficher_element(F->val);	// affichage du dernier
+		afficher_element(F->val);	/*affichage du dernier*/
 	}
 	printf("}\n");
 }
@@ -44,8 +44,9 @@ File enfiler(File F, void *elt, size_t size_elt)
 	if (est_vide_file(F)) {
 		p->suiv = p;
 	} else {
-		p->suiv = F->suiv;	// F->suiv : premier elt de la file et p : nouveau dernier
-		// fifo: first in first out
+		p->suiv = F->suiv;	 
+		/*F->suiv : premier elt de la file et p : nouveau dernier
+		 fifo: first in first out*/
 		F->suiv = p;
 	}
 	return p;

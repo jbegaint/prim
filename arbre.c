@@ -6,7 +6,7 @@
 Arbre ajouter_arbre(Arc* arc, Arbre r) {
 
 	Arbre p = (Arbre) malloc(sizeof(*p));
-
+	/*
 	// Sommet* sommet_depart;
 	// Sommet* sommet_arrive;
 
@@ -21,6 +21,7 @@ Arbre ajouter_arbre(Arc* arc, Arbre r) {
 	// noeudSommetDepart->fils = p;
 
 	// sommet_arrive->noeudArbreACM = p;
-
+	*/
+	
 	return p;
 }

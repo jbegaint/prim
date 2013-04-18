@@ -1,6 +1,5 @@
 #pragma once
 
-// #include "sommet.h"
 /* arbre fils-frère, arbre n-aire */
 
 #include "sommet.h"

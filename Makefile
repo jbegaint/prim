@@ -1,6 +1,6 @@
 # DIRSDL=/home/jean/Documents/Cours/Info/C/S2/TD7/SDLPHELMA
 # CFLAGS=-c -g -O2 -I$(DIRSDL)/include/SDL -I$(DIRSDL)/include
-CFLAGS=-c -g -O2 
+CFLAGS=-c -g -O2 -Wall -Wextra -ansi
 #-Wall 
 #-Wextra -pedantic 
 # -ansi

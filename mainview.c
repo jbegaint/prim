@@ -30,16 +30,16 @@ lecture(argv[1], &tab_sommet, &tab_arc, &len_tab_sommet, &len_tab_arc);
 	
 	init_SDL ();
 
-	SDL_Surface* ecran = NULL; //Defini un pointeur vers l'écran
+	SDL_Surface* ecran = NULL; /*Defini un pointeur vers l'écran*/
 
 	ecran=init_ecran(ecran);
 
 	ecran=edit_point(ecran, tab_sommet,len_tab_sommet );
 				
 
-	pause(); // Mise en pause du programme
+	pause(); /* Mise en pause du programme*/
 
-	SDL_Quit(); //Quitter SDL
+	SDL_Quit(); /*Quitter SDL*/
 	
 	return 0; 
 }

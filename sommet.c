@@ -9,7 +9,7 @@ Sommet trouver_min_liste_sommet(Liste L)
 {
 	Liste p;
 	Sommet sommet_ppc_min;
-	float min = FLT_MAX; // ou prendre le premier
+	float min = FLT_MAX;  /*ou prendre le premier*/
 
 	for(p=L; !est_vide_liste(p); p=p->suiv) {
 		if ( (*(Sommet*) p->val).PPC < min ) {

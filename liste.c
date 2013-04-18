@@ -16,12 +16,12 @@ Liste ajouter_tete(void *elt, Liste L, size_t size_elt)
 	p = (Liste) malloc(sizeof(*p));
 
 	if (p == NULL)
-		return NULL;	// problème d'attribution de mémoire
+		return NULL;	/*problème d'attribution de mémoire*/
 
-	// alloue de la mémiore pour p->val
+	/*alloue de la mémiore pour p->val*/
 	p->val = malloc(size_elt);
 	if (p->val == NULL)
-		return NULL;	// idem
+		return NULL;	/*idem*/
 
 	memcpy(p->val, elt, size_elt);
 
@@ -37,12 +37,12 @@ Liste ajouter_queue(void *elt, Liste L, size_t size_elt)
 	p = malloc(sizeof(*p));
 
 	if (p == NULL)
-		return NULL;	// problème d'attribution de mémoire
+		return NULL;	/*problème d'attribution de mémoire*/
 
-	// alloue de la mémiore pour p->val
+	/* alloue de la mémiore pour p->val*/
 	p->val = malloc(size_elt);
 	if (p->val == NULL)
-		return NULL;	// idem
+		return NULL;	 /*idem*/
 	p->suiv = NULL;
 
 	memcpy(p->val, elt, size_elt);
@@ -60,12 +60,11 @@ Liste ajouter_queue(void *elt, Liste L, size_t size_elt)
 	return p;
 }
 
-Liste ajout_tri(Sommet s, Liste L) {
+/*Liste ajout_tri(Sommet s, Liste L) {
 	Liste p;
 	p = malloc(sizeof(*p));
-
 	return p;
-}
+}*/
 
 void free_liste(Liste L)
 {
@@ -107,7 +106,6 @@ void afficher_sommet(Sommet s)
 
 void afficher_element(void *elt)
 {
-	// printf("%f |", (*(Arc *) elt).cout );
 	printf("a%d_%d", (*(Arc *) elt).sommet_depart, (*(Arc *) elt).sommet_arrive );
 }
 

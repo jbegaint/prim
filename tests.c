@@ -19,10 +19,10 @@ int main()
 	/* pour tester d'autres types, attention pour le moment, 
 	il faut aussi changer size_elt et afficher_element */
 	
-	// int c = 10210;
+/*	// int c = 10210;
 	// int d = 10000;
 	// double c = 10210;
-	// double d = 10000;
+	// double d = 10000;*/
 
 	char c = 'a';
 	char d = 'b';
@@ -77,7 +77,6 @@ int main()
 	printf("File: ");
 	afficher_file(F);
 
-	// void *tmp = defiler(&F);
 	afficher_element(defiler(&F));
 	printf("défilé ");
 
