@@ -97,9 +97,10 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		/* il faut maintenant récupérer les adjacents à j*/
 
 		Liste liste_sommet_adjacent = NULL;
+		Liste liste_arc_sortant = NULL;
+
 		Arc* a;
 
-		Liste liste_arc_sortant = NULL;
 		Liste ll;
 
 		for (a=tab_arc; a < tab_arc + len_tab_arc; a++) {
@@ -115,7 +116,7 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 				liste_arc_sortant = ajouter_queue(a, liste_arc_sortant, sizeof(Arc));
 			}
 		}
-		/*sommet_ppc_min.voisins = liste_sommet_adjacent;*/
+
 		sommet_ppc_min.voisins = liste_arc_sortant;
 
 		for (ll=liste_arc_sortant; !est_vide_liste(ll); ll=ll->suiv) {
@@ -186,9 +187,6 @@ int main(int argc, char* argv[]) {
 	printf("| Algo FileACM |\n");
 	printf("----------------\n");
 
-
-/*	penser à générer une erreur si num_depart pas dans le bon intervalle
-*/	
 	int num_depart;
 	if (argc > 2)
 		num_depart = atoi(argv[2]);
