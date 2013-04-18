@@ -191,11 +191,13 @@ int main(int argc, char* argv[]) {
 */	
 	int num_depart;
 	if (argc > 2)
-		num_depart =  get_param_sommet(atoi(argv[2]), len_tab_sommet);
+		num_depart = atoi(argv[2]);
 	else {
 		printf("Entrez le numéro du sommet de départ: [0,%d]\n", len_tab_sommet);
 		scanf("%d", &num_depart);
 	}
+
+	num_depart =  get_param_sommet(num_depart, len_tab_sommet);
 
 	File fileACM;
 	fileACM = algo_fileACM(tab_sommet, tab_arc, len_tab_sommet, len_tab_arc, num_depart);	
