@@ -93,10 +93,19 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 
 		(*tab_arc)[j] = arc;
 
-		/*il faut encore récupérer les sommets à mettre dans arc*/
 		/*printf("%d/%d %f\r", j+1, num_arrete, arc.cout);
 
         fflush(stdout);*/ 
 
    	}
 }
+
+int get_param_sommet(int param, int len_tab) {
+	if ( param > 0 && param < len_tab) {
+		return param;
+	}
+	printf("Paramètre invalide: le nombre doit être inférieur à %d\n", len_tab);
+	printf("0 sera utilisé\n");
+	return 0;
+}
+

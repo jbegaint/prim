@@ -191,7 +191,7 @@ int main(int argc, char* argv[]) {
 */	
 	int num_depart;
 	if (argc > 2)
-		num_depart = atoi(argv[2]);
+		num_depart =  get_param_sommet(atoi(argv[2]), len_tab_sommet);
 	else {
 		printf("Entrez le numéro du sommet de départ: [0,%d]\n", len_tab_sommet);
 		scanf("%d", &num_depart);
