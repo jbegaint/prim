@@ -5,14 +5,19 @@
 #include "sommet.h"
 #include "arc.h"
 
+void die(char *c)
+{
+	fprintf(stderr, "%s \n", c);
+	exit(EXIT_FAILURE);
+}
+
 FILE* open_file(char* filename) 
 {
   FILE *f;
 
   f = fopen(filename, "r");
   if (f == NULL) {
-    fprintf(stderr, "Ouverture impossible\n");
-    exit(EXIT_FAILURE);
+    die("Ouverture impossible");
   }
   return f;
 }
@@ -27,8 +32,7 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 	int num_sommet, num_arrete;
 
 	if (fscanf(f, "%d %d", &num_sommet, &num_arrete) != 2) {
-		fprintf(stderr, "Format de fichier invalide\n");
-		exit(EXIT_FAILURE);
+		die("Format de fichier invalide");
 	}
 
 	*len_tab_sommet = num_sommet;
@@ -39,8 +43,7 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 	*tab_sommet = malloc(num_sommet*sizeof(Sommet));
 	
 	if (*tab_sommet==NULL) {
-		fprintf(stderr, "Allocation impossible\n");
-		exit(EXIT_FAILURE);
+		die("Allocation impossible");
 	}
 	/*on se positionne au niveau de la ligne de commentaire et on l'affiche*/
 	fseek(f, 1, SEEK_CUR);
@@ -57,18 +60,15 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 		/*a voir: fgets + sscanf plutôt*/
 
 		if (fscanf(f, "%d %f %f %[^\n]s", &sommet.numero, &sommet.coordonnee_x, &sommet.coordonnee_y, (sommet.nom)) != 4) {
-			
-
-			fprintf(stderr, "Format de fichier invalide\n");
-			printf("ligne: %d\n", i);
-			
-			exit(EXIT_FAILURE);
+			die("Format de fichier invalide\n");
 		}
 		(*tab_sommet)[i] = sommet;
 
-		/*printf("%d %f %f \n", sommet.numero, sommet.coordonnee_x, sommet.coordonnee_y);*/
-		/*printf("%d/%d, %s \r",i+1, num_sommet, sommet.nom);*/
- 	 	/*fflush(stdout);*/
+		printf("%d/%d, %s \r",i+1, num_sommet, sommet.nom);
+		
+		if ( (i/num_sommet)*100 % 10 == 0)
+			printf("%d\n", i);	
+
 	} 
 
 	/*idem, on se positionne au niveau de la ligne de commentaire et on l'affiche*/
@@ -84,18 +84,16 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 
 		/*structure du fichier: depart, arrive, coût*/
 		if (fscanf(f, "%d %d %f", &depart, &arrive, &arc.cout) != 3) {
-			printf("%d\n", i+j);
-			fprintf(stderr, "Format de fichier invalide\n");
-			exit(EXIT_FAILURE);
+			die("Format de fichier invalide");
 		}
 		arc.sommet_depart = depart;
 		arc.sommet_arrive = arrive;
 
 		(*tab_arc)[j] = arc;
 
-		/*printf("%d/%d %f\r", j+1, num_arrete, arc.cout);
+		printf("%d/%d %f\r", j+1, num_arrete, arc.cout);
 
-        fflush(stdout);*/ 
+        fflush(stdout); 
 
    	}
 }
