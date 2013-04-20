@@ -26,7 +26,7 @@ Liste ajout_tri(Sommet* s, Liste L) {
 	Liste p = NULL;
 	Liste q;
 	
-	if (est_vide_liste(L) || (*s).PPC < (*(Sommet*) L).PPC ) {
+	if (est_vide_liste(L) || (*s).PPC < (*(Sommet*) L->val).PPC ) {
 		return ajouter_tete(s, L, sizeof(Sommet));
 	}
 
