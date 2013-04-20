@@ -71,8 +71,3 @@ void* defiler(File* F)
 	}
 	return val;
 }
-
-void free_file(File F)
-{
-	free_liste((Liste) F);
-}

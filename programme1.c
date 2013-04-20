@@ -33,35 +33,39 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 	d.PPC = 0;
 	d.arrive_par = NULL;
 
-	C = ajouter_queue(&d, C, sizeof(Sommet));
+/*	C = ajouter_queue(&d, C, sizeof(Sommet));
+*/	
+	C = ajout_tri(&d, C);
 	liste_sommet_atteint = ajouter_queue(&d, liste_sommet_atteint, sizeof(Sommet));
 
-	/*int i=0; compteur étapes*/
-
+/*	int i=0; compteur étapes
+*/
 	while( !est_vide_liste(C) ) {
 
-		/* blabla itératif
-
-		 printf("Étape: %d\n", i);
+/*		 blabla itératif
+*/
+		/* printf("Étape: %d\n", i);
 		 printf("C: "); afficher_liste(C);
 		 printf("D: "); afficher_liste(liste_sommet_atteint);
 		 printf("fileACM: "); afficher_file(fileACM);
 		 printf("--------------\n");
 		 getchar();
-		 i++;*/
-
+		 i++;
+*/
 		/*sommet de C de plus petit PPC;*/
 		Sommet sommet_ppc_min;
 
 		/*on récupère le sommet de plus petit PPC et son coût*/
-		sommet_ppc_min = trouver_min_liste_sommet(C);
+		sommet_ppc_min = *(Sommet*) C->val;
 
 		/*supprimer j de C*/
-		Liste p;
+		/*Liste p;*/
 
 		/*Grosse fonction dégeu qui semble fonctionner mais à changer*/
-		if (len_liste(C) > 1) {
-			/*cas premier élément de C = sommet_ppc_min*/
+		
+		C = supprimer_tete(C);
+
+		/*if (len_liste(C) > 1) {
 			if ( (*(Sommet*)C->val).numero == sommet_ppc_min.numero ) {
 				C = C->suiv;
 			}
@@ -85,7 +89,7 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		}
 		else {
 			C = NULL;
-		}
+		}*/
 
 		/*si j n'est pas d*/
 		if ( sommet_ppc_min.numero != d.numero ) {
@@ -130,7 +134,8 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 
 				if (recherche_elt_liste(liste_sommet_atteint, &tab_sommet[(*a).sommet_arrive]) != 1) {
 					if (recherche_elt_liste(C, &tab_sommet[(*a).sommet_arrive]) != 1) {
-						C = ajouter_queue(&tab_sommet[(*a).sommet_arrive], C, sizeof(Sommet));
+						/*C = ajouter_queue(&tab_sommet[(*a).sommet_arrive], C, sizeof(Sommet));*/
+						C = ajout_tri(&tab_sommet[(*a).sommet_arrive], C);
 					}
 					else {
 					}
@@ -144,7 +149,9 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 
 				if (recherche_elt_liste(liste_sommet_atteint, &tab_sommet[(*a).sommet_depart]) != 1) {
 					if (recherche_elt_liste(C, &tab_sommet[(*a).sommet_depart]) != 1) {
-						C = ajouter_queue(&tab_sommet[(*a).sommet_depart], C, sizeof(Sommet));
+/*						C = ajouter_queue(&tab_sommet[(*a).sommet_depart], C, sizeof(Sommet));
+*/					
+						C = ajout_tri(&tab_sommet[(*a).sommet_depart], C);
 					}
 					else {
 					}

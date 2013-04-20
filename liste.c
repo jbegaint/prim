@@ -60,20 +60,17 @@ Liste ajouter_queue(void *elt, Liste L, size_t size_elt)
 	return p;
 }
 
-void free_liste(Liste L)
-{
-	free(L->val);
-	free(L);
-}
-
 Liste supprimer_tete(Liste L)
 {
+	if (est_vide_liste(L))
+		return NULL;
+
 	Liste p;
 	p = (Liste) malloc(sizeof(*p));
 	if (p == NULL)
 		return NULL;
 	p = L->suiv;
-	free_liste(L);
+	free(L);
 	return p;
 }
 

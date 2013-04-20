@@ -13,10 +13,8 @@ Liste ajouter_queue(void *, Liste, size_t);
 void afficher_liste(Liste);
 void afficher_element(void *);
 void afficher_sommet(Sommet);
-void free_liste(Liste);
 Liste supprimer_tete(Liste);
 
 int recherche_elt_liste(Liste, void*);
 int len_liste(Liste);
-
-Liste ajout_tri(Sommet, Liste);
+Liste ajout_tri(Sommet*, Liste);

@@ -59,12 +59,8 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 		}
 		(*tab_sommet)[i] = sommet;
 
-		printf("%d/%d, %s \r",i+1, *len_tab_sommet, sommet.nom);
-		
-		if ( (i / *len_tab_sommet)*100 % 10 == 0)
-			printf("%d\n", i);	
-
-	} 
+/*		printf("%d/%d, %s \r",i+1, *len_tab_sommet, sommet.nom);
+*/	} 
 
 	/*idem, on se positionne au niveau de la ligne de commentaire et on l'affiche*/
 	fseek(f, 1, SEEK_CUR);

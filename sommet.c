@@ -21,26 +21,28 @@ Sommet trouver_min_liste_sommet(Liste L)
 	return sommet_ppc_min;
 }	
 
-Liste ajout_tri(Sommet s, Liste L) {
+Liste ajout_tri(Sommet* s, Liste L) {
 	Liste p = NULL;
 	Liste q;
+
+	if (est_vide_liste(L) || (*s).PPC < (*(Sommet*) L).PPC ) {
+		return ajouter_tete(s, L, sizeof(Sommet));
+	}
+
+	for(q=L; !est_vide_liste(q->suiv); q = q->suiv) {
+		if ( (*s).PPC > (*(Sommet*) q->suiv->val).PPC ) {
+			break;
+		}
+	}
 
 	p = malloc(sizeof(*p));
 
 	if (p==NULL)
 		return NULL;
 
-	p->suiv = NULL;
-	p->val = &s;
-
-	if (est_vide_liste(L) || s.PPC < (*(Sommet*) L).PPC ) {
-		return ajouter_tete(L, sizeof(Sommet));
-	}
-
-	for(q=L; !est_vide_liste(q->suiv); q = q->suiv) {
-		if ( s.PPC < (*(Sommet*) q->val).PPC )
-
-	}
+	p->val = s;
+	p->suiv = q->suiv;
+	q->suiv = p;
 
 	return L;
 }
