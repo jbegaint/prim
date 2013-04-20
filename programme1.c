@@ -61,7 +61,11 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		sommet_ppc_min = *(Sommet*) C->val;
 
 		/*supprimer j de C*/
-		
+		Liste aa;
+		for (aa=C; !est_vide_liste(aa); aa=aa->suiv) {
+			printf("%s %f\n", (*(Sommet*) aa->val).nom, (*(Sommet*) aa->val).PPC);
+		}
+
 		C = supprimer_tete(C);
 
 		/*if (len_liste(C) > 1) {
@@ -136,8 +140,6 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 						/*C = ajouter_queue(&tab_sommet[(*a).sommet_arrive], C, sizeof(Sommet));*/
 						C = ajout_tri(&tab_sommet[(*a).sommet_arrive], C);
 					}
-					else {
-					}
 				}	
 			}
 
@@ -151,8 +153,6 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 /*						C = ajouter_queue(&tab_sommet[(*a).sommet_depart], C, sizeof(Sommet));
 */					
 						C = ajout_tri(&tab_sommet[(*a).sommet_depart], C);
-					}
-					else {
 					}
 				}	
 			}

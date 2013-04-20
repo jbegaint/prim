@@ -22,15 +22,17 @@ Sommet trouver_min_liste_sommet(Liste L)
 }	
 
 Liste ajout_tri(Sommet* s, Liste L) {
+
 	Liste p = NULL;
 	Liste q;
-
+	
 	if (est_vide_liste(L) || (*s).PPC < (*(Sommet*) L).PPC ) {
 		return ajouter_tete(s, L, sizeof(Sommet));
 	}
 
 	for(q=L; !est_vide_liste(q->suiv); q = q->suiv) {
-		if ( (*s).PPC > (*(Sommet*) q->suiv->val).PPC ) {
+
+		if ( (*s).PPC < (*(Sommet*) q->suiv->val).PPC ) {
 			break;
 		}
 	}
