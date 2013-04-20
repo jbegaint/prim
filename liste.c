@@ -60,12 +60,6 @@ Liste ajouter_queue(void *elt, Liste L, size_t size_elt)
 	return p;
 }
 
-/*Liste ajout_tri(Sommet s, Liste L) {
-	Liste p;
-	p = malloc(sizeof(*p));
-	return p;
-}*/
-
 void free_liste(Liste L)
 {
 	free(L->val);

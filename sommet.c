@@ -7,7 +7,7 @@
 
 Sommet trouver_min_liste_sommet(Liste L) 
 {
-	Liste p;
+	Liste p = NULL;
 	Sommet sommet_ppc_min;
 	float min = FLT_MAX;  /*ou prendre le premier*/
 
@@ -20,3 +20,27 @@ Sommet trouver_min_liste_sommet(Liste L)
 
 	return sommet_ppc_min;
 }	
+
+Liste ajout_tri(Sommet s, Liste L) {
+	Liste p = NULL;
+	Liste q;
+
+	p = malloc(sizeof(*p));
+
+	if (p==NULL)
+		return NULL;
+
+	p->suiv = NULL;
+	p->val = &s;
+
+	if (est_vide_liste(L) || s.PPC < (*(Sommet*) L).PPC ) {
+		return ajouter_tete(L, sizeof(Sommet));
+	}
+
+	for(q=L; !est_vide_liste(q->suiv); q = q->suiv) {
+		if ( s.PPC < (*(Sommet*) q->val).PPC )
+
+	}
+
+	return L;
+}
