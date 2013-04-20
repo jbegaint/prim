@@ -3,7 +3,7 @@
 #include "arc.h"
 
 typedef struct maillon {
-	void* val;
+	void *val;
 	struct maillon *suiv;
 } *Liste;
 
@@ -15,6 +15,6 @@ void afficher_element(void *);
 void afficher_sommet(Sommet);
 Liste supprimer_tete(Liste);
 
-int recherche_elt_liste(Liste, void*);
+int recherche_elt_liste(Liste, void *);
 int len_liste(Liste);
-Liste ajout_tri(Sommet*, Liste);
+Liste ajout_tri(Sommet *, Liste);

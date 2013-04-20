@@ -16,12 +16,12 @@ Liste ajouter_tete(void *elt, Liste L, size_t size_elt)
 	p = (Liste) malloc(sizeof(*p));
 
 	if (p == NULL)
-		return NULL;	/*problème d'attribution de mémoire*/
+		return NULL;	
 
-	/*alloue de la mémiore pour p->val*/
-	p->val = malloc(size_elt);
+	p->val = malloc(size_elt); 	
+
 	if (p->val == NULL)
-		return NULL;	/*idem*/
+		return NULL;
 
 	memcpy(p->val, elt, size_elt);
 
@@ -37,18 +37,19 @@ Liste ajouter_queue(void *elt, Liste L, size_t size_elt)
 	p = malloc(sizeof(*p));
 
 	if (p == NULL)
-		return NULL;	/*problème d'attribution de mémoire*/
+		return NULL;	
 
-	/* alloue de la mémiore pour p->val*/
 	p->val = malloc(size_elt);
+
 	if (p->val == NULL)
-		return NULL;	 /*idem*/
+		return NULL;
+
 	p->suiv = NULL;
 
 	memcpy(p->val, elt, size_elt);
-	
+
 	if (!est_vide_liste(L)) {
-		for (q=L; !est_vide_liste(q); q=q->suiv) {
+		for (q = L; !est_vide_liste(q); q = q->suiv) {
 			if (q->suiv == NULL)
 				break;
 		}
@@ -67,19 +68,20 @@ Liste supprimer_tete(Liste L)
 
 	Liste p;
 	p = (Liste) malloc(sizeof(*p));
+
 	if (p == NULL)
 		return NULL;
+
 	p = L->suiv;
 	free(L);
+	
 	return p;
 }
 
 void afficher_liste(Liste L)
 {
 	printf("{");
-	if (est_vide_liste(L)) {
-	} 
-	else {
+	if (!est_vide_liste(L)) {
 		Liste p;
 		for (p = L; !est_vide_liste(p); p = p->suiv) {
 			afficher_sommet(*(Sommet *) p->val);
@@ -97,24 +99,24 @@ void afficher_sommet(Sommet s)
 
 void afficher_element(void *elt)
 {
-	printf("a%d_%d", (*(Arc *) elt).sommet_depart, (*(Arc *) elt).sommet_arrive );
+	printf("a%d_%d", (*(Arc *) elt).sommet_depart, (*(Arc *) elt).sommet_arrive);
 }
 
-int recherche_elt_liste(Liste L, void* elt) 
+int recherche_elt_liste(Liste L, void *elt)
 {
 	Liste p;
-	for (p=L; !est_vide_liste(p); p=p->suiv) {
-		if ( (*(Sommet*) p->val).numero == (*(Sommet*) elt).numero)
+	for (p = L; !est_vide_liste(p); p = p->suiv) {
+		if ((*(Sommet *) p->val).numero == (*(Sommet *) elt).numero)
 			return 1;
 	}
 	return 0;
 }
 
-int len_liste(Liste L) 
+int len_liste(Liste L)
 {
 	Liste p;
-	int i=0;
-	for (p=L; !est_vide_liste(p); p=p->suiv)
+	int i = 0;
+	for (p = L; !est_vide_liste(p); p = p->suiv)
 		i++;
 	return i;
 }
