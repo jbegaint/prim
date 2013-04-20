@@ -56,40 +56,12 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 		Sommet sommet_ppc_min;
 
 		/*on récupère le sommet de plus petit PPC et son coût*/
+		/*Comme la liste est trié, c'est le premier élément de C*/
 		sommet_ppc_min = *(Sommet*) C->val;
 
 		/*supprimer j de C*/
-		/*Liste p;*/
-
-		/*Grosse fonction dégeu qui semble fonctionner mais à changer*/
 		
 		C = supprimer_tete(C);
-
-		/*if (len_liste(C) > 1) {
-			if ( (*(Sommet*)C->val).numero == sommet_ppc_min.numero ) {
-				C = C->suiv;
-			}
-
-			else {
-				for (p=C; !est_vide_liste(p->suiv); p=p->suiv) {
-					if ( (*(Sommet*) p->suiv->val).numero == sommet_ppc_min.numero ) {
-						Liste tmp;
-						tmp = p->suiv;
-
-						if (est_vide_liste(p->suiv->suiv)) {
-							p->suiv=NULL;
-							break;
-						} else {
-							p->suiv = p->suiv->suiv; 
-						}
-						free(tmp);
-					}
-				}
-			}
-		}
-		else {
-			C = NULL;
-		}*/
 
 		/*si j n'est pas d*/
 		if ( sommet_ppc_min.numero != d.numero ) {
@@ -134,10 +106,7 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 
 				if (recherche_elt_liste(liste_sommet_atteint, &tab_sommet[(*a).sommet_arrive]) != 1) {
 					if (recherche_elt_liste(C, &tab_sommet[(*a).sommet_arrive]) != 1) {
-						/*C = ajouter_queue(&tab_sommet[(*a).sommet_arrive], C, sizeof(Sommet));*/
 						C = ajout_tri(&tab_sommet[(*a).sommet_arrive], C);
-					}
-					else {
 					}
 				}	
 			}
@@ -149,11 +118,7 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 
 				if (recherche_elt_liste(liste_sommet_atteint, &tab_sommet[(*a).sommet_depart]) != 1) {
 					if (recherche_elt_liste(C, &tab_sommet[(*a).sommet_depart]) != 1) {
-/*						C = ajouter_queue(&tab_sommet[(*a).sommet_depart], C, sizeof(Sommet));
-*/					
 						C = ajout_tri(&tab_sommet[(*a).sommet_depart], C);
-					}
-					else {
 					}
 				}	
 			}
