@@ -133,7 +133,6 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 						C = ajouter_queue(&tab_sommet[(*a).sommet_arrive], C, sizeof(Sommet));
 					}
 					else {
-					/* printf("nothing for the moment \n");*/
 					}
 				}	
 			}
