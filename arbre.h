@@ -12,5 +12,5 @@ typedef struct NoeudArbre {
 } *Arbre;
 
 
-Arbre ajouter_arbre(Arc*, Arbre);
+Arbre ajouter_arbre(Arc*, Sommet*);
 	
