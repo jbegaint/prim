@@ -99,7 +99,7 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 }
 
 int get_param_sommet(int param, int len_tab) {
-	if ( param > 0 && param < len_tab) {
+	if ( param >= 0 && param < len_tab) {
 		return param;
 	}
 	printf("Paramètre invalide: le nombre doit être inférieur à %d\n", len_tab);
