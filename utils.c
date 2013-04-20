@@ -29,18 +29,13 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 
 	f = open_file(filename);
 
-	int num_sommet, num_arrete;
-
-	if (fscanf(f, "%d %d", &num_sommet, &num_arrete) != 2) {
+	if (fscanf(f, "%d %d", len_tab_sommet, len_tab_arc) != 2) {
 		die("Format de fichier invalide");
 	}
 
-	*len_tab_sommet = num_sommet;
-	*len_tab_arc = num_arrete; /* a voir si faut pas un *2 */
+	printf("%d sommets et %d arretes\n", *len_tab_sommet, *len_tab_arc);
 
-	printf("%d sommets et %d arretes\n", num_sommet, num_arrete);
-
-	*tab_sommet = malloc(num_sommet*sizeof(Sommet));
+	*tab_sommet = malloc((*len_tab_sommet)*sizeof(Sommet));
 	
 	if (*tab_sommet==NULL) {
 		die("Allocation impossible");
@@ -52,7 +47,7 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 
 	Sommet sommet;
 		
-	for (i=0; i<num_sommet; i++) {
+	for (i=0; i<*len_tab_sommet; i++) {
 
 		/*structure du fichier: numéro, x, y, nom*/
 		/*attention le nom peut être composé...*/
@@ -64,9 +59,9 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 		}
 		(*tab_sommet)[i] = sommet;
 
-		printf("%d/%d, %s \r",i+1, num_sommet, sommet.nom);
+		printf("%d/%d, %s \r",i+1, *len_tab_sommet, sommet.nom);
 		
-		if ( (i/num_sommet)*100 % 10 == 0)
+		if ( (i / *len_tab_sommet)*100 % 10 == 0)
 			printf("%d\n", i);	
 
 	} 
@@ -76,11 +71,11 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 	fgets(s, 256, f);
 
 	Arc arc;
-	*tab_arc = malloc(2*num_arrete*sizeof(Arc));
+	*tab_arc = malloc(2*(*len_tab_arc)*sizeof(Arc));
 
 	int arrive, depart;
 
-	for (j=0; j<num_arrete; j++) {
+	for (j=0; j<*len_tab_arc; j++) {
 
 		/*structure du fichier: depart, arrive, coût*/
 		if (fscanf(f, "%d %d %f", &depart, &arrive, &arc.cout) != 3) {
@@ -91,7 +86,7 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 
 		(*tab_arc)[j] = arc;
 
-		printf("%d/%d %f\r", j+1, num_arrete, arc.cout);
+		printf("%d/%d %f\r", j+1, *len_tab_arc, arc.cout);
 
         fflush(stdout); 
 
