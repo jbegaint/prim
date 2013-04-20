@@ -71,11 +71,11 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 	fgets(s, 256, f);
 
 	Arc arc;
-	*tab_arc = malloc(2*(*len_tab_arc)*sizeof(Arc));
+	*tab_arc = malloc((*len_tab_arc)*sizeof(Arc));
 
 	int arrive, depart;
 
-	for (j=0; j<*len_tab_arc; j++) {
+	for (j=0; j < *len_tab_arc; j++) {
 
 		/*structure du fichier: depart, arrive, coût*/
 		if (fscanf(f, "%d %d %f", &depart, &arrive, &arc.cout) != 3) {

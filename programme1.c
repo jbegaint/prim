@@ -148,7 +148,6 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 						C = ajouter_queue(&tab_sommet[(*a).sommet_depart], C, sizeof(Sommet));
 					}
 					else {
-					/* printf("nothing for the moment \n");*/
 					}
 				}	
 			}
@@ -173,13 +172,6 @@ int main(int argc, char* argv[]) {
 	Arc* tab_arc;
 
 	int len_tab_sommet, len_tab_arc;
-
-	printf("Fichier: ");
-
-	int k=0;
-	for (k=0; k<len_tab_sommet; k++) {
-		printf("%s", tab_sommet[k].nom);
-	}
 
 	lecture(argv[1], &tab_sommet, &tab_arc, &len_tab_sommet, &len_tab_arc);
 
