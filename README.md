@@ -5,11 +5,12 @@ projet_info
 * hello
 
 
-INSTALL:
+Compile
 --------
 
-* mkdir build
-* cd build
-* ../configure
-* make
-* ./src/programme1 exemple.txt 0
+Run the following commands to compile:
+
+	mkdir build && cd build
+	../configure
+	make
+	./src/programme1 exemple.txt 0
