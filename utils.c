@@ -67,20 +67,30 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 	fgets(s, 256, f);
 
 	Arc arc;
-	*tab_arc = malloc((*len_tab_arc)*sizeof(Arc));
+	Arc arc1;
+	float cout;
+	*tab_arc = malloc(2*(*len_tab_arc)*sizeof(Arc));
+
+	*len_tab_arc *= 2;
 
 	int arrive, depart;
 
-	for (j=0; j < *len_tab_arc; j++) {
+	for (j=0; j < *len_tab_arc; j+=2) {
 
 		/*structure du fichier: depart, arrive, coût*/
-		if (fscanf(f, "%d %d %f", &depart, &arrive, &arc.cout) != 3) {
+		if (fscanf(f, "%d %d %f", &depart, &arrive, &cout) != 3) {
 			die("Format de fichier invalide");
 		}
 		arc.sommet_depart = depart;
 		arc.sommet_arrive = arrive;
+		arc.cout = cout;
+
+		arc1.sommet_depart = arrive;
+		arc1.sommet_arrive = depart;
+		arc1.cout = cout;
 
 		(*tab_arc)[j] = arc;
+		(*tab_arc)[j+1] = arc1;
 
 		printf("%d/%d %f\r", j+1, *len_tab_arc, arc.cout);
 

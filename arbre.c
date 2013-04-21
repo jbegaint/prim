@@ -8,6 +8,8 @@
 #include "utils.h"
 
 Arbre ajouter_arbre(Arc* arc, Sommet* tab_sommet) {
+	
+	printf("%f %d %d\n", ((Arc*) arc)->cout, ((Arc*) arc)->sommet_depart, ((Arc*) arc)->sommet_arrive);
 
 	Arbre p = NULL;
 
@@ -25,6 +27,7 @@ Arbre ajouter_arbre(Arc* arc, Sommet* tab_sommet) {
 
 	Arbre noeudSommetDepart;
 	noeudSommetDepart = sommet_depart->noeudArbreACM;
+
 
 	p->sommet = sommet_arrive;
 	p->freres = noeudSommetDepart->fils;

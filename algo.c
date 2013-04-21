@@ -32,8 +32,7 @@ Arbre algo_arbreACM(File fileACM, Sommet* tab_sommet, int num_depart) {
 
 	while (!est_vide_file(fileACM)) {
 		arc = (Arc*) defiler(&fileACM);
-		printf("%f %d %d\n", ((Arc*) arc)->cout, ((Arc*) arc)->sommet_depart, ((Arc*) arc)->sommet_arrive);
-		afficheRSB(arbreACM);
+		/*afficheRSB(arbreACM);*/
 		arbreACM = ajouter_arbre(arc, tab_sommet);
 	}
 
@@ -117,11 +116,6 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 			
 				liste_arc_sortant = ajouter_queue(a, liste_arc_sortant, sizeof(Arc));
 			}
-			if ( (*a).sommet_arrive == sommet_ppc_min.numero ) {
-				liste_sommet_adjacent = ajouter_queue(&tab_sommet[(*a).sommet_depart], liste_sommet_adjacent, sizeof(Sommet));
-				
-				liste_arc_sortant = ajouter_queue(a, liste_arc_sortant, sizeof(Arc));
-			}
 		}
 
 		sommet_ppc_min.voisins = liste_arc_sortant;
@@ -138,18 +132,6 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 				if (recherche_elt_liste(liste_sommet_atteint, &tab_sommet[(*a).sommet_arrive]) != 1) {
 					if (recherche_elt_liste(C, &tab_sommet[(*a).sommet_arrive]) != 1) {
 						C = ajout_tri(&tab_sommet[(*a).sommet_arrive], C);
-					}
-				}	
-			}
-
-			if ( (tab_sommet[(*a).sommet_depart]).PPC > (*a).cout ) {
-
-				tab_sommet[(*a).sommet_depart].PPC = (*a).cout;
-				tab_sommet[(*a).sommet_depart].arrive_par = a;
-
-				if (recherche_elt_liste(liste_sommet_atteint, &tab_sommet[(*a).sommet_depart]) != 1) {
-					if (recherche_elt_liste(C, &tab_sommet[(*a).sommet_depart]) != 1) {				
-						C = ajout_tri(&tab_sommet[(*a).sommet_depart], C);
 					}
 				}	
 			}
