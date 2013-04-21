@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdio.h>
+
 #include "sommet.h"
 #include "arc.h"
 

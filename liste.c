@@ -13,7 +13,7 @@ int est_vide_liste(Liste L)
 Liste ajouter_tete(void *elt, Liste L, size_t size_elt)
 {
 	Liste p;
-	p = (Liste) malloc(sizeof(*p));
+	p = malloc(sizeof(*p));
 
 	if (p == NULL)
 		return NULL;	

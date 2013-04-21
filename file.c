@@ -59,7 +59,7 @@ void* defiler(File* F)
 		exit(EXIT_FAILURE);
 	}
 
-	void *val = (*F)->suiv->val;
+	void* val = (*F)->suiv->val;
 
 	if ((*F)->suiv != *F) {
 		File tmp = (*F)->suiv->suiv;

@@ -15,7 +15,7 @@
 void afficheRSB(Arbre r) {
 	/*affiche Racine Fils Freres*/
 	if (r) {
-		printf("%s", (*(r->sommet)).nom);
+		printf("%s\n", (*(r->sommet)).nom);
 		afficheRSB(r->fils);
 		afficheRSB(r->freres);
 	}
@@ -32,6 +32,8 @@ Arbre algo_arbreACM(File fileACM, Sommet* tab_sommet, int num_depart) {
 
 	while (!est_vide_file(fileACM)) {
 		arc = (Arc*) defiler(&fileACM);
+		printf("%f %d %d\n", ((Arc*) arc)->cout, ((Arc*) arc)->sommet_depart, ((Arc*) arc)->sommet_arrive);
+		afficheRSB(arbreACM);
 		arbreACM = ajouter_arbre(arc, tab_sommet);
 	}
 
