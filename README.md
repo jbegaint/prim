@@ -15,4 +15,5 @@ Run the following commands to compile:
 	make
 	
 And run:
+
 	./src/programme1 exemple.txt 0
