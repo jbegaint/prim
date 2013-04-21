@@ -33,10 +33,11 @@ int main(int argc, char** argv) {
 		scanf("%d", &num_depart);
 	}
 
-	num_depart =  get_param_sommet(num_depart, len_tab_sommet);
+	num_depart = get_param_sommet(num_depart, len_tab_sommet);
 
 	File fileACM;
-	fileACM = algo_fileACM(tab_sommet, tab_arc, len_tab_sommet, len_tab_arc, num_depart);	
+	float cout = 0;
+	fileACM = algo_fileACM(tab_sommet, tab_arc, len_tab_sommet, len_tab_arc, num_depart, &cout);	
 
 	Arbre arbreACM;
 	arbreACM = algo_arbreACM(fileACM, tab_sommet, num_depart);
@@ -44,6 +45,6 @@ int main(int argc, char** argv) {
 	printf("Résultat, arbreACM: ");
 
 	afficheRSB(arbreACM);
-	
+
 	return 0;
 }

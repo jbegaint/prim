@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 #include "view.h"
+#include "algo.h"
 
 #include "sommet.h"
 #include "arc.h"

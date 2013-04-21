@@ -18,16 +18,13 @@ Arbre ajouter_arbre(Arc* arc, Sommet* tab_sommet) {
 		/*die("Allocation impossible");*/
 		exit(EXIT_FAILURE);
 	}
-	
-	Sommet* sommet_depart = NULL;
-	Sommet* sommet_arrive = NULL;
 
-	sommet_depart = &tab_sommet[arc->sommet_depart];
-	sommet_arrive = &tab_sommet[arc->sommet_arrive];
+	Sommet* sommet_depart = &tab_sommet[arc->sommet_depart];;
+	Sommet* sommet_arrive = &tab_sommet[arc->sommet_arrive];;
 
-	Arbre noeudSommetDepart;
-	noeudSommetDepart = sommet_depart->noeudArbreACM;
+	Arbre noeudSommetDepart = sommet_depart->noeudArbreACM;
 
+	printf("%s\n", (*(noeudSommetDepart->sommet)).nom);
 
 	p->sommet = sommet_arrive;
 	p->freres = noeudSommetDepart->fils;

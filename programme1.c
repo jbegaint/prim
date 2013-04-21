@@ -40,7 +40,8 @@ int main(int argc, char** argv) {
 	num_depart =  get_param_sommet(num_depart, len_tab_sommet);
 
 	File fileACM;
-	fileACM = algo_fileACM(tab_sommet, tab_arc, len_tab_sommet, len_tab_arc, num_depart);	
+	float cout;
+	fileACM = algo_fileACM(tab_sommet, tab_arc, len_tab_sommet, len_tab_arc, num_depart, &cout);	
 
 	printf("Résultat, fileACM: ");
 	afficher_file(fileACM);

@@ -7,4 +7,4 @@
 
 void afficheRSB(Arbre);
 Arbre algo_arbreACM(File, Sommet*, int);
-File algo_fileACM(Sommet*, Arc*, int, int, int);
+File algo_fileACM(Sommet*, Arc*, int, int, int, float*);

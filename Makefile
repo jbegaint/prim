@@ -19,7 +19,7 @@ tests: tests.o liste.o file.o arbre.o
 lecture: lecture.o liste.o file.o utils.o 
 	gcc  -o $@ $^ $(LFLAGS)
 
-view:  mainview.o view.o utils.o liste.o file.o sommet.o
+view:  mainview.o view.o utils.o liste.o file.o sommet.o algo.o arbre.o
 	gcc  -o $@ $^ $(LFLAGS)
 
 %.o: %.c
