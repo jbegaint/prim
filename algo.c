@@ -8,9 +8,18 @@
 
 #include "liste.h"
 #include "file.h"
-#include "utils.h"
+#include "utils.h"	
 
 #include "algo.h"
+
+void afficheRSB(Arbre r) {
+	/*affiche Racine Fils Freres*/
+	if (r) {
+		printf("%s", (*(r->sommet)).nom);
+		afficheRSB(r->fils);
+		afficheRSB(r->freres);
+	}
+}
 
 Arbre algo_arbreACM(File fileACM, Sommet* tab_sommet, int num_depart) {
 
