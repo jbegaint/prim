@@ -9,7 +9,7 @@ LFLAGS=-lSDL -lSDL_ttf
 
 all: programme1 tests lecture view
 
-programme1: programme1.o liste.o file.o sommet.o utils.o
+programme1: programme1.o liste.o file.o sommet.o utils.o algo.o
 
 tests: tests.o liste.o file.o arbre.o 
 	gcc  -o $@ $^ $(LFLAGS)
