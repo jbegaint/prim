@@ -7,7 +7,9 @@ CFLAGS=-c -g -O2 -Wall -Wextra -ansi
 # LFLAGS=-L$(DIRSDL)/lib -lSDL -lSDL_ttf -lSDL_image  -lSDL_sound -lSDL_phelma -lSDL_draw -lm
 LFLAGS=-lSDL -lSDL_ttf
 
-all: programme1 tests lecture view
+all: programme1 programme2 tests lecture view
+
+programme2: programme2.o liste.o file.o sommet.o utils.o algo.o arbre.o
 
 programme1: programme1.o liste.o file.o sommet.o utils.o algo.o arbre.o
 
