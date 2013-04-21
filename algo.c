@@ -2,15 +2,32 @@
 #include <stdlib.h>
 #include <float.h>
 
-#include "utils.h"
-
 #include "sommet.h"
 #include "arc.h"
+#include "arbre.h"
+
 #include "liste.h"
 #include "file.h"
+#include "utils.h"
 
 #include "algo.h"
 
+Arbre algo_arbreACM(File fileACM, Sommet* tab_sommet, int num_depart) {
+
+	Arbre arbreACM = NULL;
+	arbreACM = malloc(sizeof(Arbre));
+
+	arbreACM->sommet = &tab_sommet[num_depart];
+
+	Arc* arc;
+
+	while (!est_vide_file(fileACM)) {
+		arc = (Arc*) defiler(&fileACM);
+		arbreACM = ajouter_arbre(arc, tab_sommet);
+	}
+
+	return arbreACM;
+}
 
 File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_tab_arc, int num_depart) {
 
@@ -44,8 +61,8 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, int len_tab_sommet, int len_
 
 	while( !est_vide_liste(C) ) {
 
-/*		 blabla itératif
-*/
+		/*blabla itératif*/
+
 		/* printf("Étape: %d\n", i);
 		 printf("C: "); afficher_liste(C);
 		 printf("D: "); afficher_liste(liste_sommet_atteint);

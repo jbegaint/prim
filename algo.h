@@ -1,3 +1,4 @@
 #pragma once
 
-File algo_fileACM(Sommet* , Arc* , int , int , int );
+Arbre algo_arbreACM(File, Sommet*, int);
+File algo_fileACM(Sommet*, Arc*, int, int, int);
