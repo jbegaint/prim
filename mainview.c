@@ -13,12 +13,15 @@
 
 
 
-int main( int argc, char* argv[] ) { 
+int main( int argc, char* argv[]){
 	
    	
 	Sommet* tab_sommet;
 	Arc* tab_arc;
 	int len_tab_arc, len_tab_sommet;
+	File fileACM;
+	float cout_chemin;
+	
 
 
 if (argc < 2) {
@@ -26,7 +29,7 @@ if (argc < 2) {
 		exit(EXIT_FAILURE);
 	}
 
-lecture(argv[1], &tab_sommet, &tab_arc, &len_tab_sommet, &len_tab_arc);
+	lecture(argv[1], &tab_sommet, &tab_arc, &len_tab_sommet, &len_tab_arc);
 	
 	init_SDL ();
 
@@ -34,12 +37,28 @@ lecture(argv[1], &tab_sommet, &tab_arc, &len_tab_sommet, &len_tab_arc);
 
 	ecran=init_ecran(ecran);
 
-	ecran=edit_point(ecran, tab_sommet,len_tab_sommet );
-				
+	ecran=edit_point(ecran, tab_sommet,len_tab_sommet);
 
+	int num_depart;
+
+	if (argc > 2){
+		num_depart = atoi(argv[2]);
+	}
+	else {
+		printf("Entrez le numéro du sommet de départ: [0,%d]\n", len_tab_sommet);
+		scanf("%d", &num_depart);
+	}
+  
+	num_depart =  get_param_sommet(num_depart, len_tab_sommet);
+
+	fileACM = algo_fileACM(tab_sommet, tab_arc, len_tab_sommet, len_tab_arc, num_depart, &cout_chemin);	
+				
+	
 	pause(); /* Mise en pause du programme*/
 
 	SDL_Quit(); /*Quitter SDL*/
 	
 	return 0; 
 }
+
+

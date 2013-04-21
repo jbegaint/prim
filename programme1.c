@@ -169,7 +169,3 @@ int main(int argc, char* argv[]) {
 	return 0;
 }
 
-/*// A faire 
-// relié les points
-//Afficher nom sommet
-//Afficher le cout*/
