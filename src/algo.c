@@ -16,7 +16,6 @@ void afficheRSB(Arbre r) {
 	/*affiche Racine Fils Freres*/
 	if (r) {
 		printf("%s ", (*(r->sommet)).nom);
-		if (r->fils || r->freres) 
 		afficheRSB(r->fils);
 		afficheRSB(r->freres);
 	}
