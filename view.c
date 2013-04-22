@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <time.h> 
 #include <float.h>
+#include <SDL/SDL_ttf.h>
 
 #include "view.h"
 #include "sommet.h"
@@ -53,14 +54,24 @@ SDL_Surface* init_ecran (SDL_Surface* ecran)
 
 SDL_Surface* edit_point(SDL_Surface* ecran, Sommet* sommet, int len_tab_sommet)
 {
-int i=0;
-char a,b,c;
-srand(time(NULL));
-SDL_Surface *point = NULL;
-SDL_Surface *progression = NULL;
+	int i=0;
+	char a,b,c;
+	srand(time(NULL));
 
-SDL_Rect position;
-SDL_Rect position_progression;
+	TTF_Init();
+
+	SDL_Surface* nom_sommet = NULL;
+
+	SDL_Surface* point = NULL;
+	SDL_Surface* progression = NULL;
+
+	SDL_Rect position;
+	SDL_Rect position_progression;
+
+	TTF_Font* police = NULL;
+	police = TTF_OpenFont("DroidSans.ttf", 10);
+	SDL_Color couleur = {0, 0, 0};
+
 
 	point = SDL_CreateRGBSurface(SDL_HWSURFACE, 2, 2, 32, 0, 0, 0, 0);/*//Point */
 	progression = SDL_CreateRGBSurface(SDL_HWSURFACE, 10, 10, 32, 0, 0, 0, 0);/*//Point*/
@@ -68,8 +79,11 @@ SDL_Rect position_progression;
 
 for (i=0;i<len_tab_sommet;i++){
 	position.x=sommet[i].coordonnee_x*600;
-	position.y=sommet[i].coordonnee_y*600
-;
+	position.y=sommet[i].coordonnee_y*600;
+	
+	nom_sommet = TTF_RenderText_Blended(police, sommet[i].nom, couleur );/*à la fin noir*/
+	SDL_BlitSurface(nom_sommet, NULL, ecran, &position);
+
 	a=rand()%(255-0)+0;/*//Initialises couleur des points*/
 	b=rand()%(255-0)+0;
 	c=rand()%(255-0)+0;
@@ -82,11 +96,50 @@ for (i=0;i<len_tab_sommet;i++){
 	SDL_FillRect(progression, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));  
 	SDL_BlitSurface(progression, NULL, ecran, &position_progression); /* Collage de la surface sur l'écran*/
 	SDL_Flip(ecran); /* Mise à jour de l'écran*/
-  
 }	
 
-	
-	
+	TTF_CloseFont(police);
+  	SDL_FreeSurface(nom_sommet);
 	SDL_FreeSurface(point); 
+	SDL_FreeSurface(progression); 
+	TTF_Quit();
+	return ecran;
+}
+
+
+SDL_Surface* affiche_cout (SDL_Surface* ecran, float cout)
+{
+	TTF_Init();
+
+	TTF_Font* police = NULL;
+	police = TTF_OpenFont("DroidSans.ttf", 30);
+	SDL_Color couleur = {0, 0, 0};
+	SDL_Rect position_cout;
+	SDL_Surface* cout_chemin = NULL;
+
+ 	char buffer_cout [50];
+  	
+  	sprintf (buffer_cout, "%f", cout);
+
+	position_cout.x=470;
+	position_cout.y=620;
+	
+	cout_chemin = TTF_RenderText_Blended(police, "cout :", couleur );
+	SDL_BlitSurface(cout_chemin, NULL, ecran, &position_cout);
+
+	position_cout.x=470;
+	position_cout.y=650;
+	
+	cout_chemin = TTF_RenderText_Blended(police, buffer_cout, couleur );
+	SDL_BlitSurface(cout_chemin, NULL, ecran, &position_cout);
+	SDL_Flip(ecran);
+	SDL_Flip(ecran);
+
+	TTF_CloseFont(police);
+	SDL_FreeSurface(cout_chemin);
+
+
+	TTF_Quit();
+
 	return ecran;
 }

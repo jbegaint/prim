@@ -1,4 +1,5 @@
 #include <SDL/SDL.h>
+#include <SDL/SDL_ttf.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -22,6 +23,7 @@ int main( int argc, char* argv[]){
 	int len_tab_arc, len_tab_sommet;
 	File fileACM;
 	float cout_chemin;
+	int num_depart;
 	
 
 
@@ -33,14 +35,17 @@ if (argc < 2) {
 	lecture(argv[1], &tab_sommet, &tab_arc, &len_tab_sommet, &len_tab_arc);
 	
 	init_SDL ();
-
+	
 	SDL_Surface* ecran = NULL; /*Defini un pointeur vers l'écran*/
 
 	ecran=init_ecran(ecran);
 
 	ecran=edit_point(ecran, tab_sommet,len_tab_sommet);
 
-	int num_depart;
+
+
+
+	
 
 	if (argc > 2){
 		num_depart = atoi(argv[2]);
@@ -52,12 +57,19 @@ if (argc < 2) {
   
 	num_depart =  get_param_sommet(num_depart, len_tab_sommet);
 
-	fileACM = algo_fileACM(tab_sommet, tab_arc, len_tab_sommet, len_tab_arc, num_depart, &cout_chemin);	
-				
-	
-	pause(); /* Mise en pause du programme*/
+	fileACM = algo_fileACM(tab_sommet, tab_arc, len_tab_sommet, len_tab_arc, num_depart, &cout_chemin); /*Récupère la file ACM, ainsi que le cout*/	
+		
+	ecran=affiche_cout (ecran, cout_chemin);
+		
 
-	SDL_Quit(); /*Quitter SDL*/
+
+	pause(); /* Fonction de mise en pause du programme*/
+
+	
+	
+	
+	SDL_Quit(); /*quitte SDL*/
+	
 	
 	return 0; 
 }
