@@ -49,7 +49,8 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-bin_PROGRAMS = programme1$(EXEEXT) programme2$(EXEEXT) view$(EXEEXT)
+bin_PROGRAMS = programme1$(EXEEXT) programme2$(EXEEXT) view$(EXEEXT) \
+	gtk_view$(EXEEXT)
 subdir = src
 DIST_COMMON = $(include_HEADERS) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(top_srcdir)/depcomp
@@ -63,6 +64,9 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(includedir)"
 PROGRAMS = $(bin_PROGRAMS)
+am_gtk_view_OBJECTS = gtk_view-gtk_view.$(OBJEXT)
+gtk_view_OBJECTS = $(am_gtk_view_OBJECTS)
+gtk_view_DEPENDENCIES =
 am_programme1_OBJECTS = programme1.$(OBJEXT) liste.$(OBJEXT) \
 	file.$(OBJEXT) utils.$(OBJEXT) sommet.$(OBJEXT) algo.$(OBJEXT) \
 	arbre.$(OBJEXT)
@@ -86,9 +90,10 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(programme1_SOURCES) $(programme2_SOURCES) $(view_SOURCES)
-DIST_SOURCES = $(programme1_SOURCES) $(programme2_SOURCES) \
-	$(view_SOURCES)
+SOURCES = $(gtk_view_SOURCES) $(programme1_SOURCES) \
+	$(programme2_SOURCES) $(view_SOURCES)
+DIST_SOURCES = $(gtk_view_SOURCES) $(programme1_SOURCES) \
+	$(programme2_SOURCES) $(view_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -145,6 +150,8 @@ ECHO_T =
 EGREP = /usr/bin/grep -E
 EXEEXT = 
 GREP = /usr/bin/grep
+GTK_CFLAGS = -pthread -I/usr/include/gtk-2.0 -I/usr/lib64/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng15 -I/usr/include/libdrm -I/usr/include/harfbuzz  
+GTK_LIBS = -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lglib-2.0  
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
@@ -165,6 +172,7 @@ PACKAGE_TARNAME = projet-info
 PACKAGE_URL = 
 PACKAGE_VERSION = 1.0
 PATH_SEPARATOR = :
+PKG_CONFIG = /usr/bin/pkg-config
 SDL_CFLAGS = -I/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT
 SDL_CONFIG = /usr/bin/sdl-config
 SDL_LIBS = -lSDL -lpthread
@@ -218,6 +226,9 @@ programme1_SOURCES = programme1.c liste.c file.c utils.c sommet.c algo.c arbre.c
 programme2_SOURCES = programme2.c liste.c file.c utils.c sommet.c algo.c arbre.c
 view_SOURCES = mainview.c view.c liste.c file.c utils.c sommet.c algo.c arbre.c 
 include_HEADERS = sommet.h arc.h arbre.h liste.h file.h utils.h algo.h view.h
+gtk_view_SOURCES = gtk_view.c
+gtk_view_CPPFLAGS = -pthread -I/usr/include/gtk-2.0 -I/usr/lib64/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng15 -I/usr/include/libdrm -I/usr/include/harfbuzz  
+gtk_view_LDADD = -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lglib-2.0  
 CLEANFILES = *~
 all: all-am
 
@@ -293,6 +304,9 @@ uninstall-binPROGRAMS:
 
 clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
+gtk_view$(EXEEXT): $(gtk_view_OBJECTS) $(gtk_view_DEPENDENCIES) $(EXTRA_gtk_view_DEPENDENCIES) 
+	@rm -f gtk_view$(EXEEXT)
+	$(LINK) $(gtk_view_OBJECTS) $(gtk_view_LDADD) $(LIBS)
 programme1$(EXEEXT): $(programme1_OBJECTS) $(programme1_DEPENDENCIES) $(EXTRA_programme1_DEPENDENCIES) 
 	@rm -f programme1$(EXEEXT)
 	$(LINK) $(programme1_OBJECTS) $(programme1_LDADD) $(LIBS)
@@ -312,6 +326,7 @@ distclean-compile:
 include ./$(DEPDIR)/algo.Po
 include ./$(DEPDIR)/arbre.Po
 include ./$(DEPDIR)/file.Po
+include ./$(DEPDIR)/gtk_view-gtk_view.Po
 include ./$(DEPDIR)/liste.Po
 include ./$(DEPDIR)/mainview.Po
 include ./$(DEPDIR)/programme1.Po
@@ -333,6 +348,20 @@ include ./$(DEPDIR)/view.Po
 #	source='$<' object='$@' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
 #	$(COMPILE) -c `$(CYGPATH_W) '$<'`
+
+gtk_view-gtk_view.o: gtk_view.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gtk_view_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gtk_view-gtk_view.o -MD -MP -MF $(DEPDIR)/gtk_view-gtk_view.Tpo -c -o gtk_view-gtk_view.o `test -f 'gtk_view.c' || echo '$(srcdir)/'`gtk_view.c
+	$(am__mv) $(DEPDIR)/gtk_view-gtk_view.Tpo $(DEPDIR)/gtk_view-gtk_view.Po
+#	source='gtk_view.c' object='gtk_view-gtk_view.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gtk_view_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gtk_view-gtk_view.o `test -f 'gtk_view.c' || echo '$(srcdir)/'`gtk_view.c
+
+gtk_view-gtk_view.obj: gtk_view.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gtk_view_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gtk_view-gtk_view.obj -MD -MP -MF $(DEPDIR)/gtk_view-gtk_view.Tpo -c -o gtk_view-gtk_view.obj `if test -f 'gtk_view.c'; then $(CYGPATH_W) 'gtk_view.c'; else $(CYGPATH_W) '$(srcdir)/gtk_view.c'; fi`
+	$(am__mv) $(DEPDIR)/gtk_view-gtk_view.Tpo $(DEPDIR)/gtk_view-gtk_view.Po
+#	source='gtk_view.c' object='gtk_view-gtk_view.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gtk_view_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gtk_view-gtk_view.obj `if test -f 'gtk_view.c'; then $(CYGPATH_W) 'gtk_view.c'; else $(CYGPATH_W) '$(srcdir)/gtk_view.c'; fi`
 install-includeHEADERS: $(include_HEADERS)
 	@$(NORMAL_INSTALL)
 	@list='$(include_HEADERS)'; test -n "$(includedir)" || list=; \
