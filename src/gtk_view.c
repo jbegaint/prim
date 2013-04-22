@@ -1,4 +1,6 @@
 #include <gtk/gtk.h>
+#include <gdk/gdkx.h>
+
 #include <stdio.h>
 
 #include "utils.h"
@@ -13,7 +15,7 @@ static void open_file_button ( char *filename)
 	printf("%s\n", filename);
 }
 
-static void choose_file () 
+static void choose_file ()
 {
 
 	GtkWidget *filechooser;
@@ -23,12 +25,12 @@ static void choose_file ()
 	gtk_file_filter_set_name ( ff_txt, "txt");
 	gtk_file_filter_add_pattern( ff_txt, "*.txt");
 
-	filechooser = gtk_file_chooser_dialog_new ( "Choisir un fichier", 
-    											NULL, 
-    											GTK_FILE_CHOOSER_ACTION_OPEN, 
-    											GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-    											GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
-    											NULL);
+	filechooser = gtk_file_chooser_dialog_new ( "Choisir un fichier",
+												NULL,
+												GTK_FILE_CHOOSER_ACTION_OPEN,
+												GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+												GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+												NULL);
 
 	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (filechooser), ff_txt);
 
@@ -38,31 +40,19 @@ static void choose_file ()
 		open_file_button(filename);
 	}
 
-	gtk_widget_destroy (filechooser);    
+	gtk_widget_destroy (filechooser);
 }
 
-int main(int argc, char** argv)
-{    
-	GtkWidget *window;
-	GtkWidget *vbox;
-
+static void create_toolbar ( GtkWidget *window, GtkWidget *vbox) 
+{
+	
 	GtkWidget *toolbar;
 	GtkToolItem *open;
 	GtkToolItem *close;
 	GtkToolItem *sep;
-	GtkToolItem *quit;
+	GtkToolItem *quit;	
 
-    gtk_init (&argc, &argv);
- 
- 	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_title (GTK_WINDOW (window), "Voyageur de commerce 1.0");
-    gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_CENTER );
-    gtk_window_resize (GTK_WINDOW (window), 500, 500);
-
-	vbox = gtk_vbox_new (FALSE, 0);
-	gtk_container_add (GTK_CONTAINER (window), vbox);
-
-    toolbar = gtk_toolbar_new ();
+	toolbar = gtk_toolbar_new ();
 	gtk_toolbar_set_style (GTK_TOOLBAR (toolbar), GTK_TOOLBAR_ICONS);
 
 	open = gtk_tool_button_new_from_stock(GTK_STOCK_OPEN);
@@ -72,7 +62,7 @@ int main(int argc, char** argv)
 	gtk_toolbar_insert(GTK_TOOLBAR(toolbar), close, -1);
 
 	sep = gtk_separator_tool_item_new();
-	gtk_toolbar_insert(GTK_TOOLBAR(toolbar), sep, -1); 
+	gtk_toolbar_insert(GTK_TOOLBAR(toolbar), sep, -1);
 
 	quit = gtk_tool_button_new_from_stock(GTK_STOCK_QUIT);
 	gtk_toolbar_insert(GTK_TOOLBAR(toolbar), quit, -1);
@@ -80,18 +70,32 @@ int main(int argc, char** argv)
 
 	gtk_box_pack_start(GTK_BOX (vbox), toolbar, FALSE, FALSE, 2);
 
-    g_signal_connect (window, "destroy", G_CALLBACK (destroy), NULL);
+	g_signal_connect (window, "destroy", G_CALLBACK (destroy), NULL);
     g_signal_connect(G_OBJECT (quit), "clicked", G_CALLBACK (gtk_main_quit), NULL);
+	g_signal_connect(G_OBJECT (open), "clicked", choose_file, NULL);
 
-    /*gtk_widget_grab_focus(vbox);*/
+}
 
-    
+int main (int argc, char** argv)
+{
+	GtkWidget *main_window;
+	GtkWidget *vbox;
 
-    g_signal_connect(G_OBJECT (open), "clicked", choose_file, NULL);
 
-    gtk_widget_show_all (window);
+	gtk_init (&argc, &argv);
+	 
+	main_window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_title (GTK_WINDOW (main_window), "Voyageur de commerce 1.0");
+	gtk_window_set_position (GTK_WINDOW (main_window), GTK_WIN_POS_CENTER );
+	gtk_window_resize (GTK_WINDOW (main_window), 500, 500);
 
-    
+	vbox = gtk_vbox_new (FALSE, 0);
+	gtk_container_add (GTK_CONTAINER (main_window), vbox);
+	create_toolbar (main_window, vbox);
+
+  
+    gtk_widget_show_all (main_window);
+
     gtk_main ();
     
     return 0;

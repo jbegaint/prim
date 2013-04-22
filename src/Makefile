@@ -64,7 +64,8 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(includedir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_gtk_view_OBJECTS = gtk_view-gtk_view.$(OBJEXT)
+am_gtk_view_OBJECTS = gtk_view-gtk_view.$(OBJEXT) \
+	gtk_view-view.$(OBJEXT) gtk_view-utils.$(OBJEXT)
 gtk_view_OBJECTS = $(am_gtk_view_OBJECTS)
 gtk_view_DEPENDENCIES =
 am_programme1_OBJECTS = programme1.$(OBJEXT) liste.$(OBJEXT) \
@@ -226,7 +227,7 @@ programme1_SOURCES = programme1.c liste.c file.c utils.c sommet.c algo.c arbre.c
 programme2_SOURCES = programme2.c liste.c file.c utils.c sommet.c algo.c arbre.c
 view_SOURCES = mainview.c view.c liste.c file.c utils.c sommet.c algo.c arbre.c 
 include_HEADERS = sommet.h arc.h arbre.h liste.h file.h utils.h algo.h view.h
-gtk_view_SOURCES = gtk_view.c
+gtk_view_SOURCES = gtk_view.c view.c utils.c
 gtk_view_CPPFLAGS = -pthread -I/usr/include/gtk-2.0 -I/usr/lib64/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng15 -I/usr/include/libdrm -I/usr/include/harfbuzz  
 gtk_view_LDADD = -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lglib-2.0  
 CLEANFILES = *~
@@ -327,6 +328,8 @@ include ./$(DEPDIR)/algo.Po
 include ./$(DEPDIR)/arbre.Po
 include ./$(DEPDIR)/file.Po
 include ./$(DEPDIR)/gtk_view-gtk_view.Po
+include ./$(DEPDIR)/gtk_view-utils.Po
+include ./$(DEPDIR)/gtk_view-view.Po
 include ./$(DEPDIR)/liste.Po
 include ./$(DEPDIR)/mainview.Po
 include ./$(DEPDIR)/programme1.Po
@@ -362,6 +365,34 @@ gtk_view-gtk_view.obj: gtk_view.c
 #	source='gtk_view.c' object='gtk_view-gtk_view.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
 #	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gtk_view_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gtk_view-gtk_view.obj `if test -f 'gtk_view.c'; then $(CYGPATH_W) 'gtk_view.c'; else $(CYGPATH_W) '$(srcdir)/gtk_view.c'; fi`
+
+gtk_view-view.o: view.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gtk_view_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gtk_view-view.o -MD -MP -MF $(DEPDIR)/gtk_view-view.Tpo -c -o gtk_view-view.o `test -f 'view.c' || echo '$(srcdir)/'`view.c
+	$(am__mv) $(DEPDIR)/gtk_view-view.Tpo $(DEPDIR)/gtk_view-view.Po
+#	source='view.c' object='gtk_view-view.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gtk_view_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gtk_view-view.o `test -f 'view.c' || echo '$(srcdir)/'`view.c
+
+gtk_view-view.obj: view.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gtk_view_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gtk_view-view.obj -MD -MP -MF $(DEPDIR)/gtk_view-view.Tpo -c -o gtk_view-view.obj `if test -f 'view.c'; then $(CYGPATH_W) 'view.c'; else $(CYGPATH_W) '$(srcdir)/view.c'; fi`
+	$(am__mv) $(DEPDIR)/gtk_view-view.Tpo $(DEPDIR)/gtk_view-view.Po
+#	source='view.c' object='gtk_view-view.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gtk_view_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gtk_view-view.obj `if test -f 'view.c'; then $(CYGPATH_W) 'view.c'; else $(CYGPATH_W) '$(srcdir)/view.c'; fi`
+
+gtk_view-utils.o: utils.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gtk_view_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gtk_view-utils.o -MD -MP -MF $(DEPDIR)/gtk_view-utils.Tpo -c -o gtk_view-utils.o `test -f 'utils.c' || echo '$(srcdir)/'`utils.c
+	$(am__mv) $(DEPDIR)/gtk_view-utils.Tpo $(DEPDIR)/gtk_view-utils.Po
+#	source='utils.c' object='gtk_view-utils.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gtk_view_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gtk_view-utils.o `test -f 'utils.c' || echo '$(srcdir)/'`utils.c
+
+gtk_view-utils.obj: utils.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gtk_view_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gtk_view-utils.obj -MD -MP -MF $(DEPDIR)/gtk_view-utils.Tpo -c -o gtk_view-utils.obj `if test -f 'utils.c'; then $(CYGPATH_W) 'utils.c'; else $(CYGPATH_W) '$(srcdir)/utils.c'; fi`
+	$(am__mv) $(DEPDIR)/gtk_view-utils.Tpo $(DEPDIR)/gtk_view-utils.Po
+#	source='utils.c' object='gtk_view-utils.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gtk_view_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gtk_view-utils.obj `if test -f 'utils.c'; then $(CYGPATH_W) 'utils.c'; else $(CYGPATH_W) '$(srcdir)/utils.c'; fi`
 install-includeHEADERS: $(include_HEADERS)
 	@$(NORMAL_INSTALL)
 	@list='$(include_HEADERS)'; test -n "$(includedir)" || list=; \

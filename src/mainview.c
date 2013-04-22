@@ -55,7 +55,7 @@ if (argc < 2) {
 	fileACM = algo_fileACM(tab_sommet, tab_arc, len_tab_sommet, len_tab_arc, num_depart, &cout_chemin);	
 				
 	
-	pause(); /* Mise en pause du programme*/
+	pause_sdl(); /* Mise en pause du programme*/
 
 	SDL_Quit(); /*Quitter SDL*/
 	

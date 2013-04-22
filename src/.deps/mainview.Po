@@ -18,7 +18,7 @@ mainview.o: mainview.c /usr/include/SDL/SDL.h /usr/include/SDL/SDL_main.h \
  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
  /usr/include/bits/stdio.h /usr/include/stdlib.h \
  /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
- /usr/include/alloca.h /usr/include/string.h /usr/include/xlocale.h \
+ /usr/include/xlocale.h /usr/include/alloca.h /usr/include/string.h \
  /usr/include/bits/string.h /usr/include/bits/string2.h \
  /usr/include/strings.h /usr/include/inttypes.h \
  /usr/lib/gcc/x86_64-redhat-linux/4.7.2/include/stdint.h \
@@ -34,7 +34,8 @@ mainview.o: mainview.c /usr/include/SDL/SDL.h /usr/include/SDL/SDL_main.h \
  /usr/include/SDL/SDL_video.h /usr/include/SDL/SDL_joystick.h \
  /usr/include/SDL/SDL_quit.h /usr/include/SDL/SDL_loadso.h \
  /usr/include/SDL/SDL_timer.h /usr/include/SDL/SDL_version.h view.h \
- sommet.h arc.h liste.h file.h algo.h arbre.h utils.h
+ sommet.h arc.h liste.h file.h /usr/include/SDL/SDL.h algo.h arbre.h \
+ utils.h
 
 /usr/include/SDL/SDL.h:
 
@@ -112,11 +113,11 @@ mainview.o: mainview.c /usr/include/SDL/SDL.h /usr/include/SDL/SDL_main.h \
 
 /usr/include/bits/waitstatus.h:
 
+/usr/include/xlocale.h:
+
 /usr/include/alloca.h:
 
 /usr/include/string.h:
-
-/usr/include/xlocale.h:
 
 /usr/include/bits/string.h:
 
@@ -187,6 +188,8 @@ arc.h:
 liste.h:
 
 file.h:
+
+/usr/include/SDL/SDL.h:
 
 algo.h:
 
