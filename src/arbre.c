@@ -23,11 +23,14 @@ void ajouter_arbre(Arc* arc, Sommet* tab_sommet) {
 	Arbre noeudSommetDepart = sommet_depart->noeudArbreACM;
 
 	p->sommet = sommet_arrive;
-	p->freres = noeudSommetDepart->fils;
+
+	if (noeudSommetDepart->fils) {
+		noeudSommetDepart->fils->freres = p;
+	} else {
+		noeudSommetDepart->fils = p;
+	}
 
 	p->fils = NULL;
-
-	noeudSommetDepart->fils = p;
 
 	sommet_arrive->noeudArbreACM = p;
 }
