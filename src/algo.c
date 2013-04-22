@@ -15,7 +15,8 @@
 void afficheRSB(Arbre r) {
 	/*affiche Racine Fils Freres*/
 	if (r) {
-		printf("%s\n", (*(r->sommet)).nom);
+		printf("%s ", (*(r->sommet)).nom);
+		if (r->fils || r->freres) 
 		afficheRSB(r->fils);
 		afficheRSB(r->freres);
 	}
@@ -24,16 +25,19 @@ void afficheRSB(Arbre r) {
 Arbre algo_arbreACM(File fileACM, Sommet* tab_sommet, int num_depart) {
 
 	Arbre arbreACM = NULL;
-	arbreACM = malloc(sizeof(Arbre));
+	arbreACM = malloc(sizeof(*arbreACM));
 
 	arbreACM->sommet = &tab_sommet[num_depart];
+	tab_sommet[num_depart].noeudArbreACM = arbreACM;
 
-	Arc* arc;
+	Arc* ptr_arc;
 
 	while (!est_vide_file(fileACM)) {
-		arc = (Arc*) defiler(&fileACM);
+		/*getchar();*/
+		ptr_arc = (Arc*) defiler(&fileACM);
 		/*afficheRSB(arbreACM);*/
-		arbreACM = ajouter_arbre(arc, tab_sommet);
+		/*arbreACM = ajouter_arbre(ptr_arc, tab_sommet);*/
+		ajouter_arbre(ptr_arc, tab_sommet);
 	}
 
 	return arbreACM;

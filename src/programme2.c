@@ -38,13 +38,16 @@ int main(int argc, char** argv) {
 	File fileACM;
 	float cout = 0;
 	fileACM = algo_fileACM(tab_sommet, tab_arc, len_tab_sommet, len_tab_arc, num_depart, &cout);	
+	printf("FileACM: ");
+	afficher_file(fileACM);
 
 	Arbre arbreACM;
 	arbreACM = algo_arbreACM(fileACM, tab_sommet, num_depart);
 
-	printf("Résultat, arbreACM: ");
-
+	printf("arbreACM: ");
+	printf("[ ");
 	afficheRSB(arbreACM);
+	printf("]\n");
 
 	return 0;
 }
