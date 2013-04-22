@@ -26,6 +26,9 @@ Arbre algo_arbreACM(File fileACM, Sommet* tab_sommet, int num_depart) {
 	Arbre arbreACM = NULL;
 	arbreACM = malloc(sizeof(*arbreACM));
 
+	if (arbreACM == NULL)
+		return NULL;
+		
 	arbreACM->sommet = &tab_sommet[num_depart];
 	tab_sommet[num_depart].noeudArbreACM = arbreACM;
 
