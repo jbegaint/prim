@@ -32,7 +32,6 @@ Arbre algo_arbreACM(File fileACM, Sommet* tab_sommet, int num_depart) {
 	Arc* ptr_arc;
 
 	while (!est_vide_file(fileACM)) {
-		/*getchar();*/
 		ptr_arc = (Arc*) defiler(&fileACM);
 		ajouter_arbre(ptr_arc, tab_sommet);
 	}
