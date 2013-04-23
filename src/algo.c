@@ -33,14 +33,11 @@ void afficheRSB_iteratif(Arbre r)
 
 			printf("%s ", a->sommet->nom);
 
-			if (a->freres) {
+			if (a->freres)
 				l = ajouter_queue(&(a->freres), l, sizeof(Arbre));
-			}
-
 		}
 		l = supprimer_tete(l);
 	}
-	/*afficher_liste(l);*/
 }
 
 void afficheRSB(Arbre r) 
