@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <float.h>
+#include <time.h>
 
 #include "utils.h"
 
@@ -48,9 +49,14 @@ int main(int argc, char** argv) {
 	cout_arbreACM(arbreACM, &	cout_arbre);
 	printf("%f\n", cout_arbre);*/
 
-	printf("arbreACM: ");
+	printf("arbreACM (recursif): ");
 	printf("[ ");
 	afficheRSB(arbreACM);
+	printf("]\n");
+
+	printf("arbreACM (iteratif): ");
+	printf("[ ");
+	afficheRSB_iteratif(arbreACM);
 	printf("]\n");
 
 	return 0;

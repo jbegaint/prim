@@ -21,6 +21,28 @@
 	}
 }*/
 
+
+void afficheRSB_iteratif(Arbre r)
+{
+	Arbre a;
+	Liste l = NULL;
+	l = ajouter_queue(&r, l, sizeof(Arbre));
+
+	while (!est_vide_liste(l)) {
+		for (a=*(Arbre *) l->val; a; a = a->fils ) {
+
+			printf("%s ", a->sommet->nom);
+
+			if (a->freres) {
+				l = ajouter_queue(&(a->freres), l, sizeof(Arbre));
+			}
+
+		}
+		l = supprimer_tete(l);
+	}
+	/*afficher_liste(l);*/
+}
+
 void afficheRSB(Arbre r) 
 {
 	/*affiche Racine Fils Freres*/
