@@ -12,7 +12,17 @@
 
 #include "algo.h"
 
-void afficheRSB(Arbre r) {
+/*void cout_arbreACM(Arbre r, float* cout)
+{
+	if (r) {
+		*cout += r->sommet->PPC;
+		cout_arbreACM(r->fils, cout);
+		cout_arbreACM(r->freres, cout);
+	}
+}*/
+
+void afficheRSB(Arbre r) 
+{
 	/*affiche Racine Fils Freres*/
 	if (r) {
 		printf("%s ", (*(r->sommet)).nom);
@@ -21,7 +31,8 @@ void afficheRSB(Arbre r) {
 	}
 }
 
-Arbre algo_arbreACM(File fileACM, Sommet* tab_sommet, int num_depart, float* cout) {
+Arbre algo_arbreACM(File fileACM, Sommet* tab_sommet, int num_depart) 
+{
 
 	Arbre arbreACM = NULL;
 	arbreACM = malloc(sizeof(*arbreACM));
@@ -43,8 +54,9 @@ Arbre algo_arbreACM(File fileACM, Sommet* tab_sommet, int num_depart, float* cou
 }
 
 File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, 
-	int len_tab_sommet, int len_tab_arc, 
-	int num_depart, float* cout) {
+					int len_tab_sommet, int len_tab_arc, 
+					int num_depart, float* cout) 
+{
 
 	File fileACM = NULL;
 	Liste C = NULL;

@@ -42,8 +42,11 @@ int main(int argc, char** argv) {
 	afficher_file(fileACM);
 
 	Arbre arbreACM;
-	float cout_arbre = 0;
-	arbreACM = algo_arbreACM(fileACM, tab_sommet, num_depart, &cout_arbre);
+	arbreACM = algo_arbreACM(fileACM, tab_sommet, num_depart);
+
+	/*float cout_arbre = 0;
+	cout_arbreACM(arbreACM, &	cout_arbre);
+	printf("%f\n", cout_arbre);*/
 
 	printf("arbreACM: ");
 	printf("[ ");
