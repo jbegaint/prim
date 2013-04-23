@@ -21,7 +21,7 @@ void afficheRSB(Arbre r) {
 	}
 }
 
-Arbre algo_arbreACM(File fileACM, Sommet* tab_sommet, int num_depart) {
+Arbre algo_arbreACM(File fileACM, Sommet* tab_sommet, int num_depart, float* cout) {
 
 	Arbre arbreACM = NULL;
 	arbreACM = malloc(sizeof(*arbreACM));

@@ -24,11 +24,18 @@ void ajouter_arbre(Arc* arc, Sommet* tab_sommet) {
 
 	p->sommet = sommet_arrive;
 
-	if (noeudSommetDepart->fils) {
+	/* algo pour obtenir même résultat exemple */
+	/*if (noeudSommetDepart->fils) {
 		noeudSommetDepart->fils->freres = p;
 	} else {
 		noeudSommetDepart->fils = p;
-	}
+	}*/
+
+	/* algo feuille */
+	p->freres = noeudSommetDepart->fils;
+	noeudSommetDepart->fils = p;
+	/* algo feuille */
+
 
 	p->fils = NULL;
 
