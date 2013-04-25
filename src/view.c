@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include <stdio.h>
+/*#include <stdico.h>*/
 #include <time.h> 
 #include <math.h>
 #include <SDL/SDL.h>
@@ -12,7 +12,7 @@
 #include "file.h"
 #include "utils.h"
 
-void pause() /*permet de conserver l'affichage et d'initialiser la croix pour fermer le programme*/
+void pause_sdl() /*permet de conserver l'affichage et d'initialiser la croix pour fermer le programme*/
 {
     int continuer = 1;
     

@@ -5,7 +5,9 @@
 #include "liste.h"
 #include "file.h"
 
-void pause();
+#include <SDL.h>
+
+void pause_sdl();
 void init_SDL (void);
 SDL_Surface* init_ecran (SDL_Surface* ecran );
 SDL_Surface* edit_point(SDL_Surface* ecran, Sommet* sommet, int len_tab_sommet);

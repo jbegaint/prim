@@ -63,7 +63,7 @@ if (argc < 2) {
 		
 	ecran=affiche_cout (ecran, cout_chemin);
 	 	
-	
+		pause_sdl(); /* Mise en pause du programme*/
 
 	
 	/*for (p = fileACM->suiv; p != fileACM; p = (*p)->suiv)

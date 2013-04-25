@@ -12,36 +12,70 @@
 
 #include "algo.h"
 
-void afficheRSB(Arbre r) {
+/*void cout_arbreACM(Arbre r, float* cout)
+{
+	if (r) {
+		*cout += r->sommet->PPC;
+		cout_arbreACM(r->fils, cout);
+		cout_arbreACM(r->freres, cout);
+	}
+}*/
+
+
+void afficheRSB_iteratif(Arbre r)
+{
+	Arbre a;
+	Liste l = NULL;
+	l = ajouter_queue(&r, l, sizeof(Arbre));
+
+	while (!est_vide_liste(l)) {
+		for (a=*(Arbre *) l->val; a; a = a->fils ) {
+
+			printf("%s ", a->sommet->nom);
+
+			if (a->freres)
+				l = ajouter_queue(&(a->freres), l, sizeof(Arbre));
+		}
+		l = supprimer_tete(l);
+	}
+}
+
+void afficheRSB(Arbre r) 
+{
 	/*affiche Racine Fils Freres*/
 	if (r) {
-		printf("%s\n", (*(r->sommet)).nom);
+		printf("%s ", (*(r->sommet)).nom);
 		afficheRSB(r->fils);
 		afficheRSB(r->freres);
 	}
 }
 
-Arbre algo_arbreACM(File fileACM, Sommet* tab_sommet, int num_depart) {
+Arbre algo_arbreACM(File fileACM, Sommet* tab_sommet, int num_depart) 
+{
 
 	Arbre arbreACM = NULL;
-	arbreACM = malloc(sizeof(Arbre));
+	arbreACM = malloc(sizeof(*arbreACM));
 
+	if (arbreACM == NULL)
+		return NULL;
+		
 	arbreACM->sommet = &tab_sommet[num_depart];
+	tab_sommet[num_depart].noeudArbreACM = arbreACM;
 
-	Arc* arc;
+	Arc* ptr_arc;
 
 	while (!est_vide_file(fileACM)) {
-		arc = (Arc*) defiler(&fileACM);
-		/*afficheRSB(arbreACM);*/
-		arbreACM = ajouter_arbre(arc, tab_sommet);
+		ptr_arc = (Arc*) defiler(&fileACM);
+		ajouter_arbre(ptr_arc, tab_sommet);
 	}
 
 	return arbreACM;
 }
 
 File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc, 
-	int len_tab_sommet, int len_tab_arc, 
-	int num_depart, float* cout) {
+					int len_tab_sommet, int len_tab_arc, 
+					int num_depart, float* cout) 
+{
 
 	File fileACM = NULL;
 	Liste C = NULL;

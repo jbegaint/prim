@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <float.h>
+#include <time.h>
 
 #include "utils.h"
 
@@ -38,13 +39,25 @@ int main(int argc, char** argv) {
 	File fileACM;
 	float cout = 0;
 	fileACM = algo_fileACM(tab_sommet, tab_arc, len_tab_sommet, len_tab_arc, num_depart, &cout);	
+	printf("FileACM: ");
+	afficher_file(fileACM);
 
 	Arbre arbreACM;
 	arbreACM = algo_arbreACM(fileACM, tab_sommet, num_depart);
 
-	printf("Résultat, arbreACM: ");
+	/*float cout_arbre = 0;
+	cout_arbreACM(arbreACM, &	cout_arbre);
+	printf("%f\n", cout_arbre);*/
 
+	printf("arbreACM (recursif): ");
+	printf("[ ");
 	afficheRSB(arbreACM);
+	printf("]\n");
+
+	printf("arbreACM (iteratif): ");
+	printf("[ ");
+	afficheRSB_iteratif(arbreACM);
+	printf("]\n");
 
 	return 0;
 }

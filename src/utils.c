@@ -51,6 +51,7 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 	if (*tab_sommet==NULL) {
 		die("Allocation impossible");
 	}
+	
 	/*on se positionne au niveau de la ligne de commentaire et on l'affiche*/
 	fseek(f, 1, SEEK_CUR);
 	char s[256];
