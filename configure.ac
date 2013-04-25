@@ -14,9 +14,10 @@ AM_PATH_SDL($SDL_VERSION,
 	    	AC_MSG_ERROR([*** SDL version $SDL_VERSION not found!])
 )
 
-AM_PATH_GTK_2_0([2.10.0],
-			:,
-			AC_MSG_ERROR([Gtk+ 2.10.0 or higher required.]))
+AC_CHECK_LIB(SDL_ttf, 
+			:, 
+			AC_MSG_ERROR([*** Unable to find SDL_ttf])
+)
 
 CFLAGS="$CFLAGS $SDL_CFLAGS"
 LIBS="$LIBS $SDL_LIBS"

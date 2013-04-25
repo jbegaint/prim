@@ -49,8 +49,7 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-bin_PROGRAMS = programme1$(EXEEXT) programme2$(EXEEXT) view$(EXEEXT) \
-	gtk_view$(EXEEXT)
+bin_PROGRAMS = programme1$(EXEEXT) programme2$(EXEEXT) view$(EXEEXT)
 subdir = src
 DIST_COMMON = $(include_HEADERS) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(top_srcdir)/depcomp
@@ -64,10 +63,6 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(includedir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_gtk_view_OBJECTS = gtk_view-gtk_view.$(OBJEXT) \
-	gtk_view-view.$(OBJEXT) gtk_view-utils.$(OBJEXT)
-gtk_view_OBJECTS = $(am_gtk_view_OBJECTS)
-gtk_view_DEPENDENCIES =
 am_programme1_OBJECTS = programme1.$(OBJEXT) liste.$(OBJEXT) \
 	file.$(OBJEXT) utils.$(OBJEXT) sommet.$(OBJEXT) algo.$(OBJEXT) \
 	arbre.$(OBJEXT)
@@ -91,10 +86,9 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(gtk_view_SOURCES) $(programme1_SOURCES) \
-	$(programme2_SOURCES) $(view_SOURCES)
-DIST_SOURCES = $(gtk_view_SOURCES) $(programme1_SOURCES) \
-	$(programme2_SOURCES) $(view_SOURCES)
+SOURCES = $(programme1_SOURCES) $(programme2_SOURCES) $(view_SOURCES)
+DIST_SOURCES = $(programme1_SOURCES) $(programme2_SOURCES) \
+	$(view_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -151,8 +145,6 @@ ECHO_T = @ECHO_T@
 EGREP = @EGREP@
 EXEEXT = @EXEEXT@
 GREP = @GREP@
-GTK_CFLAGS = @GTK_CFLAGS@
-GTK_LIBS = @GTK_LIBS@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -173,7 +165,6 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
-PKG_CONFIG = @PKG_CONFIG@
 SDL_CFLAGS = @SDL_CFLAGS@
 SDL_CONFIG = @SDL_CONFIG@
 SDL_LIBS = @SDL_LIBS@
@@ -227,9 +218,6 @@ programme1_SOURCES = programme1.c liste.c file.c utils.c sommet.c algo.c arbre.c
 programme2_SOURCES = programme2.c liste.c file.c utils.c sommet.c algo.c arbre.c
 view_SOURCES = mainview.c view.c liste.c file.c utils.c sommet.c algo.c arbre.c 
 include_HEADERS = sommet.h arc.h arbre.h liste.h file.h utils.h algo.h view.h
-gtk_view_SOURCES = gtk_view.c view.c utils.c
-gtk_view_CPPFLAGS = @GTK_CFLAGS@
-gtk_view_LDADD = @GTK_LIBS@
 CLEANFILES = *~
 all: all-am
 
@@ -305,9 +293,6 @@ uninstall-binPROGRAMS:
 
 clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
-gtk_view$(EXEEXT): $(gtk_view_OBJECTS) $(gtk_view_DEPENDENCIES) $(EXTRA_gtk_view_DEPENDENCIES) 
-	@rm -f gtk_view$(EXEEXT)
-	$(LINK) $(gtk_view_OBJECTS) $(gtk_view_LDADD) $(LIBS)
 programme1$(EXEEXT): $(programme1_OBJECTS) $(programme1_DEPENDENCIES) $(EXTRA_programme1_DEPENDENCIES) 
 	@rm -f programme1$(EXEEXT)
 	$(LINK) $(programme1_OBJECTS) $(programme1_LDADD) $(LIBS)
@@ -327,9 +312,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/algo.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/arbre.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/file.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtk_view-gtk_view.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtk_view-utils.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtk_view-view.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/liste.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mainview.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/programme1.Po@am__quote@
@@ -351,48 +333,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(COMPILE) -c `$(CYGPATH_W) '$<'`
-
-gtk_view-gtk_view.o: gtk_view.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gtk_view_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gtk_view-gtk_view.o -MD -MP -MF $(DEPDIR)/gtk_view-gtk_view.Tpo -c -o gtk_view-gtk_view.o `test -f 'gtk_view.c' || echo '$(srcdir)/'`gtk_view.c
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gtk_view-gtk_view.Tpo $(DEPDIR)/gtk_view-gtk_view.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gtk_view.c' object='gtk_view-gtk_view.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gtk_view_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gtk_view-gtk_view.o `test -f 'gtk_view.c' || echo '$(srcdir)/'`gtk_view.c
-
-gtk_view-gtk_view.obj: gtk_view.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gtk_view_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gtk_view-gtk_view.obj -MD -MP -MF $(DEPDIR)/gtk_view-gtk_view.Tpo -c -o gtk_view-gtk_view.obj `if test -f 'gtk_view.c'; then $(CYGPATH_W) 'gtk_view.c'; else $(CYGPATH_W) '$(srcdir)/gtk_view.c'; fi`
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gtk_view-gtk_view.Tpo $(DEPDIR)/gtk_view-gtk_view.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gtk_view.c' object='gtk_view-gtk_view.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gtk_view_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gtk_view-gtk_view.obj `if test -f 'gtk_view.c'; then $(CYGPATH_W) 'gtk_view.c'; else $(CYGPATH_W) '$(srcdir)/gtk_view.c'; fi`
-
-gtk_view-view.o: view.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gtk_view_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gtk_view-view.o -MD -MP -MF $(DEPDIR)/gtk_view-view.Tpo -c -o gtk_view-view.o `test -f 'view.c' || echo '$(srcdir)/'`view.c
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gtk_view-view.Tpo $(DEPDIR)/gtk_view-view.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='view.c' object='gtk_view-view.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gtk_view_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gtk_view-view.o `test -f 'view.c' || echo '$(srcdir)/'`view.c
-
-gtk_view-view.obj: view.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gtk_view_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gtk_view-view.obj -MD -MP -MF $(DEPDIR)/gtk_view-view.Tpo -c -o gtk_view-view.obj `if test -f 'view.c'; then $(CYGPATH_W) 'view.c'; else $(CYGPATH_W) '$(srcdir)/view.c'; fi`
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gtk_view-view.Tpo $(DEPDIR)/gtk_view-view.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='view.c' object='gtk_view-view.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gtk_view_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gtk_view-view.obj `if test -f 'view.c'; then $(CYGPATH_W) 'view.c'; else $(CYGPATH_W) '$(srcdir)/view.c'; fi`
-
-gtk_view-utils.o: utils.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gtk_view_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gtk_view-utils.o -MD -MP -MF $(DEPDIR)/gtk_view-utils.Tpo -c -o gtk_view-utils.o `test -f 'utils.c' || echo '$(srcdir)/'`utils.c
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gtk_view-utils.Tpo $(DEPDIR)/gtk_view-utils.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='utils.c' object='gtk_view-utils.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gtk_view_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gtk_view-utils.o `test -f 'utils.c' || echo '$(srcdir)/'`utils.c
-
-gtk_view-utils.obj: utils.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gtk_view_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gtk_view-utils.obj -MD -MP -MF $(DEPDIR)/gtk_view-utils.Tpo -c -o gtk_view-utils.obj `if test -f 'utils.c'; then $(CYGPATH_W) 'utils.c'; else $(CYGPATH_W) '$(srcdir)/utils.c'; fi`
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gtk_view-utils.Tpo $(DEPDIR)/gtk_view-utils.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='utils.c' object='gtk_view-utils.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gtk_view_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gtk_view-utils.obj `if test -f 'utils.c'; then $(CYGPATH_W) 'utils.c'; else $(CYGPATH_W) '$(srcdir)/utils.c'; fi`
 install-includeHEADERS: $(include_HEADERS)
 	@$(NORMAL_INSTALL)
 	@list='$(include_HEADERS)'; test -n "$(includedir)" || list=; \

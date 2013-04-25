@@ -33,9 +33,9 @@ mainview.o: mainview.c /usr/include/SDL/SDL.h /usr/include/SDL/SDL_main.h \
  /usr/include/SDL/SDL_keysym.h /usr/include/SDL/SDL_mouse.h \
  /usr/include/SDL/SDL_video.h /usr/include/SDL/SDL_joystick.h \
  /usr/include/SDL/SDL_quit.h /usr/include/SDL/SDL_loadso.h \
- /usr/include/SDL/SDL_timer.h /usr/include/SDL/SDL_version.h view.h \
- sommet.h arc.h liste.h file.h /usr/include/SDL/SDL.h algo.h arbre.h \
- utils.h
+ /usr/include/SDL/SDL_timer.h /usr/include/SDL/SDL_version.h \
+ /usr/include/SDL/SDL_ttf.h /usr/include/SDL/SDL.h view.h sommet.h arc.h \
+ liste.h file.h /usr/include/SDL/SDL.h algo.h arbre.h utils.h
 
 /usr/include/SDL/SDL.h:
 
@@ -178,6 +178,10 @@ mainview.o: mainview.c /usr/include/SDL/SDL.h /usr/include/SDL/SDL_main.h \
 /usr/include/SDL/SDL_timer.h:
 
 /usr/include/SDL/SDL_version.h:
+
+/usr/include/SDL/SDL_ttf.h:
+
+/usr/include/SDL/SDL.h:
 
 view.h:
 
