@@ -58,11 +58,14 @@ int main(int argc, char **argv)
 
 	ecran = affiche_cout(ecran, cout_chemin);
 
-	pause_sdl();		/* Mise en pause du programme */
 
 	Arc arc;
 
+	int cc=0;
+
 	for (p = fileACM->suiv; p != fileACM; p = p->suiv) {
+		printf("%d\n", cc);
+		cc++;
 
 		arc =  *((Arc* ) p->val);
 
@@ -76,6 +79,8 @@ int main(int argc, char **argv)
 
 		SDL_Flip(ecran);
 	}
+
+	pause_sdl();		/* Mise en pause du programme */
 
 	SDL_Quit();		/*quitte SDL */
 
