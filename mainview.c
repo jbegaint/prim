@@ -24,7 +24,8 @@ int main( int argc, char* argv[]){
 	File fileACM;
 	float cout_chemin;
 	int num_depart;
-	
+	float x1,y1,x2,y2;
+	File* p;
 
 
 if (argc < 2) {
@@ -61,12 +62,26 @@ if (argc < 2) {
 		
 	ecran=affiche_cout (ecran, cout_chemin);
 		
-
+	
 
 	pause(); /* Fonction de mise en pause du programme*/
 
 	
+	for (p = fileACM->suiv; p != fileACM; p = p->suiv)
+	{
+		
+		
+
+		x1=(*p)->val.coordonnee_x;
+		y1=(*p)->val.coordonnee_y;
+
+		x2=(*p)->suiv->val.coordonnee_x;
+		y2=(*p)->suiv->val.coordonnee_y;
 	
+		
+		ecran = Ligne(ecran, x1, y1,x2, y2) ;
+		SDL_Flip(ecran);
+	}
 	
 	SDL_Quit(); /*quitte SDL*/
 	

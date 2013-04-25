@@ -1,8 +1,8 @@
-#include <SDL/SDL.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h> 
-#include <float.h>
+#include <math.h>
+#include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
 
 #include "view.h"
@@ -10,7 +10,6 @@
 #include "arc.h"
 #include "liste.h"
 #include "file.h"
-
 #include "utils.h"
 
 void pause() /*permet de conserver l'affichage et d'initialiser la croix pour fermer le programme*/
@@ -78,8 +77,8 @@ SDL_Surface* edit_point(SDL_Surface* ecran, Sommet* sommet, int len_tab_sommet)
 
 
 for (i=0;i<len_tab_sommet;i++){
-	position.x=sommet[i].coordonnee_x*600;
-	position.y=sommet[i].coordonnee_y*600;
+	position.x=sommet[i].coordonnee_x*600.0;
+	position.y=sommet[i].coordonnee_y*600.0;
 	
 	nom_sommet = TTF_RenderText_Blended(police, sommet[i].nom, couleur );/*à la fin noir*/
 	SDL_BlitSurface(nom_sommet, NULL, ecran, &position);
@@ -142,4 +141,82 @@ SDL_Surface* affiche_cout (SDL_Surface* ecran, float cout)
 	TTF_Quit();
 
 	return ecran;
+}
+
+
+
+SDL_Surface* Ligne(SDL_Surface* ecran,float x1,float y1, float x2,float y2)  /*algorithme de Bresenham*/
+{
+	
+	int x,y,ValAbsx,ValAbsy,deplacementx,deplacementy,milieu,i;
+	long couleur = 65536*255 + 256*255 + 255;/*Convertie la couleur en long */
+ 	int BytesPixel;
+	char* position;
+
+	x1=x1*600.0;
+	x2=x2*600.0;
+	y1=y1*600.0;
+	y2=y2*600.0;
+
+	ValAbsx = abs(x2-x1);
+	ValAbsy = abs(y2-y1);
+
+	if(x1>x2){
+		deplacementx = -1;
+	}
+	else{
+		deplacementx = 1;
+	}
+	if(y1>y2){
+		deplacementy = -1;
+	}
+	else{			
+		deplacementy = 1;
+	}
+ 
+	x = x1;
+	y = y1;
+
+	if(ValAbsx>ValAbsy) 
+	{
+		milieu = ValAbsx/2;
+		for(i=0;i<ValAbsx;i++)
+		{
+			x = x + deplacementx;
+			milieu = milieu + ValAbsy;
+			if(milieu>ValAbsx)
+			{
+				milieu = milieu - ValAbsx;
+				y = milieu + deplacementy;
+			}
+			BytesPixel = ecran->format->BytesPerPixel;
+			position = (unsigned char *)ecran->pixels + y * ecran->pitch + x * BytesPixel;
+			if (BytesPixel==4){
+				*(unsigned long*)position = couleur;
+			}
+		}
+	}
+	else
+	{
+		milieu = ValAbsy/2;
+		for(i=0;i<ValAbsy;i++)
+		{
+			y = y+ deplacementy;
+			milieu += ValAbsx;
+ 
+			if(milieu>ValAbsy)
+			{
+				milieu = milieu - deplacementx;
+				x = x + deplacementx;
+			}
+			BytesPixel = ecran->format->BytesPerPixel;
+			position = (unsigned char *)ecran->pixels + y * ecran->pitch + x * BytesPixel;
+			if (BytesPixel==4){
+				*(unsigned long*)position = couleur;
+			}
+		}
+			
+	}
+
+return ecran;
 }
