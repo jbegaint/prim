@@ -24,7 +24,7 @@ void pause() /*permet de conserver l'affichage et d'initialiser la croix pour fe
         SDL_WaitEvent(&event);
         switch(event.type)
         {
-            case SDL_QUIT:
+            case SDL_QUIT: 
                 continuer = 0;
         }
     }
@@ -41,9 +41,8 @@ void init_SDL (void)
 
 SDL_Surface* init_ecran (SDL_Surface* ecran)
 {
-      
+        /* ouvre une fenetre de 640*480 32 bits, dans la mémoire video ou double buffer*/
 	ecran=SDL_SetVideoMode(600, 700, 32, SDL_HWSURFACE | SDL_DOUBLEBUF); 
-	/* ouvre une fenetre de 640*480 32 bits, dans la mémoire video ou double buffer*/
 	SDL_WM_SetCaption("Chemin le plus court", NULL);/* Nomme la fenetre*/
 	SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 70, 70, 70));/*Mise en couleur de l'écran*/
 	SDL_Flip(ecran); /*Mise à jour de l'écran*/
@@ -54,49 +53,61 @@ SDL_Surface* init_ecran (SDL_Surface* ecran)
 SDL_Surface* edit_point(SDL_Surface* ecran, Sommet* sommet, int len_tab_sommet)
 {
 	int i=0;
+
+	/* Sert pour les couleurs des sommets*/
 	char a,b,c;
 	srand(time(NULL));
 
-	TTF_Init();
-
-	SDL_Surface* nom_sommet = NULL;
-
-	SDL_Surface* point = NULL;
-	SDL_Surface* progression = NULL;
-
-	SDL_Rect position;
-	SDL_Rect position_progression;
-
-	TTF_Font* police = NULL;
+	TTF_Init(); /*Initialise SDL_TTF (police d'écriture) */
+	TTF_Font* police = NULL; /*Pointeur vers police*/
 	police = TTF_OpenFont("DroidSans.ttf", 10);
-	SDL_Color couleur = {0, 0, 0};
+	SDL_Color couleur = {0, 0, 0}; /*Couleur Noire*/
 
+	SDL_Surface* nom_sommet = NULL; /*Surface pour l'écriture du sommet */
+	SDL_Surface* point = NULL; /*Surface pour affichage des points*/
+	SDL_Surface* progression = NULL; /*Surface pour la barre de progression*/
 
-	point = SDL_CreateRGBSurface(SDL_HWSURFACE, 2, 2, 32, 0, 0, 0, 0);/*//Point */
-	progression = SDL_CreateRGBSurface(SDL_HWSURFACE, 10, 10, 32, 0, 0, 0, 0);/*//Point*/
+	SDL_Rect position_sommet; /*Position pour les noms des sommets */
+	SDL_Rect position; /*Position pour la progression*/
+	SDL_Rect position_progression; /*Position pour les sommets */
+
+	point = SDL_CreateRGBSurface(SDL_HWSURFACE, 2, 2, 32, 0, 0, 0, 0);/*Création d'un rectangle 2*2 en couleur 32 bits)*/
+	progression = SDL_CreateRGBSurface(SDL_HWSURFACE, 10, 10, 32, 0, 0, 0, 0);/*Création d'un rectangle 10*10 en couleur 32 bits)*/
 
 
 for (i=0;i<len_tab_sommet;i++){
+	
+
+	/* Position des noms des sommets*/
+	position_sommet.x=sommet[i].coordonnee_x*600.0-5;
+	position_sommet.y=sommet[i].coordonnee_y*600.0;
+	
+	nom_sommet = TTF_RenderText_Blended(police, sommet[i].nom, couleur );/*Nomme les sommets*/
+	SDL_BlitSurface(nom_sommet, NULL, ecran, &position_sommet); /*Affiche les noms*/
+
+	/*Position des sommets */
 	position.x=sommet[i].coordonnee_x*600.0;
 	position.y=sommet[i].coordonnee_y*600.0;
-	
-	nom_sommet = TTF_RenderText_Blended(police, sommet[i].nom, couleur );/*à la fin noir*/
-	SDL_BlitSurface(nom_sommet, NULL, ecran, &position);
 
-	a=rand()%(255-0)+0;/*//Initialises couleur des points*/
+	/*Initialises couleur des sommets de manière aléatoire*/
+	a=rand()%(255-0)+0;
 	b=rand()%(255-0)+0;
 	c=rand()%(255-0)+0;
-       	SDL_FillRect(point, NULL, SDL_MapRGB(ecran->format, a, b, c));    	
-	SDL_BlitSurface(point, NULL, ecran, &position); /*// Collage de la surface sur l'écran*/
-	SDL_Flip(ecran); /*// Mise à jour de l'écran*/
 
+       	SDL_FillRect(point, NULL, SDL_MapRGB(ecran->format, a, b, c)); /*Place les sommets*/   	
+	SDL_BlitSurface(point, NULL, ecran, &position); /* Collage des sommets sur l'écran*/
+	
+	/*Mise à jour de l'écran*/
+	SDL_Flip(ecran); 
+	
+	/*Idem mais pour la barre de progression*/
 	position_progression.y=650;
 	position_progression.x=i*300/len_tab_sommet+150;
 	SDL_FillRect(progression, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));  
-	SDL_BlitSurface(progression, NULL, ecran, &position_progression); /* Collage de la surface sur l'écran*/
-	SDL_Flip(ecran); /* Mise à jour de l'écran*/
+	SDL_BlitSurface(progression, NULL, ecran, &position_progression); 
+	SDL_Flip(ecran); 
 }	
-
+	/*On libère la mémoire de la police, des surfaces nom_sommet, point, progression et on stope SDL_TTF*/
 	TTF_CloseFont(police);
   	SDL_FreeSurface(nom_sommet);
 	SDL_FreeSurface(point); 
@@ -108,17 +119,21 @@ for (i=0;i<len_tab_sommet;i++){
 
 SDL_Surface* affiche_cout (SDL_Surface* ecran, float cout)
 {
+	/*Affichage cout : Même principe que pour afficher le nom des sommets :
+On ouvre une police, on initialise couleur, position et on l'affiche.
+Puis on libère la mémoire */
+	
 	TTF_Init();
 
 	TTF_Font* police = NULL;
-	police = TTF_OpenFont("DroidSans.ttf", 30);
+	police = TTF_OpenFont("DroidSans.ttf", 25);
 	SDL_Color couleur = {0, 0, 0};
 	SDL_Rect position_cout;
 	SDL_Surface* cout_chemin = NULL;
 
  	char buffer_cout [50];
   	
-  	sprintf (buffer_cout, "%f", cout);
+  	sprintf (buffer_cout, "%f", cout);/*Convertie le float en chaine de caractère */
 
 	position_cout.x=470;
 	position_cout.y=620;
@@ -132,11 +147,10 @@ SDL_Surface* affiche_cout (SDL_Surface* ecran, float cout)
 	cout_chemin = TTF_RenderText_Blended(police, buffer_cout, couleur );
 	SDL_BlitSurface(cout_chemin, NULL, ecran, &position_cout);
 	SDL_Flip(ecran);
-	SDL_Flip(ecran);
+	
 
 	TTF_CloseFont(police);
 	SDL_FreeSurface(cout_chemin);
-
 
 	TTF_Quit();
 

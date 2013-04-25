@@ -59,30 +59,28 @@ if (argc < 2) {
 	num_depart =  get_param_sommet(num_depart, len_tab_sommet);
 
 	fileACM = algo_fileACM(tab_sommet, tab_arc, len_tab_sommet, len_tab_arc, num_depart, &cout_chemin); /*Récupère la file ACM, ainsi que le cout*/	
+
 		
 	ecran=affiche_cout (ecran, cout_chemin);
-		
+	 	
 	
 
-	pause(); /* Fonction de mise en pause du programme*/
-
 	
-	for (p = fileACM->suiv; p != fileACM; p = p->suiv)
-	{
+	/*for (p = fileACM->suiv; p != fileACM; p = (*p)->suiv)
+	{	
 		
-		
+		x1=tab_sommet[(*(Arc*)p).sommet_depart].coordonnee_x;
+		y1=tab_sommet[(*(Arc*)p).sommet_depart].coordonnee_y;
 
-		x1=(*p)->val.coordonnee_x;
-		y1=(*p)->val.coordonnee_y;
-
-		x2=(*p)->suiv->val.coordonnee_x;
-		y2=(*p)->suiv->val.coordonnee_y;
-	
+		x2=tab_sommet[(*(Arc*)p).sommet_arrive].coordonnee_x;
+		y2=tab_sommet[(*(Arc*)p).sommet_arrive].coordonnee_y;
 		
 		ecran = Ligne(ecran, x1, y1,x2, y2) ;
 		SDL_Flip(ecran);
-	}
+	} Seg Fault */
 	
+	pause(); /* Fonction de mise en pause du programme*/
+
 	SDL_Quit(); /*quitte SDL*/
 	
 	
