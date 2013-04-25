@@ -58,15 +58,11 @@ int main(int argc, char **argv)
 
 	ecran = affiche_cout(ecran, cout_chemin);
 
+	/* Début affichage des lignes */
 
 	Arc arc;
 
-	int cc=0;
-
 	for (p = fileACM->suiv; p != fileACM; p = p->suiv) {
-		printf("%d\n", cc);
-		cc++;
-
 		arc =  *((Arc* ) p->val);
 
 		x1 = tab_sommet[arc.sommet_depart].coordonnee_x;
@@ -77,8 +73,36 @@ int main(int argc, char **argv)
 
 		ecran = Ligne(ecran, x1, y1, x2, y2);
 
+		printf("%s -> %s\n", tab_sommet[arc.sommet_depart].nom, 
+							tab_sommet[arc.sommet_arrive].nom);
+		printf("%0.1f %0.1f %0.1f %0.1f\n", x1, y1, x2, y2);
+		getchar();
+
+
 		SDL_Flip(ecran);
 	}
+
+	/* NE PAS OUBLIER D'AFFICHER LE DERNIER, cf afficher_file */
+	arc =  *((Arc* ) fileACM->val);
+
+	x1 = tab_sommet[arc.sommet_depart].coordonnee_x;
+	y1 = tab_sommet[arc.sommet_depart].coordonnee_y;
+
+	x2 = tab_sommet[arc.sommet_arrive].coordonnee_x;
+	y2 = tab_sommet[arc.sommet_arrive].coordonnee_y;
+
+	ecran = Ligne(ecran, x1, y1, x2, y2);
+
+	printf("%s -> %s\n", tab_sommet[arc.sommet_depart].nom, 
+						tab_sommet[arc.sommet_arrive].nom);
+	printf("%0.1f %0.1f %0.1f %0.1f\n", x1, y1, x2, y2);
+	getchar();
+
+	SDL_Flip(ecran);
+
+	/* Fin affichage des lignes */
+
+
 
 	pause_sdl();		/* Mise en pause du programme */
 
