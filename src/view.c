@@ -12,6 +12,7 @@
 #include "file.h"
 #include "utils.h"
 
+
 void pause_sdl()
 {				/*permet de conserver l'affichage et d'initialiser la croix pour fermer le programme */
 	int continuer = 1;

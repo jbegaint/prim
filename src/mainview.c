@@ -1,5 +1,6 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
+
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -12,6 +13,7 @@
 #include "file.h"
 
 #include "utils.h"
+
 
 int main(int argc, char **argv)
 {
@@ -97,6 +99,8 @@ int main(int argc, char **argv)
 						tab_sommet[arc.sommet_arrive].nom);
 	printf("%0.1f %0.1f %0.1f %0.1f\n", x1, y1, x2, y2);
 	getchar();
+
+	printf("Fin\n");
 
 	SDL_Flip(ecran);
 
