@@ -26,10 +26,10 @@ void afficheRSB_iteratif(Arbre r)
 {
 	Arbre a;
 	Liste l = NULL;
-	l = ajouter_queue(&r, l, sizeof(Arbre));
+	l = ajouter_queue( &r, l, sizeof(Arbre));
 
 	while (!est_vide_liste(l)) {
-		for (a=*(Arbre *) l->val; a; a = a->fils ) {
+		for (a = *(Arbre *) l->val; a; a = a->fils ) {
 
 			printf("%s ", a->sommet->nom);
 

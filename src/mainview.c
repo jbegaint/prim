@@ -18,11 +18,13 @@ int main(int argc, char **argv)
 	Sommet *tab_sommet;
 	Arc *tab_arc;
 	int len_tab_arc, len_tab_sommet;
+
 	File fileACM;
+
 	float cout_chemin;
 	int num_depart;
 	float x1, y1, x2, y2;
-	File *p;
+	File p;
 
 
 	if (argc < 2) {
@@ -58,24 +60,24 @@ int main(int argc, char **argv)
 
 	pause_sdl();		/* Mise en pause du programme */
 
+	Arc arc;
 
-	/*for (p = fileACM->suiv; p != fileACM; p = (*p)->suiv)
-	   {    
+	for (p = fileACM->suiv; p != fileACM; p = p->suiv) {
 
-	   x1=tab_sommet[(*(Arc*)p).sommet_depart].coordonnee_x;
-	   y1=tab_sommet[(*(Arc*)p).sommet_depart].coordonnee_y;
+		arc =  *((Arc* ) p->val);
 
-	   x2=tab_sommet[(*(Arc*)p).sommet_arrive].coordonnee_x;
-	   y2=tab_sommet[(*(Arc*)p).sommet_arrive].coordonnee_y;
+		x1 = tab_sommet[arc.sommet_depart].coordonnee_x;
+		y1 = tab_sommet[arc.sommet_depart].coordonnee_y;
 
-	   ecran = Ligne(ecran, x1, y1,x2, y2) ;
-	   SDL_Flip(ecran);
-	   } Seg Fault */
+		x2 = tab_sommet[arc.sommet_arrive].coordonnee_x;
+		y2 = tab_sommet[arc.sommet_arrive].coordonnee_y;
 
-	pause();		/* Fonction de mise en pause du programme */
+		ecran = Ligne(ecran, x1, y1, x2, y2);
+
+		SDL_Flip(ecran);
+	}
 
 	SDL_Quit();		/*quitte SDL */
-
 
 	return 0;
 }

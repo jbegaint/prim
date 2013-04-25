@@ -60,12 +60,12 @@ SDL_Surface *edit_point(SDL_Surface * ecran, Sommet * sommet,
 
 	TTF_Init();		/*Initialise SDL_TTF (police d'écriture) */
 	TTF_Font *police = NULL;	/*Pointeur vers police */
-	police = TTF_OpenFont("DroidSans.ttf", 10);
+	police = TTF_OpenFont("DroidSans.ttf", 15);
 
 	if (police == NULL) {
 		die("Erreur lecture fichier police");
 	}
-	
+
 	SDL_Color couleur = { 0, 0, 0 };	/*Couleur Noire */
 
 	SDL_Surface *nom_sommet = NULL;	/*Surface pour l'écriture du sommet */
