@@ -175,7 +175,7 @@ SDL_Surface *Ligne(SDL_Surface * ecran, float x1, float y1, float x2,
 	int BytesPixel;
 	char *position;
 
-	x1 = x1 * 600.0;
+	x1 = x1 * 600.0; 
 	x2 = x2 * 600.0;
 	y1 = y1 * 600.0;
 	y2 = y2 * 600.0;
@@ -183,16 +183,8 @@ SDL_Surface *Ligne(SDL_Surface * ecran, float x1, float y1, float x2,
 	ValAbsx = abs(x2 - x1);
 	ValAbsy = abs(y2 - y1);
 
-	if (x1 > x2) {
-		deplacementx = -1;
-	} else {
-		deplacementx = 1;
-	}
-	if (y1 > y2) {
-		deplacementy = -1;
-	} else {
-		deplacementy = 1;
-	}
+	deplacementx = (x1 > x2) ? -1 : 1;
+	deplacementy = (y1 > y2) ? -1 : 1;
 
 	x = x1;
 	y = y1;

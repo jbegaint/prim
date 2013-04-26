@@ -13,15 +13,18 @@
 
 int main(int argc, char** argv) {
 
-	if (argc < 2) {
-		fprintf(stderr, "Usage: %s fichier\n", argv[0]);
-		exit(EXIT_FAILURE);
-	}
-
 	Sommet* tab_sommet;
 	Arc* tab_arc;
 
 	int len_tab_sommet, len_tab_arc;
+	int num_depart;
+	File fileACM;
+	float cout;
+
+	if (argc < 2) {
+		fprintf(stderr, "Usage: %s fichier\n", argv[0]);
+		exit(EXIT_FAILURE);
+	}
 
 	lecture(argv[1], &tab_sommet, &tab_arc, &len_tab_sommet, &len_tab_arc);
 
@@ -29,7 +32,6 @@ int main(int argc, char** argv) {
 	printf("| Algo FileACM |\n");
 	printf("----------------\n");
 
-	int num_depart;
 	if (argc > 2)
 		num_depart = atoi(argv[2]);
 	else {
@@ -39,8 +41,7 @@ int main(int argc, char** argv) {
 
 	num_depart =  get_param_sommet(num_depart, len_tab_sommet);
 
-	File fileACM;
-	float cout;
+	
 	fileACM = algo_fileACM(tab_sommet, tab_arc, len_tab_sommet, len_tab_arc, num_depart, &cout);	
 
 	printf("Résultat, fileACM: ");

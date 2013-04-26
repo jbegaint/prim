@@ -54,6 +54,8 @@ Arbre algo_arbreACM(File fileACM, Sommet* tab_sommet, int num_depart)
 {
 
 	Arbre arbreACM = NULL;
+	Arc* ptr_arc;
+
 	arbreACM = malloc(sizeof(*arbreACM));
 
 	if (arbreACM == NULL)
@@ -62,7 +64,6 @@ Arbre algo_arbreACM(File fileACM, Sommet* tab_sommet, int num_depart)
 	arbreACM->sommet = &tab_sommet[num_depart];
 	tab_sommet[num_depart].noeudArbreACM = arbreACM;
 
-	Arc* ptr_arc;
 
 	while (!est_vide_file(fileACM)) {
 		ptr_arc = (Arc*) defiler(&fileACM);
@@ -104,6 +105,10 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc,
 
 		/*sommet de C de plus petit PPC;*/
 		Sommet sommet_ppc_min;
+		Liste liste_sommet_adjacent = NULL;
+		Liste liste_arc_sortant = NULL;
+		Arc* a;
+		Liste ll;
 
 		/*on récupère le sommet de plus petit PPC et son coût*/
 		/*Comme la liste est triée, c'est le premier élément de C*/
@@ -123,12 +128,7 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc,
 
 		/* il faut maintenant récupérer les adjacents à j*/
 
-		Liste liste_sommet_adjacent = NULL;
-		Liste liste_arc_sortant = NULL;
 
-		Arc* a;
-
-		Liste ll;
 
 		for (a=tab_arc; a < tab_arc + len_tab_arc; a++) {
 			/* A voir pour la comparaison */

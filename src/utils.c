@@ -37,6 +37,10 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 {
 	FILE *f;
 	int i, j; /* compteurs */
+	char s[256];
+	Sommet sommet;
+	int arrive, depart;
+	float cout;
 
 	f = open_file(filename);
 
@@ -54,10 +58,8 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 	
 	/*on se positionne au niveau de la ligne de commentaire et on l'affiche*/
 	fseek(f, 1, SEEK_CUR);
-	char s[256];
 	fgets(s, 256, f);
 
-	Sommet sommet;
 		
 	for (i=0; i<*len_tab_sommet; i++) {
 
@@ -82,8 +84,7 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 	*tab_arc = malloc(2*(*len_tab_arc)*sizeof(Arc));
 	*len_tab_arc *= 2;
 
-	int arrive, depart;
-	float cout;
+
 
 	for (j=0; j < *len_tab_arc; j+=2) {
 

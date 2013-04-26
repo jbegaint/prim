@@ -58,7 +58,6 @@ void* defiler(File* F)
 		fprintf((stderr), "Erreur: impossible de défiler une file vide \n");;
 		exit(EXIT_FAILURE);
 	}
-
 	void* val = (*F)->suiv->val;
 
 	if ((*F)->suiv != *F) {

@@ -63,10 +63,11 @@ Liste ajouter_queue(void *elt, Liste L, size_t size_elt)
 
 Liste supprimer_tete(Liste L)
 {
+	Liste p;
+
 	if (est_vide_liste(L))
 		return NULL;
 
-	Liste p;
 	p = (Liste) malloc(sizeof(*p));
 
 	if (p == NULL)
