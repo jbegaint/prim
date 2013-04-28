@@ -106,8 +106,6 @@ int main(int argc, char **argv)
 
 	/* Fin affichage des lignes */
 
-
-
 	pause_sdl();		/* Mise en pause du programme */
 
 	SDL_Quit();		/*quitte SDL */
