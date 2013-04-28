@@ -86,13 +86,13 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc,
 	Sommet d = tab_sommet[num_depart];
 
 	/*
-		DEBUT ALGO
+		DEBUT ALGO PRIM
 	*/
 
 	Sommet* smt;
 	for (smt=tab_sommet; smt < tab_sommet+len_tab_sommet; smt++) {
-		(*smt).PPC = FLT_MAX;
-		(*smt).arrive_par = NULL;
+		smt->PPC = FLT_MAX;
+		smt->arrive_par = NULL;
 	}
 	
 	d.PPC = 0;
@@ -103,7 +103,6 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc,
 
 	while( !est_vide_liste(C) ) {
 
-		/*sommet de C de plus petit PPC;*/
 		Sommet sommet_ppc_min;
 		Liste liste_sommet_adjacent = NULL;
 		Liste liste_arc_sortant = NULL;
@@ -115,8 +114,6 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc,
 		sommet_ppc_min = *(Sommet*) C->val;
 
 		/*supprimer j de C*/
-		
-
 		C = supprimer_tete(C);
 
 		/*si j n'est pas d*/
@@ -126,14 +123,10 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc,
 			liste_sommet_atteint = ajouter_queue(&sommet_ppc_min, liste_sommet_atteint, sizeof(Sommet));
 		}
 
-		/* il faut maintenant récupérer les adjacents à j*/
-
-
-
+		/* on récupère les adjacents */
 		for (a=tab_arc; a < tab_arc + len_tab_arc; a++) {
-			/* A voir pour la comparaison */
-			if ( (*a).sommet_depart == sommet_ppc_min.numero ) {
-				liste_sommet_adjacent = ajouter_queue(&tab_sommet[(*a).sommet_arrive], liste_sommet_adjacent, sizeof(Sommet));
+			if ( a->sommet_depart == sommet_ppc_min.numero ) {
+				liste_sommet_adjacent = ajouter_queue(&tab_sommet[a->sommet_arrive], liste_sommet_adjacent, sizeof(Sommet));
 			
 				liste_arc_sortant = ajouter_queue(a, liste_arc_sortant, sizeof(Arc));
 			}
@@ -145,14 +138,14 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc,
 
 			a = (Arc *) ll->val;
 
-			if ( (tab_sommet[(*a).sommet_arrive]).PPC > (*a).cout ) {
+			if ( (tab_sommet[a->sommet_arrive]).PPC > a->cout ) {
 
-				tab_sommet[(*a).sommet_arrive].PPC = (*a).cout;
-				tab_sommet[(*a).sommet_arrive].arrive_par = a;
+				tab_sommet[a->sommet_arrive].PPC = a->cout;
+				tab_sommet[a->sommet_arrive].arrive_par = a;
 
-				if (recherche_elt_liste(liste_sommet_atteint, &tab_sommet[(*a).sommet_arrive]) != 1) {
-					if (recherche_elt_liste(C, &tab_sommet[(*a).sommet_arrive]) != 1) {
-						C = ajout_tri(&tab_sommet[(*a).sommet_arrive], C);
+				if (recherche_elt_liste(liste_sommet_atteint, &tab_sommet[a->sommet_arrive]) != 1) {
+					if (recherche_elt_liste(C, &tab_sommet[a->sommet_arrive]) != 1) {
+						C = ajout_tri(&tab_sommet[a->sommet_arrive], C);
 					}
 				}	
 			}
@@ -162,6 +155,7 @@ File algo_fileACM(Sommet* tab_sommet, Arc* tab_arc,
 
 	printf("Cout de l'acm: %f\n", *cout);
 
+	/* FIN ALGO PRIM */
+
 	return fileACM;
-	/*FIN ALGO*/
 }
