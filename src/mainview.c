@@ -75,16 +75,8 @@ int main(int argc, char **argv)
 		x2 = tab_sommet[arc.sommet_arrive].coordonnee_x;
 		y2 = tab_sommet[arc.sommet_arrive].coordonnee_y;
 
-		// ecran = Ligne(ecran, x1, y1, x2, y2);
-		int couleur = 1;		//0xff0000FF; 
+		int couleur = 0;		//0xff0000FF; 
 		Draw_Line(ecran, x1*600, y1*600, x2*600, y2*600, couleur);
-
-
-		printf("%s -> %s\n", tab_sommet[arc.sommet_depart].nom, 
-							tab_sommet[arc.sommet_arrive].nom);
-		printf("%0.1f %0.1f %0.1f %0.1f\n", x1, y1, x2, y2);
-		getchar();
-
 
 		SDL_Flip(ecran);
 	}
@@ -99,11 +91,6 @@ int main(int argc, char **argv)
 	y2 = tab_sommet[arc.sommet_arrive].coordonnee_y;
 
 	Draw_Line(ecran, x1*600, y1*600, x2*600, y2*600, 1);
-
-	printf("%s -> %s\n", tab_sommet[arc.sommet_depart].nom, 
-						tab_sommet[arc.sommet_arrive].nom);
-	printf("%0.1f %0.1f %0.1f %0.1f\n", x1, y1, x2, y2);
-	getchar();
 
 	printf("Fin\n");
 

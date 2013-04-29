@@ -60,7 +60,7 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 	fseek(f, 1, SEEK_CUR);
 	fgets(s, 256, f);
 
-		
+	printf("Sommets:\n");
 	for (i=0; i<*len_tab_sommet; i++) {
 
 		/*structure du fichier: numéro, x, y, nom*/
@@ -73,8 +73,12 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 		}
 		(*tab_sommet)[i] = sommet;
 
-/*		printf("%d/%d, %s \r",i+1, *len_tab_sommet, sommet.nom);
-*/	} 
+		printf("%d/%d\r",i+1, *len_tab_sommet);
+		fflush(stdout); 
+
+	} 
+	printf("\n");
+
 
 	/*idem, on se positionne au niveau de la ligne de commentaire et on l'affiche*/
 	fseek(f, 1, SEEK_CUR);
@@ -85,7 +89,7 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 	*len_tab_arc *= 2;
 
 
-
+	printf("Arcs:\n");
 	for (j=0; j < *len_tab_arc; j+=2) {
 
 		/*structure du fichier: depart, arrive, coût*/
@@ -96,11 +100,12 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 		(*tab_arc)[j] = get_arc(depart, arrive, cout);
 		(*tab_arc)[j+1] = get_arc(arrive, depart, cout);
 
-		/*printf("%d/%d %f\r", j+1, *len_tab_arc, arc.cout);*/
-
-        /*fflush(stdout); */
+		printf("%d/%d\r", j+1, *len_tab_arc);
+        fflush(stdout); 
 
    	}
+	printf("\n");
+
 }
 
 int get_param_sommet(int param, int len_tab) {
