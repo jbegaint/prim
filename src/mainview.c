@@ -14,6 +14,8 @@
 
 #include "utils.h"
 
+#include "SDL_draw.h"
+
 
 int main(int argc, char **argv)
 {
@@ -62,7 +64,7 @@ int main(int argc, char **argv)
 
 	/* Début affichage des lignes */
 
-	Arc arc;
+	Arc arc;	
 
 	for (p = fileACM->suiv; p != fileACM; p = p->suiv) {
 		arc =  *((Arc* ) p->val);
@@ -73,7 +75,10 @@ int main(int argc, char **argv)
 		x2 = tab_sommet[arc.sommet_arrive].coordonnee_x;
 		y2 = tab_sommet[arc.sommet_arrive].coordonnee_y;
 
-		ecran = Ligne(ecran, x1, y1, x2, y2);
+		// ecran = Ligne(ecran, x1, y1, x2, y2);
+		int couleur = 1;		//0xff0000FF; 
+		Draw_Line(ecran, x1*600, y1*600, x2*600, y2*600, couleur);
+
 
 		printf("%s -> %s\n", tab_sommet[arc.sommet_depart].nom, 
 							tab_sommet[arc.sommet_arrive].nom);
@@ -93,7 +98,7 @@ int main(int argc, char **argv)
 	x2 = tab_sommet[arc.sommet_arrive].coordonnee_x;
 	y2 = tab_sommet[arc.sommet_arrive].coordonnee_y;
 
-	ecran = Ligne(ecran, x1, y1, x2, y2);
+	Draw_Line(ecran, x1*600, y1*600, x2*600, y2*600, 1);
 
 	printf("%s -> %s\n", tab_sommet[arc.sommet_depart].nom, 
 						tab_sommet[arc.sommet_arrive].nom);

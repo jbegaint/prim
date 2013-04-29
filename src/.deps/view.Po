@@ -11,7 +11,11 @@ view.o: view.c /usr/include/stdlib.h /usr/include/features.h \
  /usr/include/sys/select.h /usr/include/bits/select.h \
  /usr/include/bits/sigset.h /usr/include/bits/time.h \
  /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
- /usr/include/alloca.h /usr/include/bits/timex.h /usr/include/math.h \
+ /usr/include/alloca.h /usr/include/stdio.h /usr/include/libio.h \
+ /usr/include/_G_config.h /usr/include/wchar.h \
+ /usr/lib/gcc/x86_64-redhat-linux/4.7.2/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h /usr/include/bits/timex.h /usr/include/math.h \
  /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
  /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
  /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
@@ -19,13 +23,9 @@ view.o: view.c /usr/include/stdlib.h /usr/include/features.h \
  /usr/include/SDL/SDL.h /usr/include/SDL/SDL_main.h \
  /usr/include/SDL/SDL_stdinc.h /usr/include/SDL/SDL_config.h \
  /usr/include/SDL/SDL_config-x86_64.h /usr/include/SDL/SDL_platform.h \
- /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
- /usr/include/wchar.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.7.2/include/stdarg.h \
- /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
- /usr/include/bits/stdio.h /usr/include/string.h \
- /usr/include/bits/string.h /usr/include/bits/string2.h \
- /usr/include/strings.h /usr/include/inttypes.h \
+ /usr/include/string.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/strings.h \
+ /usr/include/inttypes.h \
  /usr/lib/gcc/x86_64-redhat-linux/4.7.2/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/wchar.h /usr/include/ctype.h \
  /usr/include/iconv.h /usr/include/SDL/begin_code.h \
@@ -94,6 +94,22 @@ view.o: view.c /usr/include/stdlib.h /usr/include/features.h \
 
 /usr/include/alloca.h:
 
+/usr/include/stdio.h:
+
+/usr/include/libio.h:
+
+/usr/include/_G_config.h:
+
+/usr/include/wchar.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/4.7.2/include/stdarg.h:
+
+/usr/include/bits/stdio_lim.h:
+
+/usr/include/bits/sys_errlist.h:
+
+/usr/include/bits/stdio.h:
+
 /usr/include/bits/timex.h:
 
 /usr/include/math.h:
@@ -125,22 +141,6 @@ view.o: view.c /usr/include/stdlib.h /usr/include/features.h \
 /usr/include/SDL/SDL_config-x86_64.h:
 
 /usr/include/SDL/SDL_platform.h:
-
-/usr/include/stdio.h:
-
-/usr/include/libio.h:
-
-/usr/include/_G_config.h:
-
-/usr/include/wchar.h:
-
-/usr/lib/gcc/x86_64-redhat-linux/4.7.2/include/stdarg.h:
-
-/usr/include/bits/stdio_lim.h:
-
-/usr/include/bits/sys_errlist.h:
-
-/usr/include/bits/stdio.h:
 
 /usr/include/string.h:
 

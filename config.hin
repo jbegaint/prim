@@ -6,6 +6,9 @@
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 
+/* Define to 1 if you have the `SDL_draw' library (-lSDL_draw). */
+#undef HAVE_LIBSDL_DRAW
+
 /* Define to 1 if you have the `SDL_ttf' library (-lSDL_ttf). */
 #undef HAVE_LIBSDL_TTF
 

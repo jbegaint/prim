@@ -35,7 +35,8 @@ mainview.o: mainview.c /usr/include/SDL/SDL.h /usr/include/SDL/SDL_main.h \
  /usr/include/SDL/SDL_quit.h /usr/include/SDL/SDL_loadso.h \
  /usr/include/SDL/SDL_timer.h /usr/include/SDL/SDL_version.h \
  /usr/include/SDL/SDL_ttf.h /usr/include/SDL/SDL.h view.h sommet.h arc.h \
- liste.h file.h /usr/include/SDL/SDL.h algo.h arbre.h utils.h
+ liste.h file.h /usr/include/SDL/SDL.h algo.h arbre.h utils.h SDL_draw.h \
+ /usr/include/SDL/begin_code.h /usr/include/SDL/close_code.h
 
 /usr/include/SDL/SDL.h:
 
@@ -200,3 +201,9 @@ algo.h:
 arbre.h:
 
 utils.h:
+
+SDL_draw.h:
+
+/usr/include/SDL/begin_code.h:
+
+/usr/include/SDL/close_code.h:

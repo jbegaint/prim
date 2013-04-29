@@ -119,7 +119,7 @@ INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 LDFLAGS = 
 LIBOBJS = 
-LIBS = -lSDL_ttf  -lSDL -lpthread
+LIBS = -lSDL_draw -lSDL_ttf  -lSDL -lpthread
 LTLIBOBJS = 
 MAKEINFO = ${SHELL} /home/jean/Documents/Cours/Info/C/S2/projet_info/missing --run makeinfo
 MKDIR_P = /usr/bin/mkdir -p
@@ -181,12 +181,12 @@ target_alias =
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
-DEPS = liste.c file.c utils.c sommet.c algo.c arbre.c 
+DEPS = liste.c file.c utils.c sommet.c algo.c arbre.c
 programme1_SOURCES = programme1.c $(DEPS)
 programme2_SOURCES = programme2.c $(DEPS)
 view_SOURCES = mainview.c view.c $(DEPS)
 CLEANFILES = *~
-AM_CPPFLAGS = -Wall -Wextra -ansi
+AM_CPPFLAGS = -Wall -Wextra
 all: all-am
 
 .SUFFIXES:

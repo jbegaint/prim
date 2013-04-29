@@ -11,7 +11,7 @@
 #include "liste.h"
 #include "file.h"
 #include "utils.h"
-
+#include "math.h"
 
 void pause_sdl()
 {				/*permet de conserver l'affichage et d'initialiser la croix pour fermer le programme */
@@ -169,6 +169,7 @@ SDL_Surface *affiche_cout(SDL_Surface * ecran, float cout)
 SDL_Surface *Ligne(SDL_Surface * ecran, float x1, float y1, float x2,
 		   float y2)
 {				/*algorithme de Bresenham */
+
 
 	int x, y, ValAbsx, ValAbsy, deplacementx, deplacementy, milieu, i;
 	long couleur = 65536 * 255 + 256 * 255 + 255;
