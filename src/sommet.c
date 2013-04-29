@@ -40,9 +40,6 @@ Liste ajout_tri(Sommet * s, Liste L)
 
 	p = malloc(sizeof(*p));
 
-	if (p == NULL)
-		return NULL;
-
 	p->val = s;
 	p->suiv = q->suiv;
 	q->suiv = p;

@@ -1,5 +1,5 @@
 #include <stdlib.h>
-/*#include <stdico.h>*/
+#include <stdio.h>
 #include <time.h>
 #include <math.h>
 #include <SDL/SDL.h>
@@ -171,7 +171,8 @@ SDL_Surface *Ligne(SDL_Surface * ecran, float x1, float y1, float x2,
 {				/*algorithme de Bresenham */
 
 	int x, y, ValAbsx, ValAbsy, deplacementx, deplacementy, milieu, i;
-	long couleur = 65536 * 255 + 256 * 255 + 255;	/*Convertie la couleur en long */
+	long couleur = 65536 * 255 + 256 * 255 + 255;
+	/*Convertie la couleur en long */
 	int BytesPixel;
 	char *position;
 
