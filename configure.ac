@@ -20,5 +20,5 @@ CFLAGS="$CFLAGS $SDL_CFLAGS"
 LIBS="$LIBS $SDL_LIBS"
 
 AM_CONFIG_HEADER([config.h:config.hin])
-AC_CONFIG_FILES([Makefile src/Makefile])
+AC_CONFIG_FILES([Makefile src/Makefile include/Makefile])
 AC_OUTPUT

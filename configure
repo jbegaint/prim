@@ -4473,7 +4473,7 @@ LIBS="$LIBS $SDL_LIBS"
 
 ac_config_headers="$ac_config_headers config.h:config.hin"
 
-ac_config_files="$ac_config_files Makefile src/Makefile"
+ac_config_files="$ac_config_files Makefile src/Makefile include/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -5204,6 +5204,7 @@ do
     "config.h") CONFIG_HEADERS="$CONFIG_HEADERS config.h:config.hin" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
     "src/Makefile") CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
+    "include/Makefile") CONFIG_FILES="$CONFIG_FILES include/Makefile" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac
