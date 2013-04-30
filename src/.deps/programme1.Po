@@ -16,8 +16,10 @@ programme1.o: programme1.c /usr/include/stdio.h /usr/include/features.h \
  /usr/include/bits/sigset.h /usr/include/bits/time.h \
  /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
  /usr/include/alloca.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.7.2/include/float.h utils.h sommet.h \
- arc.h liste.h file.h algo.h arbre.h
+ /usr/lib/gcc/x86_64-redhat-linux/4.7.2/include/float.h \
+ ../include/utils.h ../include/sommet.h ../include/arc.h \
+ ../include/liste.h ../include/file.h ../include/algo.h \
+ ../include/arbre.h
 
 /usr/include/stdio.h:
 
@@ -89,16 +91,16 @@ programme1.o: programme1.c /usr/include/stdio.h /usr/include/features.h \
 
 /usr/lib/gcc/x86_64-redhat-linux/4.7.2/include/float.h:
 
-utils.h:
+../include/utils.h:
 
-sommet.h:
+../include/sommet.h:
 
-arc.h:
+../include/arc.h:
 
-liste.h:
+../include/liste.h:
 
-file.h:
+../include/file.h:
 
-algo.h:
+../include/algo.h:
 
-arbre.h:
+../include/arbre.h:

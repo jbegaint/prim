@@ -39,8 +39,9 @@ view.o: view.c /usr/include/stdlib.h /usr/include/features.h \
  /usr/include/SDL/SDL_video.h /usr/include/SDL/SDL_joystick.h \
  /usr/include/SDL/SDL_quit.h /usr/include/SDL/SDL_loadso.h \
  /usr/include/SDL/SDL_timer.h /usr/include/SDL/SDL_version.h \
- /usr/include/SDL/SDL_ttf.h /usr/include/SDL/SDL.h view.h sommet.h arc.h \
- liste.h file.h /usr/include/SDL/SDL.h utils.h
+ /usr/include/SDL/SDL_ttf.h /usr/include/SDL/SDL.h ../include/view.h \
+ ../include/sommet.h ../include/arc.h ../include/liste.h \
+ ../include/file.h /usr/include/SDL/SDL.h ../include/utils.h
 
 /usr/include/stdlib.h:
 
@@ -208,16 +209,16 @@ view.o: view.c /usr/include/stdlib.h /usr/include/features.h \
 
 /usr/include/SDL/SDL.h:
 
-view.h:
+../include/view.h:
 
-sommet.h:
+../include/sommet.h:
 
-arc.h:
+../include/arc.h:
 
-liste.h:
+../include/liste.h:
 
-file.h:
+../include/file.h:
 
 /usr/include/SDL/SDL.h:
 
-utils.h:
+../include/utils.h:

@@ -15,7 +15,8 @@ utils.o: utils.c /usr/include/stdlib.h /usr/include/features.h \
  /usr/include/_G_config.h /usr/include/wchar.h \
  /usr/lib/gcc/x86_64-redhat-linux/4.7.2/include/stdarg.h \
  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
- /usr/include/bits/stdio.h utils.h sommet.h arc.h
+ /usr/include/bits/stdio.h ../include/utils.h ../include/sommet.h \
+ ../include/arc.h
 
 /usr/include/stdlib.h:
 
@@ -85,8 +86,8 @@ utils.o: utils.c /usr/include/stdlib.h /usr/include/features.h \
 
 /usr/include/bits/stdio.h:
 
-utils.h:
+../include/utils.h:
 
-sommet.h:
+../include/sommet.h:
 
-arc.h:
+../include/arc.h:

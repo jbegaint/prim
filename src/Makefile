@@ -182,11 +182,11 @@ top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
 DEPS = liste.c file.c utils.c sommet.c algo.c arbre.c
+AM_CPPFLAGS = -I../include
 programme1_SOURCES = programme1.c $(DEPS)
 programme2_SOURCES = programme2.c $(DEPS)
 view_SOURCES = mainview.c view.c $(DEPS)
 CLEANFILES = *~
-AM_CPPFLAGS = -Wall -Wextra
 all: all-am
 
 .SUFFIXES:

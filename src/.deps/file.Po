@@ -16,7 +16,8 @@ file.o: file.c /usr/include/stdio.h /usr/include/features.h \
  /usr/include/bits/sigset.h /usr/include/bits/time.h \
  /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
  /usr/include/alloca.h /usr/include/string.h /usr/include/bits/string.h \
- /usr/include/bits/string2.h file.h liste.h arc.h sommet.h
+ /usr/include/bits/string2.h ../include/file.h ../include/liste.h \
+ ../include/arc.h ../include/sommet.h
 
 /usr/include/stdio.h:
 
@@ -92,10 +93,10 @@ file.o: file.c /usr/include/stdio.h /usr/include/features.h \
 
 /usr/include/bits/string2.h:
 
-file.h:
+../include/file.h:
 
-liste.h:
+../include/liste.h:
 
-arc.h:
+../include/arc.h:
 
-sommet.h:
+../include/sommet.h:

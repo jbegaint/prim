@@ -11,7 +11,6 @@
 #include "liste.h"
 #include "file.h"
 #include "utils.h"
-#include "math.h"
 
 void pause_sdl()
 {				/*permet de conserver l'affichage et d'initialiser la croix pour fermer le programme */
@@ -145,7 +144,7 @@ SDL_Surface *affiche_cout(SDL_Surface * ecran, float cout)
 	position_cout.x = 470;
 	position_cout.y = 620;
 
-	cout_chemin = TTF_RenderText_Blended(police, "cout :", couleur);
+	cout_chemin = TTF_RenderUTF8_Solid(police, "coût :", couleur);
 	SDL_BlitSurface(cout_chemin, NULL, ecran, &position_cout);
 
 	position_cout.x = 470;

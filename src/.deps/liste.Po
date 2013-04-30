@@ -17,8 +17,8 @@ liste.o: liste.c /usr/include/stdlib.h /usr/include/features.h \
  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
  /usr/include/bits/stdio.h /usr/include/string.h \
  /usr/include/bits/string.h /usr/include/bits/string2.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.7.2/include/float.h liste.h arc.h \
- sommet.h
+ /usr/lib/gcc/x86_64-redhat-linux/4.7.2/include/float.h \
+ ../include/liste.h ../include/arc.h ../include/sommet.h
 
 /usr/include/stdlib.h:
 
@@ -96,8 +96,8 @@ liste.o: liste.c /usr/include/stdlib.h /usr/include/features.h \
 
 /usr/lib/gcc/x86_64-redhat-linux/4.7.2/include/float.h:
 
-liste.h:
+../include/liste.h:
 
-arc.h:
+../include/arc.h:
 
-sommet.h:
+../include/sommet.h:

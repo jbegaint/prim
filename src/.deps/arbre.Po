@@ -15,7 +15,8 @@ arbre.o: arbre.c /usr/include/stdlib.h /usr/include/features.h \
  /usr/include/_G_config.h /usr/include/wchar.h \
  /usr/lib/gcc/x86_64-redhat-linux/4.7.2/include/stdarg.h \
  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
- /usr/include/bits/stdio.h arbre.h sommet.h arc.h utils.h
+ /usr/include/bits/stdio.h ../include/arbre.h ../include/sommet.h \
+ ../include/arc.h ../include/utils.h
 
 /usr/include/stdlib.h:
 
@@ -85,10 +86,10 @@ arbre.o: arbre.c /usr/include/stdlib.h /usr/include/features.h \
 
 /usr/include/bits/stdio.h:
 
-arbre.h:
+../include/arbre.h:
 
-sommet.h:
+../include/sommet.h:
 
-arc.h:
+../include/arc.h:
 
-utils.h:
+../include/utils.h:

@@ -17,7 +17,8 @@ sommet.o: sommet.c /usr/include/stdlib.h /usr/include/features.h \
  /usr/include/wchar.h \
  /usr/lib/gcc/x86_64-redhat-linux/4.7.2/include/stdarg.h \
  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
- /usr/include/bits/stdio.h sommet.h liste.h arc.h
+ /usr/include/bits/stdio.h ../include/sommet.h ../include/liste.h \
+ ../include/arc.h
 
 /usr/include/stdlib.h:
 
@@ -89,8 +90,8 @@ sommet.o: sommet.c /usr/include/stdlib.h /usr/include/features.h \
 
 /usr/include/bits/stdio.h:
 
-sommet.h:
+../include/sommet.h:
 
-liste.h:
+../include/liste.h:
 
-arc.h:
+../include/arc.h:
