@@ -44,8 +44,16 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 
 	f = open_file(filename);
 
-	if (fscanf(f, "%d %d", len_tab_sommet, len_tab_arc) != 2) {
-		die("Format de fichier invalide");
+	// if (fscanf(f, "%d %d", len_tab_sommet, len_tab_arc) != 2) {
+	// 	die("Format de fichier invalide");
+	// }
+
+	char line[256];
+
+	if (fgets(line, sizeof(line), f) != 0) {
+		if (sscanf(line, "%d %d", len_tab_sommet, len_tab_arc) != 2) {
+			die("Format de fichier invalide");
+		}
 	}
 
 	printf("%d sommets et %d arretes\n", *len_tab_sommet, *len_tab_arc);
@@ -56,8 +64,6 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 		die("Allocation impossible");
 	}
 	
-	/*on se positionne au niveau de la ligne de commentaire et on l'affiche*/
-	fseek(f, 1, SEEK_CUR);
 	fgets(s, 256, f);
 
 	printf("Sommets:\n");
@@ -68,20 +74,24 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 
 		/*a voir: fgets + sscanf plutôt*/
 
-		if (fscanf(f, "%d %f %f %[^\n]s", &sommet.numero, &sommet.coordonnee_x, &sommet.coordonnee_y, (sommet.nom)) != 4) {
-			die("Format de fichier invalide\n");
+		// if (fscanf(f, "%d %f %f %[^\n]s", &sommet.numero, &sommet.coordonnee_x, &sommet.coordonnee_y, (sommet.nom)) != 4) {
+		// 	die("Format de fichier invalide\n");
+		// }
+
+		if (fgets(line, sizeof(line), f) != 0) {
+			if (sscanf(line, "%d %f %f %[^\n]s", &sommet.numero, &sommet.coordonnee_x, &sommet.coordonnee_y, (sommet.nom)) != 4) {
+				die("Format de fichier invalide");
 		}
+
+	}
 		(*tab_sommet)[i] = sommet;
 
 		printf("%d/%d\r",i+1, *len_tab_sommet);
-		fflush(stdout); 
+		fflush(stdout);
 
 	} 
 	printf("\n");
 
-
-	/*idem, on se positionne au niveau de la ligne de commentaire et on l'affiche*/
-	fseek(f, 1, SEEK_CUR);
 	fgets(s, 256, f);
 
 
@@ -100,7 +110,7 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 		(*tab_arc)[j] = get_arc(depart, arrive, cout);
 		(*tab_arc)[j+1] = get_arc(arrive, depart, cout);
 
-		printf("%d/%d\r", j+1, *len_tab_arc);
+		printf("%d/%d\r", j+2, *len_tab_arc);
         fflush(stdout); 
 
    	}
