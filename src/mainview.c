@@ -65,18 +65,19 @@ int main(int argc, char **argv)
 	/* Début affichage des lignes */
 
 	Arc arc;	
+	float window_width = ecran->w;
+	int couleur = 0;		//0xff0000FF; 
 
 	for (p = fileACM->suiv; p != fileACM; p = p->suiv) {
 		arc =  *((Arc* ) p->val);
 
-		x1 = tab_sommet[arc.sommet_depart].coordonnee_x;
-		y1 = tab_sommet[arc.sommet_depart].coordonnee_y;
+		x1 = tab_sommet[arc.sommet_depart].coordonnee_x*window_width;
+		y1 = tab_sommet[arc.sommet_depart].coordonnee_y*window_width;
 
-		x2 = tab_sommet[arc.sommet_arrive].coordonnee_x;
-		y2 = tab_sommet[arc.sommet_arrive].coordonnee_y;
+		x2 = tab_sommet[arc.sommet_arrive].coordonnee_x*window_width;
+		y2 = tab_sommet[arc.sommet_arrive].coordonnee_y*window_width;
 
-		int couleur = 0;		//0xff0000FF; 
-		Draw_Line(ecran, x1*600, y1*600, x2*600, y2*600, couleur);
+		Draw_Line(ecran, x1, y1, x2, y2, couleur);
 
 		SDL_Flip(ecran);
 	}
@@ -84,13 +85,13 @@ int main(int argc, char **argv)
 	/* NE PAS OUBLIER D'AFFICHER LE DERNIER, cf afficher_file */
 	arc =  *((Arc* ) fileACM->val);
 
-	x1 = tab_sommet[arc.sommet_depart].coordonnee_x;
-	y1 = tab_sommet[arc.sommet_depart].coordonnee_y;
+	x1 = tab_sommet[arc.sommet_depart].coordonnee_x*window_width;
+	y1 = tab_sommet[arc.sommet_depart].coordonnee_y*window_width;
 
-	x2 = tab_sommet[arc.sommet_arrive].coordonnee_x;
-	y2 = tab_sommet[arc.sommet_arrive].coordonnee_y;
+	x2 = tab_sommet[arc.sommet_arrive].coordonnee_x*window_width;
+	y2 = tab_sommet[arc.sommet_arrive].coordonnee_y*window_width;
 
-	Draw_Line(ecran, x1*600, y1*600, x2*600, y2*600, 1);
+	Draw_Line(ecran, x1, y1, x2, y2, couleur);
 
 	printf("Fin\n");
 

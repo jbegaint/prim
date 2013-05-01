@@ -40,6 +40,9 @@ void init_SDL(void)
 SDL_Surface *init_ecran(SDL_Surface * ecran)
 {
 	/* ouvre une fenetre de 640*480 32 bits, dans la mémoire video ou double buffer */
+	SDL_VideoInfo* info = SDL_GetVideoInfo(); 
+	int width = info->current_w; 
+	int height = info->current_h; 
 	ecran =
 	    SDL_SetVideoMode(600, 700, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
 	SDL_WM_SetCaption("Chemin le plus court", NULL);	/* Nomme la fenetre */
@@ -79,19 +82,21 @@ SDL_Surface *edit_point(SDL_Surface * ecran, Sommet * sommet,
 	point = SDL_CreateRGBSurface(SDL_HWSURFACE, 2, 2, 32, 0, 0, 0, 0);	/*Création d'un rectangle 2*2 en couleur 32 bits) */
 	progression = SDL_CreateRGBSurface(SDL_HWSURFACE, 10, 10, 32, 0, 0, 0, 0);	/*Création d'un rectangle 10*10 en couleur 32 bits) */
 
+	float window_width = ecran->w;
+
 
 	for (i = 0; i < len_tab_sommet; i++) {
 
 		/* Position des noms des sommets */
-		position_sommet.x = sommet[i].coordonnee_x * 600.0 - 5;
-		position_sommet.y = sommet[i].coordonnee_y * 600.0;
+		position_sommet.x = sommet[i].coordonnee_x * window_width - 5;
+		position_sommet.y = sommet[i].coordonnee_y * window_width;
 
 		nom_sommet = TTF_RenderText_Blended(police, sommet[i].nom, couleur);	/*Nomme les sommets */
 		SDL_BlitSurface(nom_sommet, NULL, ecran, &position_sommet);	/*Affiche les noms */
 
 		/*Position des sommets */
-		position.x = sommet[i].coordonnee_x * 600.0;
-		position.y = sommet[i].coordonnee_y * 600.0;
+		position.x = sommet[i].coordonnee_x * window_width;
+		position.y = sommet[i].coordonnee_y * window_width;
 
 		/*Initialises couleur des sommets de manière aléatoire */
 		a = rand() % (255 - 0) + 0;
@@ -160,72 +165,5 @@ SDL_Surface *affiche_cout(SDL_Surface * ecran, float cout)
 
 	TTF_Quit();
 
-	return ecran;
-}
-
-
-
-SDL_Surface *Ligne(SDL_Surface * ecran, float x1, float y1, float x2,
-		   float y2)
-{				/*algorithme de Bresenham */
-
-
-	int x, y, ValAbsx, ValAbsy, deplacementx, deplacementy, milieu, i;
-	long couleur = 65536 * 255 + 256 * 255 + 255;
-	/*Convertie la couleur en long */
-	int BytesPixel;
-	char *position;
-
-	x1 = x1 * 600.0; 
-	x2 = x2 * 600.0;
-	y1 = y1 * 600.0;
-	y2 = y2 * 600.0;
-
-	ValAbsx = abs(x2 - x1);
-	ValAbsy = abs(y2 - y1);
-
-	deplacementx = (x1 > x2) ? -1 : 1;
-	deplacementy = (y1 > y2) ? -1 : 1;
-
-	x = x1;
-	y = y1;
-
-	if (ValAbsx > ValAbsy) {
-		milieu = ValAbsx / 2;
-		for (i = 0; i < ValAbsx; i++) {
-			x = x + deplacementx;
-			milieu = milieu + ValAbsy;
-			if (milieu > ValAbsx) {
-				milieu = milieu - ValAbsx;
-				y = milieu + deplacementy;
-			}
-			BytesPixel = ecran->format->BytesPerPixel;
-			position =
-			    (unsigned char *) ecran->pixels +
-			    y * ecran->pitch + x * BytesPixel;
-			if (BytesPixel == 4) {
-				*(unsigned long *) position = couleur;
-			}
-		}
-	} else {
-		milieu = ValAbsy / 2;
-		for (i = 0; i < ValAbsy; i++) {
-			y = y + deplacementy;
-			milieu += ValAbsx;
-
-			if (milieu > ValAbsy) {
-				milieu = milieu - deplacementx;
-				x = x + deplacementx;
-			}
-			BytesPixel = ecran->format->BytesPerPixel;
-			position =
-			    (unsigned char *) ecran->pixels +
-			    y * ecran->pitch + x * BytesPixel;
-			if (BytesPixel == 4) {
-				*(unsigned long *) position = couleur;
-			}
-		}
-
-	}
 	return ecran;
 }

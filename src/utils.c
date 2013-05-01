@@ -76,9 +76,12 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 			k++;
 			if (sscanf(line, "%d %f %f %[^\n]s", &sommet.numero, &sommet.coordonnee_x, &sommet.coordonnee_y, (sommet.nom)) != 4) {
 				die("Format de fichier invalide");
-		}
+			}
 
-	}
+		}
+		// pour avoir une carte des villes correcte...
+		sommet.coordonnee_y = 1 - sommet.coordonnee_y;
+
 		(*tab_sommet)[i] = sommet;
 
 		printf("%d/%d\r",i+1, *len_tab_sommet);
@@ -86,6 +89,7 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 
 	} 
 	printf("\n");
+
 
 	fgets(s, 256, f);
 
