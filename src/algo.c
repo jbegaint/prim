@@ -134,8 +134,7 @@ File algo_fileACM(Sommet * tab_sommet, Arc * tab_arc,
 
 		sommet_ppc_min.voisins = liste_arc_sortant;
 
-		for (ll = liste_arc_sortant; !est_vide_liste(ll);
-		     ll = ll->suiv) {
+		for (ll = liste_arc_sortant; !est_vide_liste(ll); ll = ll->suiv) {
 
 			a = (Arc *) ll->val;
 

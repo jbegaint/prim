@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "utils.h"
 #include "sommet.h"
@@ -37,20 +38,19 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 {
 	FILE *f;
 	int i, j; /* compteurs */
-	char s[256];
+	char s[256], line[256];
+	char* base;
+
+	int k=0;
+
 	Sommet sommet;
 	int arrive, depart;
 	float cout;
 
 	f = open_file(filename);
 
-	// if (fscanf(f, "%d %d", len_tab_sommet, len_tab_arc) != 2) {
-	// 	die("Format de fichier invalide");
-	// }
-
-	char line[256];
-
 	if (fgets(line, sizeof(line), f) != 0) {
+		k++;
 		if (sscanf(line, "%d %d", len_tab_sommet, len_tab_arc) != 2) {
 			die("Format de fichier invalide");
 		}
@@ -72,13 +72,8 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 		/*structure du fichier: numéro, x, y, nom*/
 		/*attention le nom peut être composé...*/
 
-		/*a voir: fgets + sscanf plutôt*/
-
-		// if (fscanf(f, "%d %f %f %[^\n]s", &sommet.numero, &sommet.coordonnee_x, &sommet.coordonnee_y, (sommet.nom)) != 4) {
-		// 	die("Format de fichier invalide\n");
-		// }
-
 		if (fgets(line, sizeof(line), f) != 0) {
+			k++;
 			if (sscanf(line, "%d %f %f %[^\n]s", &sommet.numero, &sommet.coordonnee_x, &sommet.coordonnee_y, (sommet.nom)) != 4) {
 				die("Format de fichier invalide");
 		}
@@ -94,16 +89,26 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 
 	fgets(s, 256, f);
 
+	base = basename(filename);
+	// les fichiers graphe*.txt listes les arretes 
+	// alors que monde.txt et france.txt listent les Arcs
 
-	*tab_arc = malloc(2*(*len_tab_arc)*sizeof(Arc));
-	*len_tab_arc *= 2;
+	if ( (strcmp(base, "monde.txt") == 0) || (strcmp(base, "france.txt") == 0)) {
+		*tab_arc = malloc((*len_tab_arc)*sizeof(Arc));
 
+	} else {
+		*len_tab_arc *= 2;
+	}
+
+	*tab_arc = malloc((*len_tab_arc)*sizeof(Arc));
 
 	printf("Arcs:\n");
 	for (j=0; j < *len_tab_arc; j+=2) {
+		k++;
 
 		/*structure du fichier: depart, arrive, coût*/
 		if (fscanf(f, "%d %d %f", &depart, &arrive, &cout) != 3) {
+			printf("%d\n", k);
 			die("Format de fichier invalide");
 		}
 
