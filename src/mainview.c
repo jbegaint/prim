@@ -65,7 +65,9 @@ int main(int argc, char **argv)
 	/* Début affichage des lignes */
 
 	Arc arc;	
-	float window_width = ecran->w;
+	
+	float window_width = get_width(ecran);
+
 	int couleur = 0;		//0xff0000FF; 
 
 	for (p = fileACM->suiv; p != fileACM; p = p->suiv) {

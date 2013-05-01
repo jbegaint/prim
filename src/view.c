@@ -12,6 +12,16 @@
 #include "file.h"
 #include "utils.h"
 
+float get_width(SDL_Surface* ecran) {
+	float f = ecran->w;
+	return f;
+}
+
+float get_height(SDL_Surface* ecran) {
+	float f = ecran->h;
+	return f;
+}
+
 void pause_sdl()
 {				/*permet de conserver l'affichage et d'initialiser la croix pour fermer le programme */
 	int continuer = 1;
@@ -41,10 +51,9 @@ SDL_Surface *init_ecran(SDL_Surface * ecran)
 {
 	/* ouvre une fenetre de 640*480 32 bits, dans la mémoire video ou double buffer */
 	SDL_VideoInfo* info = SDL_GetVideoInfo(); 
-	int width = info->current_w; 
-	int height = info->current_h; 
+	int height = info->current_h - 100; // évite de manger le panel 
 	ecran =
-	    SDL_SetVideoMode(600, 700, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
+	    SDL_SetVideoMode(height, height, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
 	SDL_WM_SetCaption("Chemin le plus court", NULL);	/* Nomme la fenetre */
 	SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 70, 70, 70));	/*Mise en couleur de l'écran */
 	SDL_Flip(ecran);	/*Mise à jour de l'écran */
@@ -82,21 +91,21 @@ SDL_Surface *edit_point(SDL_Surface * ecran, Sommet * sommet,
 	point = SDL_CreateRGBSurface(SDL_HWSURFACE, 2, 2, 32, 0, 0, 0, 0);	/*Création d'un rectangle 2*2 en couleur 32 bits) */
 	progression = SDL_CreateRGBSurface(SDL_HWSURFACE, 10, 10, 32, 0, 0, 0, 0);	/*Création d'un rectangle 10*10 en couleur 32 bits) */
 
-	float window_width = ecran->w;
-
+	float window_width = get_width(ecran);
+	float window_height = get_height(ecran);
 
 	for (i = 0; i < len_tab_sommet; i++) {
 
 		/* Position des noms des sommets */
-		position_sommet.x = sommet[i].coordonnee_x * window_width - 5;
-		position_sommet.y = sommet[i].coordonnee_y * window_width;
+		position_sommet.x = sommet[i].coordonnee_x * window_width;
+		position_sommet.y = sommet[i].coordonnee_y * window_height;
 
 		nom_sommet = TTF_RenderText_Blended(police, sommet[i].nom, couleur);	/*Nomme les sommets */
 		SDL_BlitSurface(nom_sommet, NULL, ecran, &position_sommet);	/*Affiche les noms */
 
 		/*Position des sommets */
 		position.x = sommet[i].coordonnee_x * window_width;
-		position.y = sommet[i].coordonnee_y * window_width;
+		position.y = sommet[i].coordonnee_y * window_height;
 
 		/*Initialises couleur des sommets de manière aléatoire */
 		a = rand() % (255 - 0) + 0;
@@ -137,7 +146,7 @@ SDL_Surface *affiche_cout(SDL_Surface * ecran, float cout)
 	TTF_Init();
 
 	TTF_Font *police = NULL;
-	police = TTF_OpenFont("DroidSans.ttf", 25);
+	police = TTF_OpenFont("DroidSans.ttf", 20);
 	SDL_Color couleur = { 0, 0, 0 };
 	SDL_Rect position_cout;
 	SDL_Surface *cout_chemin = NULL;
@@ -146,14 +155,14 @@ SDL_Surface *affiche_cout(SDL_Surface * ecran, float cout)
 
 	sprintf(buffer_cout, "%f", cout);	/*Convertie le float en chaine de caractère */
 
-	position_cout.x = 470;
-	position_cout.y = 620;
+	position_cout.x = get_width(ecran) - 150;
+	position_cout.y = get_height(ecran) - 30;
 
 	cout_chemin = TTF_RenderUTF8_Solid(police, "coût :", couleur);
 	SDL_BlitSurface(cout_chemin, NULL, ecran, &position_cout);
 
-	position_cout.x = 470;
-	position_cout.y = 650;
+	position_cout.x = get_width(ecran) - 100;
+	position_cout.y = get_height(ecran) - 30;
 
 	cout_chemin = TTF_RenderText_Blended(police, buffer_cout, couleur);
 	SDL_BlitSurface(cout_chemin, NULL, ecran, &position_cout);
