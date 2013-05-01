@@ -13,12 +13,12 @@
 #include "utils.h"
 
 float get_width(SDL_Surface* ecran) {
-	float f = ecran->w;
+	float f = ecran->w - 50; //border
 	return f;
 }
 
 float get_height(SDL_Surface* ecran) {
-	float f = ecran->h;
+	float f = ecran->h - 50; //border
 	return f;
 }
 
