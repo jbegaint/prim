@@ -131,7 +131,7 @@ int get_param_sommet(int param, int len_tab) {
 	if ( param >= 0 && param < len_tab) {
 		return param;
 	}
-	printf("Paramètre invalide: le nombre doit être inférieur à %d\n", len_tab);
+	printf("Paramètre invalide: le nombre doit être inférieur à %d\n", len_tab-1);
 	printf("0 sera utilisé\n");
 	return 0;
 }

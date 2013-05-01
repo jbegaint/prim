@@ -51,7 +51,7 @@ int main(int argc, char **argv)
 		num_depart = atoi(argv[2]);
 	} else {
 		printf("Entrez le numéro du sommet de départ: [0,%d]\n",
-		       len_tab_sommet);
+		       len_tab_sommet-1);
 		scanf("%d", &num_depart);
 	}
 
