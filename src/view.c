@@ -156,7 +156,7 @@ SDL_Surface *affiche_cout(SDL_Surface * ecran, float cout)
 
 	sprintf(buffer_cout, "%f", cout);	/*Convertie le float en chaine de caractère */
 
-	position_cout.x = get_width(ecran) - 150;
+	position_cout.x = 25;
 	position_cout.y = get_height(ecran) - 30;
 
 	cout_chemin = TTF_RenderUTF8_Solid(police, "coût :", couleur);
