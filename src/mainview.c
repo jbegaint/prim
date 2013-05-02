@@ -17,6 +17,23 @@
 #include "SDL_draw.h"
 
 
+void draw_arc( SDL_Surface* ecran, Arc arc, Sommet* tab_sommet) 
+{
+	float x1, x2, y1, y2;
+	float window_width = get_width(ecran);
+	int offset = 25;
+	x1 = tab_sommet[arc.sommet_depart].coordonnee_x*window_width + offset;
+	y1 = tab_sommet[arc.sommet_depart].coordonnee_y*window_width + offset;
+
+	x2 = tab_sommet[arc.sommet_arrive].coordonnee_x*window_width + offset;
+	y2 = tab_sommet[arc.sommet_arrive].coordonnee_y*window_width + offset;
+
+	int couleur = 0;
+
+	Draw_Line(ecran, x1, y1, x2, y2, couleur);
+	SDL_Flip(ecran);
+}
+
 int main(int argc, char **argv)
 {
 	Sommet *tab_sommet;
@@ -72,38 +89,22 @@ int main(int argc, char **argv)
 
 	for (p = fileACM->suiv; p != fileACM; p = p->suiv) {
 		arc =  *((Arc* ) p->val);
-
-		x1 = tab_sommet[arc.sommet_depart].coordonnee_x*window_width;
-		y1 = tab_sommet[arc.sommet_depart].coordonnee_y*window_width;
-
-		x2 = tab_sommet[arc.sommet_arrive].coordonnee_x*window_width;
-		y2 = tab_sommet[arc.sommet_arrive].coordonnee_y*window_width;
-
-		Draw_Line(ecran, x1, y1, x2, y2, couleur);
-
-		SDL_Flip(ecran);
+		draw_arc(ecran, arc, tab_sommet);
 	}
 
 	/* NE PAS OUBLIER D'AFFICHER LE DERNIER, cf afficher_file */
 	arc =  *((Arc* ) fileACM->val);
-
-	x1 = tab_sommet[arc.sommet_depart].coordonnee_x*window_width;
-	y1 = tab_sommet[arc.sommet_depart].coordonnee_y*window_width;
-
-	x2 = tab_sommet[arc.sommet_arrive].coordonnee_x*window_width;
-	y2 = tab_sommet[arc.sommet_arrive].coordonnee_y*window_width;
-
-	Draw_Line(ecran, x1, y1, x2, y2, couleur);
-
-	printf("Fin\n");
-
-	SDL_Flip(ecran);
+	draw_arc(ecran, arc, tab_sommet);
 
 	/* Fin affichage des lignes */
 
-	pause_sdl();		/* Mise en pause du programme */
+	printf("Fin\n");
 
-	SDL_Quit();		/*quitte SDL */
+	/* Mise en pause du programme */
+	pause_sdl();		
+
+	/* quitte SDL */
+	SDL_Quit();		
 
 	return 0;
 }

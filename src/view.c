@@ -13,12 +13,12 @@
 #include "utils.h"
 
 float get_width(SDL_Surface* ecran) {
-	float f = ecran->w - 50; //border
+	float f = ecran->w - 50; // border
 	return f;
 }
 
 float get_height(SDL_Surface* ecran) {
-	float f = ecran->h - 50; //border
+	float f = ecran->h - 50; // border
 	return f;
 }
 
@@ -93,18 +93,20 @@ SDL_Surface *edit_point(SDL_Surface * ecran, Sommet * sommet,
 	float window_width = get_width(ecran);
 	float window_height = get_height(ecran);
 
+	int offset = 25;
+
 	for (i = 0; i < len_tab_sommet; i++) {
 
 		/* Position des noms des sommets */
-		position_sommet.x = sommet[i].coordonnee_x * window_width;
-		position_sommet.y = sommet[i].coordonnee_y * window_height;
+		position_sommet.x = sommet[i].coordonnee_x * window_width + offset;
+		position_sommet.y = sommet[i].coordonnee_y * window_height + offset;
 
 		nom_sommet = TTF_RenderText_Blended(police, sommet[i].nom, couleur);	/*Nomme les sommets */
 		SDL_BlitSurface(nom_sommet, NULL, ecran, &position_sommet);	/*Affiche les noms */
 
 		/*Position des sommets */
-		position.x = sommet[i].coordonnee_x * window_width;
-		position.y = sommet[i].coordonnee_y * window_height;
+		position.x = sommet[i].coordonnee_x * window_width + offset;
+		position.y = sommet[i].coordonnee_y * window_height + offset;
 
 		/*Initialises couleur des sommets de manière aléatoire */
 		a = rand() % (255 - 0) + 0;
