@@ -154,18 +154,12 @@ SDL_Surface *affiche_cout(SDL_Surface * ecran, float cout)
 
 	char buffer_cout[50];
 
-	sprintf(buffer_cout, "%f", cout);	/*Convertie le float en chaine de caractère */
+	sprintf(buffer_cout, "coût : %f", cout);	/*Convertie le float en chaine de caractère */
 
 	position_cout.x = 25;
 	position_cout.y = get_height(ecran) - 30;
 
-	cout_chemin = TTF_RenderUTF8_Solid(police, "coût :", couleur);
-	SDL_BlitSurface(cout_chemin, NULL, ecran, &position_cout);
-
-	position_cout.x = get_width(ecran) - 100;
-	position_cout.y = get_height(ecran) - 30;
-
-	cout_chemin = TTF_RenderText_Blended(police, buffer_cout, couleur);
+	cout_chemin = TTF_RenderUTF8_Solid(police, buffer_cout, couleur);
 	SDL_BlitSurface(cout_chemin, NULL, ecran, &position_cout);
 	SDL_Flip(ecran);
 
