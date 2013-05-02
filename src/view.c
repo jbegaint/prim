@@ -52,8 +52,7 @@ SDL_Surface *init_ecran(SDL_Surface * ecran)
 	/* ouvre une fenetre de 640*480 32 bits, dans la mémoire video ou double buffer */
 	SDL_VideoInfo* info = SDL_GetVideoInfo(); 
 	int height = info->current_h - 100; // évite de manger le panel 
-	ecran =
-	    SDL_SetVideoMode(height, height, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
+	ecran = SDL_SetVideoMode(height, height, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
 	SDL_WM_SetCaption("Chemin le plus court", NULL);	/* Nomme la fenetre */
 	SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 70, 70, 70));	/*Mise en couleur de l'écran */
 	SDL_Flip(ecran);	/*Mise à jour de l'écran */
