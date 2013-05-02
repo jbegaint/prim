@@ -120,7 +120,7 @@ SDL_Surface *edit_point(SDL_Surface * ecran, Sommet * sommet,
 		SDL_Flip(ecran);
 
 		/*Idem mais pour la barre de progression */
-		position_progression.y = 650;
+		position_progression.y = get_height(ecran) - 100;
 		position_progression.x = i * 300 / len_tab_sommet + 150;
 		SDL_FillRect(progression, NULL,
 			     SDL_MapRGB(ecran->format, 255, 255, 255));
@@ -162,7 +162,6 @@ SDL_Surface *affiche_cout(SDL_Surface * ecran, float cout)
 	cout_chemin = TTF_RenderUTF8_Solid(police, buffer_cout, couleur);
 	SDL_BlitSurface(cout_chemin, NULL, ecran, &position_cout);
 	SDL_Flip(ecran);
-
 
 	TTF_CloseFont(police);
 	SDL_FreeSurface(cout_chemin);
