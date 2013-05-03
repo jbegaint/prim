@@ -38,12 +38,10 @@ while (continuer) {
 
 		case SDL_KEYDOWN: 
 		case SDLK_m: 
-		printf("hakuna matata ");
-		
-			
+		printf("hakuna matata \n");
+		continuer = 0 ;		
 		}
 	}
-
 }
 
 
