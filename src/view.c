@@ -71,7 +71,7 @@ SDL_Surface *edit_point(SDL_Surface * ecran, Sommet * sommet,
 
 	TTF_Init();		/*Initialise SDL_TTF (police d'écriture) */
 	TTF_Font *police = NULL;	/*Pointeur vers police */
-	police = TTF_OpenFont("DroidSans.ttf", 15);
+	police = TTF_OpenFont("DroidSans.ttf", 8);
 
 	if (police == NULL) {
 		die("Erreur lecture fichier police");
@@ -120,8 +120,8 @@ SDL_Surface *edit_point(SDL_Surface * ecran, Sommet * sommet,
 		SDL_Flip(ecran);
 
 		/*Idem mais pour la barre de progression */
-		position_progression.y = get_height(ecran) - 100;
-		position_progression.x = i * 300 / len_tab_sommet + 150;
+		position_progression.y = get_height(ecran) +10;
+		position_progression.x = i * 300 / len_tab_sommet + 175;
 		SDL_FillRect(progression, NULL,
 			     SDL_MapRGB(ecran->format, 255, 255, 255));
 		SDL_BlitSurface(progression, NULL, ecran,
