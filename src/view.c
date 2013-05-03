@@ -29,11 +29,19 @@ void pause_sdl()
 
 	SDL_Event event;
 
-	while (continuer) {
-		SDL_WaitEvent(&event);
-		switch (event.type) {
+while (continuer) {
+	SDL_WaitEvent(&event);
+
+	switch(event.type){
 		case SDL_QUIT:
-			continuer = 0;
+		continuer = 0;
+		break;
+
+		case SDL_KEYDOWN:
+		switch(event.key.keysym.sym){ 
+		case SDLK_m: 
+			printf("hakuna matata");
+			}
 		}
 	}
 }
