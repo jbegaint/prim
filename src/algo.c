@@ -33,8 +33,7 @@ Liste afficheRSB_iteratif(Arbre r)
 		for (a = *(Arbre *) l->val; a; a = a->fils) {
 
 			// printf("%s ", a->sommet->nom);
-			arbre = ajouter_queue(a->sommet, arbre, sizeof(Sommet*));
-
+			arbre = ajouter_queue(a->sommet, arbre, sizeof(Sommet));
 
 			if (a->freres)
 				l = ajouter_queue(&(a->freres), l, sizeof(Arbre));
