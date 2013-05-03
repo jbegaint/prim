@@ -26,7 +26,6 @@ void pause_sdl()
 {				/*permet de conserver l'affichage et d'initialiser la croix pour fermer le programme */
 	int continuer = 1;
 
-
 	SDL_Event event;
 
 while (continuer) {
@@ -37,13 +36,14 @@ while (continuer) {
 		continuer = 0;
 		break;
 
-		case SDL_KEYDOWN:
-		switch(event.key.keysym.sym){ 
+		case SDL_KEYDOWN: 
 		case SDLK_m: 
-			printf("hakuna matata");
-			}
+		printf("hakuna matata ");
+		
+			
 		}
 	}
+
 }
 
 
