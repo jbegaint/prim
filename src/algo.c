@@ -22,22 +22,26 @@
 }*/
 
 
-void afficheRSB_iteratif(Arbre r)
+Liste afficheRSB_iteratif(Arbre r)
 {
 	Arbre a;
 	Liste l = NULL;
+	Liste arbre = NULL;
 	l = ajouter_queue(&r, l, sizeof(Arbre));
 
 	while (!est_vide_liste(l)) {
 		for (a = *(Arbre *) l->val; a; a = a->fils) {
 
-			printf("%s ", a->sommet->nom);
+			// printf("%s ", a->sommet->nom);
+			arbre = ajouter_queue(a->sommet, arbre, sizeof(Sommet*));
+
 
 			if (a->freres)
 				l = ajouter_queue(&(a->freres), l, sizeof(Arbre));
 		}
 		l = supprimer_tete(l);
 	}
+	return arbre;
 }
 
 void afficheRSB(Arbre r)

@@ -55,9 +55,9 @@ int main(int argc, char** argv) {
 	printf("]\n");
 
 	printf("arbreACM (iteratif): ");
-	printf("[ ");
-	afficheRSB_iteratif(arbreACM);
-	printf("]\n");
 
+	Liste arbre;
+	arbre = afficheRSB_iteratif(arbreACM);
+	afficher_liste(arbre);
 	return 0;
 }
