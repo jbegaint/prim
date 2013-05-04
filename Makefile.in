@@ -48,7 +48,7 @@ NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
 subdir = .
-DIST_COMMON = $(am__configure_deps) $(srcdir)/Makefile.am \
+DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/config.hin \
 	$(top_srcdir)/configure compile depcomp install-sh missing
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -217,6 +217,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 SUBDIRS = src include
 CLEANFILES = *~
+EXTRA_DIST = DroidSans.ttf README exemple.txt
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 

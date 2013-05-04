@@ -35,6 +35,7 @@ int main(int argc, char** argv) {
 	}
 
 	num_depart = get_param_sommet(num_depart, len_tab_sommet);
+	printf("Départ: %s\n", tab_sommet[num_depart].nom);
 
 	File fileACM;
 	float cout = 0;

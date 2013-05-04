@@ -1,4 +1,4 @@
-AC_INIT([Projet Info], [1.0])
+AC_INIT([Projet_Info], [Begaint_Rochet])
 AM_INIT_AUTOMAKE([foreign -Wall -Werror])
 AC_PROG_CC
 

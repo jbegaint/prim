@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 
 #include "view.h"
 #include "algo.h"
@@ -91,9 +92,7 @@ int main(int argc, char **argv)
 
 	ecran = edit_point(ecran, tab_sommet, len_tab_sommet);
 
-	float cout_chemin;
-
-	ecran = affiche_cout(ecran, cout_chemin);
+	ecran = affiche_cout(ecran, cout);
 
 	/* Début affichage des lignes */
 
@@ -136,6 +135,7 @@ int main(int argc, char **argv)
 		Draw_Line(ecran, x1, y1, x2, y2, couleur);
 		SDL_Flip(ecran);
 
+		usleep(10000);
 	}
 
 	/* Fin affichage des lignes */
