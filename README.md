@@ -1,4 +1,5 @@
-Projet Programmation : Le Tour du Monde le moins cher.
+Projet Programmation : Le Tour du Monde le moins cher
+=====================================================
 
 
 Compilation
