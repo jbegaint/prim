@@ -4,6 +4,7 @@
 
 #include "file.h"
 #include "liste.h"
+#include "arc.h"
 
 int est_vide_file(File F)
 {
@@ -17,10 +18,10 @@ void afficher_file(File F)
 	} else {
 		File p;
 		for (p = F->suiv; p != F; p = p->suiv) {
-			afficher_element(p->val);
+			afficher_arc(*(Arc*) p->val);
 			printf(", ");
 		}
-		afficher_element(F->val);	/*affichage du dernier*/
+	afficher_arc(*(Arc*) F->val);	/*affichage du dernier*/
 	}
 	printf("}\n");
 }

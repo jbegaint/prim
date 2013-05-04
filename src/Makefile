@@ -48,7 +48,8 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-bin_PROGRAMS = programme1$(EXEEXT) programme2$(EXEEXT) view$(EXEEXT)
+bin_PROGRAMS = programme1$(EXEEXT) programme2$(EXEEXT) view$(EXEEXT) \
+	tests$(EXEEXT)
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 	$(top_srcdir)/depcomp
@@ -70,6 +71,9 @@ programme1_LDADD = $(LDADD)
 am_programme2_OBJECTS = programme2.$(OBJEXT) $(am__objects_1)
 programme2_OBJECTS = $(am_programme2_OBJECTS)
 programme2_LDADD = $(LDADD)
+am_tests_OBJECTS = tests.$(OBJEXT) $(am__objects_1)
+tests_OBJECTS = $(am_tests_OBJECTS)
+tests_LDADD = $(LDADD)
 am_view_OBJECTS = mainview.$(OBJEXT) view.$(OBJEXT) $(am__objects_1)
 view_OBJECTS = $(am_view_OBJECTS)
 view_LDADD = $(LDADD)
@@ -81,9 +85,10 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(programme1_SOURCES) $(programme2_SOURCES) $(view_SOURCES)
-DIST_SOURCES = $(programme1_SOURCES) $(programme2_SOURCES) \
+SOURCES = $(programme1_SOURCES) $(programme2_SOURCES) $(tests_SOURCES) \
 	$(view_SOURCES)
+DIST_SOURCES = $(programme1_SOURCES) $(programme2_SOURCES) \
+	$(tests_SOURCES) $(view_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -186,6 +191,7 @@ DEPS = liste.c file.c utils.c sommet.c algo.c arbre.c
 programme1_SOURCES = programme1.c $(DEPS)
 programme2_SOURCES = programme2.c $(DEPS)
 view_SOURCES = mainview.c view.c $(DEPS)
+tests_SOURCES = tests.c $(DEPS)
 CLEANFILES = *~
 all: all-am
 
@@ -267,6 +273,9 @@ programme1$(EXEEXT): $(programme1_OBJECTS) $(programme1_DEPENDENCIES) $(EXTRA_pr
 programme2$(EXEEXT): $(programme2_OBJECTS) $(programme2_DEPENDENCIES) $(EXTRA_programme2_DEPENDENCIES) 
 	@rm -f programme2$(EXEEXT)
 	$(LINK) $(programme2_OBJECTS) $(programme2_LDADD) $(LIBS)
+tests$(EXEEXT): $(tests_OBJECTS) $(tests_DEPENDENCIES) $(EXTRA_tests_DEPENDENCIES) 
+	@rm -f tests$(EXEEXT)
+	$(LINK) $(tests_OBJECTS) $(tests_LDADD) $(LIBS)
 view$(EXEEXT): $(view_OBJECTS) $(view_DEPENDENCIES) $(EXTRA_view_DEPENDENCIES) 
 	@rm -f view$(EXEEXT)
 	$(LINK) $(view_OBJECTS) $(view_LDADD) $(LIBS)
@@ -285,6 +294,7 @@ include ./$(DEPDIR)/mainview.Po
 include ./$(DEPDIR)/programme1.Po
 include ./$(DEPDIR)/programme2.Po
 include ./$(DEPDIR)/sommet.Po
+include ./$(DEPDIR)/tests.Po
 include ./$(DEPDIR)/utils.Po
 include ./$(DEPDIR)/view.Po
 

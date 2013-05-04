@@ -98,9 +98,9 @@ void afficher_sommet(Sommet s)
 	printf("%s", s.nom);
 }
 
-void afficher_element(void *elt)
+void afficher_arc(Arc arc)
 {
-	printf("a%d_%d", (*(Arc *) elt).sommet_depart, (*(Arc *) elt).sommet_arrive);
+	printf("a%d_%d", arc.sommet_depart, arc.sommet_arrive);
 }
 
 int recherche_elt_liste(Liste L, void *elt)
@@ -111,13 +111,4 @@ int recherche_elt_liste(Liste L, void *elt)
 			return 1;
 	}
 	return 0;
-}
-
-int len_liste(Liste L)
-{
-	Liste p;
-	int i = 0;
-	for (p = L; !est_vide_liste(p); p = p->suiv)
-		i++;
-	return i;
 }

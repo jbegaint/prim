@@ -7,83 +7,36 @@
 #include "sommet.h"
 #include "arbre.h"
 
+void success()
+{
+	printf(" ok\n");
+}
 
 int main() 
 {
-	size_t size_elt = sizeof(char);
+	size_t size_char = sizeof(char);
 
-	/* ------- TEST LISTE -------------------------------- */
+	Sommet sommet1, sommet2, sommet3;
 
-	Liste L = NULL; 
+	/* Test Liste */
+	Liste liste1 = NULL;
+	Liste liste2 = ajouter_queue( &sommet1, liste2, size_char); 
+// Liste ajouter_tete(void *, Liste, size_t);
+// Liste ajouter_queue(void *, Liste, size_t);
+// void afficher_liste(Liste);
+// void afficher_arc(void *);
+// void afficher_sommet(Sommet);
+// Liste supprimer_tete(Liste);
 
-	/* pour tester d'autres types, attention pour le moment, 
-	il faut aussi changer size_elt et afficher_element */
-	
-/*	// int c = 10210;
-	// int d = 10000;
-	// double c = 10210;
-	// double d = 10000;*/
+// int recherche_elt_liste(Liste, void *);
+// Liste ajout_tri(Sommet *, Liste);
+	printf("[Test Liste]\n");
 
-	char c = 'a';
-	char d = 'b';
-	char e = 'c';
-
-	printf("##########\n");
-	printf("TEST LISTE\n");
-	printf("##########\n");
+	printf("est_vide_liste... ");
+	if ( est_vide_liste(liste1) && !est_vide_liste(liste2) )
+		success();
 
 
-	printf("Liste: ");
-	afficher_liste(L);
-
-	L = ajouter_tete(&c, L, size_elt);
-	printf("Liste: ");
-	afficher_liste(L);
-
-	L = ajouter_queue(&d, L, size_elt);
-	printf("Liste: ");
-	afficher_liste(L);
-
-	L = ajouter_queue(&e, L, size_elt);
-	printf("Liste: ");
-	afficher_liste(L);
-
-	L = supprimer_tete(L);
-	printf("Liste: ");
-	afficher_liste(L);
-
-	/* ------- TEST FILE -------------------------------- */
-	printf("##########\n");
-	printf("TEST FILE\n");
-	printf("##########\n");
-
-	File F = NULL;
-	printf("File: ");
-	afficher_file(F);
-
-	F = enfiler(F, &c, size_elt);
-	printf("File: ");
-	afficher_file(F);
-
-	F = enfiler(F, &d, size_elt);
-	printf("File: ");
-	afficher_file(F);
-
-	defiler(&F);
-	printf("File: ");
-	afficher_file(F);
-
-	F = enfiler(F, &e, size_elt);
-	printf("File: ");
-	afficher_file(F);
-
-	afficher_element(defiler(&F));
-	printf("défilé ");
-
-	printf("\n");
-
-	printf("File: ");
-	afficher_file(F);
 
 	return 0;
 }
