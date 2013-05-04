@@ -2,12 +2,14 @@ Projet Programmation : Le Tour du Monde le moins cher
 =====================================================
 
 
+
 Compilation
 -----------
 
-Exécutez les commandes suivantes pour compiler:
+Exécutez les commandes suivantes dans le répertoire du projet pour compiler:
 * ./configure
 * make
+
 	
 Exécution
 ---------
@@ -19,3 +21,8 @@ Exemples:
 * ./src/programme2 exemple.txt 0
 * ./src/view exemple.txt 3
 
+
+Auteurs
+-------
+* Bégaint Jean
+* Rochet Sylvain
