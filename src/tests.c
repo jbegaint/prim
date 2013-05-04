@@ -6,37 +6,84 @@
 #include "arc.h"
 #include "sommet.h"
 #include "arbre.h"
+#include "utils.h"
 
-void success()
+void test(int i)
 {
-	printf(" ok\n");
+	if (i)
+		printf(" [OK]\n");
+	else
+		printf(" [ERROR]\n");
 }
 
 int main() 
 {
-	size_t size_char = sizeof(char);
 
 	Sommet sommet1, sommet2, sommet3;
 
 	/* Test Liste */
 	Liste liste1 = NULL;
-	Liste liste2 = ajouter_queue( &sommet1, liste2, size_char); 
-// Liste ajouter_tete(void *, Liste, size_t);
-// Liste ajouter_queue(void *, Liste, size_t);
-// void afficher_liste(Liste);
-// void afficher_arc(void *);
-// void afficher_sommet(Sommet);
-// Liste supprimer_tete(Liste);
+	Liste liste2 = NULL; 
 
-// int recherche_elt_liste(Liste, void *);
-// Liste ajout_tri(Sommet *, Liste);
 	printf("[Test Liste]\n");
 
+
+	printf("ajouter_tete... ");
+	liste1 = ajouter_tete(&sommet1, liste1, sizeof(Sommet));
+	test( !est_vide_liste(liste1) && (memcmp(&sommet1, (Sommet *) liste1->val, sizeof(Sommet)) == 0) );
+
+	printf("ajouter_queue... ");
+	liste1 = ajouter_queue(&sommet2, liste1, sizeof(Sommet));
+	test( (memcmp(&sommet2, (Sommet *) liste1->suiv->val, sizeof(Sommet)) == 0) );
+
+
 	printf("est_vide_liste... ");
-	if ( est_vide_liste(liste1) && !est_vide_liste(liste2) )
-		success();
+	test( !est_vide_liste(liste1) && est_vide_liste(liste2) );
+
+	printf("supprimer_tete... ");
+	liste1 = supprimer_tete(liste1);
+	test( (memcmp(&sommet2, (Sommet *) liste1->val, sizeof(Sommet)) == 0) );
+
+	printf("recherche_elt_liste... ");
+	test( recherche_elt_liste(liste1, &sommet2));
+
+	printf("ajout_tri... ");
+	liste1 = NULL;
+	sommet1.PPC = 1;
+	sommet2.PPC = 2;
+	sommet3.PPC = 3;
+
+	liste1 = ajout_tri(&sommet2, liste1);
+	liste1 = ajout_tri(&sommet1, liste1);
+	liste1 = ajout_tri(&sommet3, liste1);
 
 
+	test( (memcmp(&sommet1, (Sommet *) liste1->val, sizeof(Sommet)) == 0) 
+			&& (memcmp(&sommet2, (Sommet *) liste1->suiv->val, sizeof(Sommet)) == 0)
+			&& (memcmp(&sommet3, (Sommet *) liste1->suiv->suiv->val, sizeof(Sommet)) == 0)
+		 );
+
+	printf("\n");
+
+	/* Test Liste */
+	printf("[Test File]\n");
+
+	File file1;
+	File file2;
+
+	printf("enfiler... ");
+	file1 = enfiler( file1, &sommet1, sizeof(Sommet));
+	test( (memcmp(&sommet1, (Sommet *) file1->val, sizeof(Sommet)) == 0) );
+
+	printf("est_vide_file... ");
+	test( !est_vide_file(file1) && est_vide_file(file2) );
+
+	printf("defiler... ");
+	file1 = enfiler( file1, &sommet2, sizeof(Sommet));
+	// defiler(&file1);
+	// test( (memcmp( &sommet1, (Sommet *) defiler(&file1), sizeof(Sommet)) == 0) );
+
+// void* defiler(File*);
 
 	return 0;
 }

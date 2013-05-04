@@ -57,7 +57,7 @@ Arbre algo_arbreACM(File fileACM, Sommet * tab_sommet, int num_depart)
 {
 
 	Arbre arbreACM = NULL;
-	Arc *ptr_arc;
+	Arc* ptr_arc;
 
 	arbreACM = malloc(sizeof(*arbreACM));
 
