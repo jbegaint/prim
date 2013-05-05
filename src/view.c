@@ -36,10 +36,21 @@ while (continuer) {
 		continuer = 0;
 		break;
 
-		case SDL_KEYDOWN: 
-		case SDLK_m: 
-		printf("hakuna matata \n");
-		continuer = 0 ;		
+		case SDL_KEYDOWN:
+			 switch (event.key.keysym.sym){
+				case SDLK_m:
+					printf("hakuna matata \n");
+					continuer = 0 ;
+					break;
+				default:
+				break;
+			}
+		break;
+
+		default:
+		break;
+
+			
 		}
 	}
 }
