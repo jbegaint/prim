@@ -8,12 +8,11 @@
 #include "arbre.h"
 #include "utils.h"
 
-void test(int i)
+void test(int res)
 {
-	if (i)
-		printf(" [OK]\n");
-	else
-		printf(" [ERROR]\n");
+	char* c;
+	c = (res) ? "[OK]" : "[ERROR]";
+	printf("%s\n", c);
 }
 
 int main() 
@@ -68,8 +67,8 @@ int main()
 	/* Test Liste */
 	printf("[Test File]\n");
 
-	File file1;
-	File file2;
+	File file1 = NULL;
+	File file2 = NULL;
 
 	printf("enfiler... ");
 	file1 = enfiler( file1, &sommet1, sizeof(Sommet));
@@ -80,10 +79,41 @@ int main()
 
 	printf("defiler... ");
 	file1 = enfiler( file1, &sommet2, sizeof(Sommet));
-	// defiler(&file1);
-	// test( (memcmp( &sommet1, (Sommet *) defiler(&file1), sizeof(Sommet)) == 0) );
+	test( (memcmp( &sommet1, (Sommet *) defiler(&file1), sizeof(Sommet)) == 0) );
 
-// void* defiler(File*);
+	printf("\n");
+
+	/* Test Sommet */
+	printf("[Test Sommet]\n");
+
+	printf("trouver_min_liste_sommet... ");
+	Sommet smt;
+	smt = trouver_min_liste_sommet(liste1);
+	test( (memcmp( &smt, &sommet1, sizeof(Sommet)) == 0) );
+
+	printf("\n");
+
+	/* Test Arbre */
+	printf("[Test Arbre]\n");
+
+	printf("ajouter_arbre... ");
+
+	Arc arc1;
+	arc1.sommet_depart = 0;
+	arc1.sommet_arrive = 1;
+
+	Arbre arbre1 = malloc(sizeof(Arbre));
+	arbre1->sommet = &sommet1;
+
+	sommet1.noeudArbreACM = arbre1;
+	Sommet tab_sommet[2];
+	tab_sommet[0] = sommet1;
+	tab_sommet[1] = sommet2;
+
+	ajouter_arbre( &arc1, tab_sommet);
+	test( (memcmp(&sommet1, (sommet1.noeudArbreACM)->sommet, sizeof(Sommet)) == 0) );
+
+	printf("\n");
 
 	return 0;
 }
