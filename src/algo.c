@@ -12,16 +12,6 @@
 
 #include "algo.h"
 
-/*void cout_arbreACM(Arbre r, float* cout)
-{
-	if (r) {
-		*cout += r->sommet->PPC;
-		cout_arbreACM(r->fils, cout);
-		cout_arbreACM(r->freres, cout);
-	}
-}*/
-
-
 Liste afficheRSB_iteratif(Arbre r)
 {
 	Arbre a;
@@ -32,7 +22,6 @@ Liste afficheRSB_iteratif(Arbre r)
 	while (!est_vide_liste(l)) {
 		for (a = *(Arbre *) l->val; a; a = a->fils) {
 
-			// printf("%s ", a->sommet->nom);
 			arbre = ajouter_queue(a->sommet, arbre, sizeof(Sommet));
 
 			if (a->freres)

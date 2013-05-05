@@ -115,5 +115,23 @@ int main()
 
 	printf("\n");
 
+	/* Test Utils */
+	printf("[Test Utils]\n");
+
+	printf("get_arc... ");
+	Arc arc2;
+	arc1.cout = 1;
+	arc2 = get_arc(0, 1, 1);
+	test( (memcmp(&arc1, &arc2, sizeof(Arc)) == 0) );
+
+	printf("get_param_sommet... ");
+	test( (get_param_sommet(1, 2) == 1 ) && (get_param_sommet(2, 2) == 0) && (get_param_sommet(3, 2) == 0));
+
+	printf("open_file... ");
+	FILE* f;
+	f = open_file("exemple.txt");
+	test( f != NULL );
+	fclose(f);
+
 	return 0;
 }

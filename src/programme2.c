@@ -46,10 +46,6 @@ int main(int argc, char** argv) {
 	Arbre arbreACM;
 	arbreACM = algo_arbreACM(fileACM, tab_sommet, num_depart);
 
-	/*float cout_arbre = 0;
-	cout_arbreACM(arbreACM, &	cout_arbre);
-	printf("%f\n", cout_arbre);*/
-
 	printf("arbreACM (recursif): ");
 	printf("[ ");
 	afficheRSB(arbreACM);
@@ -57,8 +53,26 @@ int main(int argc, char** argv) {
 
 	printf("arbreACM (iteratif): ");
 
-	Liste arbre;
-	arbre = afficheRSB_iteratif(arbreACM);
-	afficher_liste(arbre);
+	Liste liste_sommets_arbre;
+	liste_sommets_arbre = afficheRSB_iteratif(arbreACM);
+	afficher_liste(liste_sommets_arbre);
+
+	Liste l;
+	Sommet s1, s2;
+	Arc* ptr_arc;
+	float cc = 0;
+
+	for (l=liste_sommets_arbre; !est_vide_liste(l) && !est_vide_liste(l->suiv); l=l->suiv) {
+		s1 = *(Sommet *) l->val;
+		s2 = *(Sommet *) l->suiv->val;
+		for (ptr_arc = tab_arc; ptr_arc < tab_arc + len_tab_arc; ptr_arc++) {
+			if ( (ptr_arc->sommet_depart == s1.numero) && (ptr_arc->sommet_arrive == s2.numero) ) {
+				cc += ptr_arc->cout;
+				continue;
+			}
+		}
+	}
+	printf("Coût chemin arbre : %f\n", cc);
+
 	return 0;
 }
