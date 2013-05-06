@@ -17,7 +17,6 @@
 
 #include "SDL_draw.h"
 
-
 void draw_arc( SDL_Surface* ecran, Arc arc, Sommet* tab_sommet) 
 {
 	float x1, x2, y1, y2;
@@ -120,8 +119,11 @@ int main(int argc, char **argv)
 	
 	Liste pp;
 	Sommet sommet1, sommet2;
+	Liste sommets;
+	Liste SMT = returnRSB(arbreACM);
 
-	for ( pp = arbre; !est_vide_liste(pp) && !est_vide_liste(pp->suiv); pp = pp->suiv){
+	// smt arbre
+	for ( pp = SMT; !est_vide_liste(pp) && !est_vide_liste(pp->suiv); pp = pp->suiv){
 
 		sommet1 = *(Sommet *) pp->val;
 		sommet2 = *(Sommet *) pp->suiv->val;
@@ -132,10 +134,13 @@ int main(int argc, char **argv)
 		x2 = sommet2.coordonnee_x*window_width + offset;
 		y2 = sommet2.coordonnee_y*window_width + offset;
 
+		printf("%s -> %s\n", sommet1.nom, sommet2.nom);
+		// getchar();
+
 		Draw_Line(ecran, x1, y1, x2, y2, couleur);
 		SDL_Flip(ecran);
 
-		usleep(10000);
+		// usleep(10000);
 	}
 
 	/* Fin affichage des lignes */

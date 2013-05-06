@@ -50,7 +50,7 @@ Liste ajouter_queue(void *elt, Liste L, size_t size_elt)
 
 	if (!est_vide_liste(L)) {
 		for (q = L; !est_vide_liste(q); q = q->suiv) {
-			if (q->suiv == NULL)
+			if (est_vide_liste(q->suiv))
 				break;
 		}
 

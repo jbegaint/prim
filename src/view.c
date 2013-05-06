@@ -171,7 +171,7 @@ SDL_Surface *affiche_cout(SDL_Surface * ecran, float cout)
 
 	char buffer_cout[50];
 
-	sprintf(buffer_cout, "coût : %f", cout);	/*Convertie le float en chaine de caractère */
+	sprintf(buffer_cout, "coût : %f (arbre)", cout);	/*Convertie le float en chaine de caractère */
 
 	position_cout.x = 25;
 	position_cout.y = get_height(ecran) - 30;
