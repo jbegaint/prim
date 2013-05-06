@@ -1,4 +1,4 @@
 SUBDIRS = src include
 CLEANFILES = *~
 
-EXTRA_DIST = DroidSans.ttf README exemple.txt
+EXTRA_DIST = DroidSans.ttf README.md exemple.txt

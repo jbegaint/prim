@@ -64,7 +64,7 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__objects_1 = liste.$(OBJEXT) file.$(OBJEXT) utils.$(OBJEXT) \
-	sommet.$(OBJEXT) algo.$(OBJEXT) arbre.$(OBJEXT)
+	algo.$(OBJEXT) arbre.$(OBJEXT)
 am_programme1_OBJECTS = programme1.$(OBJEXT) $(am__objects_1)
 programme1_OBJECTS = $(am_programme1_OBJECTS)
 programme1_LDADD = $(LDADD)
@@ -97,12 +97,12 @@ am__can_run_installinfo = \
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /home/sylvain/Documents/Info/projet_info/missing --run aclocal-1.12
+ACLOCAL = ${SHELL} /home/jean/Documents/Cours/Info/C/S2/projet_info/missing --run aclocal-1.12
 AMTAR = $${TAR-tar}
-AUTOCONF = ${SHELL} /home/sylvain/Documents/Info/projet_info/missing --run autoconf
-AUTOHEADER = ${SHELL} /home/sylvain/Documents/Info/projet_info/missing --run autoheader
-AUTOMAKE = ${SHELL} /home/sylvain/Documents/Info/projet_info/missing --run automake-1.12
-AWK = mawk
+AUTOCONF = ${SHELL} /home/jean/Documents/Cours/Info/C/S2/projet_info/missing --run autoconf
+AUTOHEADER = ${SHELL} /home/jean/Documents/Cours/Info/C/S2/projet_info/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/jean/Documents/Cours/Info/C/S2/projet_info/missing --run automake-1.12
+AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2 -I/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT
@@ -114,9 +114,9 @@ DEPDIR = .deps
 ECHO_C = 
 ECHO_N = -n
 ECHO_T = 
-EGREP = /bin/grep -E
+EGREP = /usr/bin/grep -E
 EXEEXT = 
-GREP = /bin/grep
+GREP = /usr/bin/grep
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
@@ -124,10 +124,10 @@ INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 LDFLAGS = 
 LIBOBJS = 
-LIBS = -lSDL_draw -lSDL_ttf  -L/usr/lib/x86_64-linux-gnu -lSDL
+LIBS = -lSDL_draw -lSDL_ttf  -lSDL -lpthread
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /home/sylvain/Documents/Info/projet_info/missing --run makeinfo
-MKDIR_P = /bin/mkdir -p
+MAKEINFO = ${SHELL} /home/jean/Documents/Cours/Info/C/S2/projet_info/missing --run makeinfo
+MKDIR_P = /usr/bin/mkdir -p
 OBJEXT = o
 PACKAGE = projet_info
 PACKAGE_BUGREPORT = 
@@ -139,15 +139,15 @@ PACKAGE_VERSION = Begaint_Rochet
 PATH_SEPARATOR = :
 SDL_CFLAGS = -I/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT
 SDL_CONFIG = /usr/bin/sdl-config
-SDL_LIBS = -L/usr/lib/x86_64-linux-gnu -lSDL
+SDL_LIBS = -lSDL -lpthread
 SET_MAKE = 
-SHELL = /bin/bash
+SHELL = /bin/sh
 STRIP = 
 VERSION = Begaint_Rochet
-abs_builddir = /home/sylvain/Documents/Info/projet_info/src
-abs_srcdir = /home/sylvain/Documents/Info/projet_info/src
-abs_top_builddir = /home/sylvain/Documents/Info/projet_info
-abs_top_srcdir = /home/sylvain/Documents/Info/projet_info
+abs_builddir = /home/jean/Documents/Cours/Info/C/S2/projet_info/src
+abs_srcdir = /home/jean/Documents/Cours/Info/C/S2/projet_info/src
+abs_top_builddir = /home/jean/Documents/Cours/Info/C/S2/projet_info
+abs_top_srcdir = /home/jean/Documents/Cours/Info/C/S2/projet_info
 ac_ct_CC = gcc
 am__include = include
 am__leading_dot = .
@@ -166,7 +166,7 @@ host_alias =
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/sylvain/Documents/Info/projet_info/install-sh
+install_sh = ${SHELL} /home/jean/Documents/Cours/Info/C/S2/projet_info/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -187,7 +187,7 @@ top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
 AM_CPPFLAGS = -I$(top_builddir)/include
-DEPS = liste.c file.c utils.c sommet.c algo.c arbre.c
+DEPS = liste.c file.c utils.c algo.c arbre.c
 programme1_SOURCES = programme1.c $(DEPS)
 programme2_SOURCES = programme2.c $(DEPS)
 view_SOURCES = mainview.c view.c $(DEPS)
@@ -293,7 +293,6 @@ include ./$(DEPDIR)/liste.Po
 include ./$(DEPDIR)/mainview.Po
 include ./$(DEPDIR)/programme1.Po
 include ./$(DEPDIR)/programme2.Po
-include ./$(DEPDIR)/sommet.Po
 include ./$(DEPDIR)/tests.Po
 include ./$(DEPDIR)/utils.Po
 include ./$(DEPDIR)/view.Po

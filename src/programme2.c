@@ -57,6 +57,7 @@ int main(int argc, char** argv) {
 	liste_sommets_arbre = afficheRSB_iteratif(arbreACM);
 	afficher_liste(liste_sommets_arbre);
 
+	/* Faux pour le moment */
 	Liste l;
 	Sommet s1, s2;
 	Arc* ptr_arc;

@@ -119,18 +119,20 @@ File algo_fileACM(Sommet * tab_sommet, Arc * tab_arc,
 		for (a = tab_arc; a < tab_arc + len_tab_arc; a++) {
 			if (a->sommet_depart == sommet_ppc_min.numero) {
 				liste_sommet_adjacent = ajouter_queue(&tab_sommet[a->sommet_arrive], liste_sommet_adjacent, sizeof(Sommet));
-
+			
 				liste_arc_sortant = ajouter_queue(a, liste_arc_sortant, sizeof(Arc));
 			}
 		}
 
 		sommet_ppc_min.voisins = liste_arc_sortant;
 
+		// printf("Sommet: %s\n", sommet_ppc_min.nom);
+
 		for (ll = liste_arc_sortant; !est_vide_liste(ll); ll = ll->suiv) {
 
 			a = (Arc *) ll->val;
 
-			if ((tab_sommet[a->sommet_arrive]).PPC > a->cout) {
+			if ((tab_sommet[a->sommet_arrive]).PPC > a->cout) { 
 
 				tab_sommet[a->sommet_arrive].PPC = a->cout;
 				tab_sommet[a->sommet_arrive].arrive_par = a;
@@ -138,11 +140,19 @@ File algo_fileACM(Sommet * tab_sommet, Arc * tab_arc,
 				if (recherche_elt_liste(liste_sommet_atteint, &tab_sommet[a->sommet_arrive]) != 1) {
 					if (recherche_elt_liste(C, &tab_sommet[a->sommet_arrive]) != 1) {
 						C = ajout_tri(&tab_sommet[a->sommet_arrive], C);
+					} else {
+
+						Liste L = C;
+						Liste l;
+						C = NULL;
+						for (l = L; !est_vide_liste(l); l = l->suiv ) {
+							C = ajout_tri(&tab_sommet[((Sommet*) l->val)->numero], C);
+						}
 					}
 				}
 			}
-		}
 
+		}
 	}
 
 	printf("Cout de l'acm: %f\n", *cout);

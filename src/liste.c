@@ -72,8 +72,7 @@ Liste ajout_tri(Sommet * s, Liste L)
 	}
 
 	for (q = L; !est_vide_liste(q->suiv); q = q->suiv) {
-
-		if ((*s).PPC < (*(Sommet *) q->suiv->val).PPC) {
+		if ( s->PPC < (*(Sommet *) q->suiv->val).PPC) {
 			break;
 		}
 	}

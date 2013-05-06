@@ -84,14 +84,14 @@ int main()
 	printf("\n");
 
 	/* Test Sommet */
-	printf("[Test Sommet]\n");
+	// printf("[Test Sommet]\n");
 
-	printf("trouver_min_liste_sommet... ");
-	Sommet smt;
-	smt = trouver_min_liste_sommet(liste1);
-	test( (memcmp( &smt, &sommet1, sizeof(Sommet)) == 0) );
+	// printf("trouver_min_liste_sommet... ");
+	// Sommet smt;
+	// smt = trouver_min_liste_sommet(liste1);
+	// test( (memcmp( &smt, &sommet1, sizeof(Sommet)) == 0) );
 
-	printf("\n");
+	// printf("\n");
 
 	/* Test Arbre */
 	printf("[Test Arbre]\n");
