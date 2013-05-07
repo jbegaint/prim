@@ -43,6 +43,7 @@ int main()
 	liste1 = supprimer_tete(liste1);
 	test( (memcmp(&sommet2, (Sommet *) liste1->val, sizeof(Sommet)) == 0) );
 
+
 	printf("recherche_elt_liste... ");
 	test( recherche_elt_liste(liste1, &sommet2));
 
@@ -61,6 +62,15 @@ int main()
 			&& (memcmp(&sommet2, (Sommet *) liste1->suiv->val, sizeof(Sommet)) == 0)
 			&& (memcmp(&sommet3, (Sommet *) liste1->suiv->suiv->val, sizeof(Sommet)) == 0)
 		 );
+
+
+	printf("supprimer_queue... ");
+	liste1 = NULL;
+	liste1 = ajouter_tete(&sommet1, liste1, sizeof(Sommet));
+	liste1 = ajouter_tete(&sommet2, liste1, sizeof(Sommet));
+	liste1 = supprimer_queue(liste1);
+	test( (liste1->suiv == NULL) && (memcmp(&sommet2, (Sommet *) liste1->val, sizeof(Sommet)) == 0) );
+
 
 	printf("\n");
 
