@@ -111,6 +111,7 @@ CPPFLAGS =
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
+DIRSDL = /users/prog1a/C/librairie/2011
 ECHO_C = 
 ECHO_N = -n
 ECHO_T = 
@@ -191,6 +192,7 @@ DEPS = liste.c file.c utils.c algo.c arbre.c
 programme1_SOURCES = programme1.c $(DEPS)
 programme2_SOURCES = programme2.c $(DEPS)
 view_SOURCES = mainview.c view.c $(DEPS)
+#endif
 tests_SOURCES = tests.c $(DEPS)
 CLEANFILES = *~
 all: all-am
@@ -529,6 +531,9 @@ uninstall-am: uninstall-binPROGRAMS
 	mostlyclean-generic pdf pdf-am ps ps-am tags uninstall \
 	uninstall-am uninstall-binPROGRAMS
 
+
+#ifdef PHELMA_FLAG
+	view_LDFLAGS=-L$(DIRSDL)/lib -lSDL_draw
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

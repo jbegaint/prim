@@ -12,23 +12,6 @@
 
 #include "algo.h"
 
-Liste SMT = NULL;
-
-void returnRSB(Arbre r)
-{
-	if (r) {
-		SMT = ajouter_queue((Sommet*) r->sommet, SMT, sizeof(Sommet));
-		returnRSB(r->fils);
-		returnRSB(r->freres);
-	}
-}
-
-Liste RSB(Arbre r)
-{
-	returnRSB(r);
-	return SMT;
-}
-
 Liste afficheRSB_iteratif(Arbre r)
 {
 	Arbre a;
@@ -48,9 +31,6 @@ Liste afficheRSB_iteratif(Arbre r)
 				l = ajouter_tete(&(a->freres), l, sizeof(Arbre));
 		}
 		free(tmp);
-		// l = supprimer_tete(l);
-		// l = supprimer_queue(l);
-		// supprimer_queue;
 	}
 	return arbre;
 }
