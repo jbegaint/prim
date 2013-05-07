@@ -3,7 +3,6 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <time.h>
 
 #include "view.h"
 #include "algo.h"
@@ -79,9 +78,9 @@ int main(int argc, char **argv)
 
 	printf("arbreACM (iteratif): ");
 
-	Liste arbre;
-	arbre = afficheRSB_iteratif(arbreACM);
-	afficher_liste(arbre);
+	Liste liste_sommets_arbre;
+	liste_sommets_arbre = afficheRSB_iteratif(arbreACM);
+	afficher_liste(liste_sommets_arbre);
 
 	init_SDL();
 
@@ -112,18 +111,13 @@ int main(int argc, char **argv)
 	// draw_arc(ecran, arc, tab_sommet);
 
 
-	// TEST AATATAAT
 	float offset = 25;
 	int couleur = 0;
-
 	
 	Liste pp;
 	Sommet sommet1, sommet2;
-	Liste sommets;
-	Liste SMT = returnRSB(arbreACM);
 
-	// smt arbre
-	for ( pp = SMT; !est_vide_liste(pp) && !est_vide_liste(pp->suiv); pp = pp->suiv){
+	for ( pp = liste_sommets_arbre; !est_vide_liste(pp) && !est_vide_liste(pp->suiv); pp = pp->suiv){
 
 		sommet1 = *(Sommet *) pp->val;
 		sommet2 = *(Sommet *) pp->suiv->val;
@@ -135,12 +129,9 @@ int main(int argc, char **argv)
 		y2 = sommet2.coordonnee_y*window_width + offset;
 
 		printf("%s -> %s\n", sommet1.nom, sommet2.nom);
-		// getchar();
 
 		Draw_Line(ecran, x1, y1, x2, y2, couleur);
 		SDL_Flip(ecran);
-
-		// usleep(10000);
 	}
 
 	/* Fin affichage des lignes */

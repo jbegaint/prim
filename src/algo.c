@@ -34,17 +34,22 @@ Liste afficheRSB_iteratif(Arbre r)
 	Arbre a;
 	Liste l = NULL;
 	Liste arbre = NULL;
-	l = ajouter_queue(&r, l, sizeof(Arbre));
+	Liste tmp;
+	l = ajouter_tete(&r, l, sizeof(Arbre));
 
 	while (!est_vide_liste(l)) {
-		for (a = *(Arbre *) l->val; a; a = a->fils) {
+		tmp = l;
+		l = l->suiv;
+		for (a = *(Arbre *) tmp->val; a; a = a->fils) {
 
 			arbre = ajouter_queue(a->sommet, arbre, sizeof(Sommet));
 
 			if (a->freres)
-				l = ajouter_queue(&(a->freres), l, sizeof(Arbre));
+				l = ajouter_tete(&(a->freres), l, sizeof(Arbre));
 		}
-		l = supprimer_tete(l);
+		free(tmp);
+		// l = supprimer_tete(l);
+		// l = supprimer_queue(l);
 		// supprimer_queue;
 	}
 	return arbre;
