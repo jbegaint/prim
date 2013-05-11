@@ -68,7 +68,7 @@ int main()
 	liste1 = NULL;
 	liste1 = ajouter_tete(&sommet1, liste1, sizeof(Sommet));
 	liste1 = ajouter_tete(&sommet2, liste1, sizeof(Sommet));
-	liste1 = supprimer_queue(liste1);
+	liste1 = supprimer_queue( liste1);
 	test( (liste1->suiv == NULL) && (memcmp(&sommet2, (Sommet *) liste1->val, sizeof(Sommet)) == 0) );
 
 
