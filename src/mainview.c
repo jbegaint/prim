@@ -3,7 +3,6 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <time.h>
 
 #include "view.h"
 #include "algo.h"
@@ -16,7 +15,6 @@
 #include "utils.h"
 
 #include "SDL_draw.h"
-
 
 void draw_arc( SDL_Surface* ecran, Arc arc, Sommet* tab_sommet) 
 {
@@ -80,9 +78,9 @@ int main(int argc, char **argv)
 
 	printf("arbreACM (iteratif): ");
 
-	Liste arbre;
-	arbre = afficheRSB_iteratif(arbreACM);
-	afficher_liste(arbre);
+	Liste liste_sommets_arbre;
+	liste_sommets_arbre = afficheRSB_iteratif(arbreACM);
+	afficher_liste(liste_sommets_arbre);
 
 	init_SDL();
 
@@ -113,15 +111,13 @@ int main(int argc, char **argv)
 	// draw_arc(ecran, arc, tab_sommet);
 
 
-	// TEST AATATAAT
 	float offset = 25;
 	int couleur = 0;
-
 	
 	Liste pp;
 	Sommet sommet1, sommet2;
 
-	for ( pp = arbre; !est_vide_liste(pp) && !est_vide_liste(pp->suiv); pp = pp->suiv){
+	for ( pp = liste_sommets_arbre; !est_vide_liste(pp) && !est_vide_liste(pp->suiv); pp = pp->suiv){
 
 		sommet1 = *(Sommet *) pp->val;
 		sommet2 = *(Sommet *) pp->suiv->val;
@@ -132,10 +128,10 @@ int main(int argc, char **argv)
 		x2 = sommet2.coordonnee_x*window_width + offset;
 		y2 = sommet2.coordonnee_y*window_width + offset;
 
+		printf("%s -> %s\n", sommet1.nom, sommet2.nom);
+
 		Draw_Line(ecran, x1, y1, x2, y2, couleur);
 		SDL_Flip(ecran);
-
-		usleep(10000);
 	}
 
 	/* Fin affichage des lignes */

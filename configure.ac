@@ -14,7 +14,17 @@ AM_PATH_SDL($SDL_VERSION,
 )
 
 AC_CHECK_LIB([SDL_ttf], [TTF_Init])
-AC_CHECK_LIB([SDL_draw], [Draw_Line])
+AC_CHECK_LIB([SDL_draw], [Draw_Line], 
+				[], 
+				[AC_DEFINE(PHELMA_FLAG, [], [Phelma flag defined])]
+
+
+)
+
+#ifdef PHELMA_FLAG
+	DIRSDL=/users/prog1a/C/librairie/2011
+	AC_SUBST(DIRSDL)
+#endif
 
 CFLAGS="$CFLAGS $SDL_CFLAGS"
 LIBS="$LIBS $SDL_LIBS"

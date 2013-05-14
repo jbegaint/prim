@@ -621,6 +621,7 @@ ac_includes_default="\
 ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
+DIRSDL
 SDL_LIBS
 SDL_CFLAGS
 SDL_CONFIG
@@ -4465,8 +4466,20 @@ _ACEOF
 
   LIBS="-lSDL_draw $LIBS"
 
+else
+
+$as_echo "#define PHELMA_FLAG /**/" >>confdefs.h
+
+
+
+
 fi
 
+
+#ifdef PHELMA_FLAG
+	DIRSDL=/users/prog1a/C/librairie/2011
+
+#endif
 
 CFLAGS="$CFLAGS $SDL_CFLAGS"
 LIBS="$LIBS $SDL_LIBS"

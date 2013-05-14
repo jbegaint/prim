@@ -29,6 +29,7 @@ Liste ajouter_tete(void *elt, Liste L, size_t size_elt)
 	return p;
 }
 
+
 Liste ajouter_queue(void *elt, Liste L, size_t size_elt)
 {
 	Liste p;
@@ -50,7 +51,7 @@ Liste ajouter_queue(void *elt, Liste L, size_t size_elt)
 
 	if (!est_vide_liste(L)) {
 		for (q = L; !est_vide_liste(q); q = q->suiv) {
-			if (q->suiv == NULL)
+			if (est_vide_liste(q->suiv))
 				break;
 		}
 
@@ -102,6 +103,22 @@ Liste supprimer_tete(Liste L)
 	free(L);
 	
 	return p;
+}
+
+Liste supprimer_queue(Liste L)
+{
+	Liste p;
+	if (est_vide_liste(L) || est_vide_liste(L->suiv))
+		return NULL;
+
+	p = L;
+	while (!est_vide_liste(p->suiv->suiv)) {
+		p = p->suiv;
+	}
+	free(p->suiv);
+	p->suiv = NULL;
+
+	return L;
 }
 
 void afficher_liste(Liste L)

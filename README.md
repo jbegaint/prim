@@ -28,6 +28,8 @@ Rôles des différens programmes:
 * programme 2 : construit l'arbre à partir des arcs puis affiche le parcours de cet arbre
 * view : version graphique de programme2
 
+* tests : test les différentes fonctions associées aux listes et files
+
 
 
 Auteurs

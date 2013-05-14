@@ -71,7 +71,7 @@ SDL_Surface *init_ecran(SDL_Surface * ecran)
 	int height = info->current_h - 100; // évite de manger le panel 
 	ecran = SDL_SetVideoMode(height, height, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
 	SDL_WM_SetCaption("Chemin le plus court", NULL);	/* Nomme la fenetre */
-	SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 70, 70, 70));	/*Mise en couleur de l'écran */
+	SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 230, 230, 230));	/*Mise en couleur de l'écran */
 	SDL_Flip(ecran);	/*Mise à jour de l'écran */
 	return ecran;
 }
@@ -171,7 +171,7 @@ SDL_Surface *affiche_cout(SDL_Surface * ecran, float cout)
 
 	char buffer_cout[50];
 
-	sprintf(buffer_cout, "coût : %f", cout);	/*Convertie le float en chaine de caractère */
+	sprintf(buffer_cout, "coût : %f (arbre)", cout);	/*Convertie le float en chaine de caractère */
 
 	position_cout.x = 25;
 	position_cout.y = get_height(ecran) - 30;
