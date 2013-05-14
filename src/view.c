@@ -98,14 +98,13 @@ SDL_Surface *edit_point(SDL_Surface * ecran, Sommet * sommet,
 
 	SDL_Surface *nom_sommet = NULL;	/*Surface pour l'écriture du sommet */
 	SDL_Surface *point = NULL;	/*Surface pour affichage des points */
-	SDL_Surface *progression = NULL;	/*Surface pour la barre de progression */
+	
 
 	SDL_Rect position_sommet;	/*Position pour les noms des sommets */
 	SDL_Rect position;	/*Position pour la progression */
-	SDL_Rect position_progression;	/*Position pour les sommets */
-
+	
 	point = SDL_CreateRGBSurface(SDL_HWSURFACE, 2, 2, 32, 0, 0, 0, 0);	/*Création d'un rectangle 2*2 en couleur 32 bits) */
-	progression = SDL_CreateRGBSurface(SDL_HWSURFACE, 10, 10, 32, 0, 0, 0, 0);	/*Création d'un rectangle 10*10 en couleur 32 bits) */
+	
 
 	float window_width = get_width(ecran);
 	float window_height = get_height(ecran);
@@ -136,20 +135,11 @@ SDL_Surface *edit_point(SDL_Surface * ecran, Sommet * sommet,
 		/*Mise à jour de l'écran */
 		SDL_Flip(ecran);
 
-		/*Idem mais pour la barre de progression */
-		position_progression.y = get_height(ecran) +10;
-		position_progression.x = i * 300 / len_tab_sommet + 175;
-		SDL_FillRect(progression, NULL,
-			     SDL_MapRGB(ecran->format, 255, 255, 255));
-		SDL_BlitSurface(progression, NULL, ecran,
-				&position_progression);
-		SDL_Flip(ecran);
 	}
-	/*On libère la mémoire de la police, des surfaces nom_sommet, point, progression et on stope SDL_TTF */
+	/*On libère la mémoire de la police, des surfaces nom_sommet, point et on stope SDL_TTF */
 	TTF_CloseFont(police);
 	SDL_FreeSurface(nom_sommet);
 	SDL_FreeSurface(point);
-	SDL_FreeSurface(progression);
 	TTF_Quit();
 	return ecran;
 }
