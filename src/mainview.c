@@ -99,18 +99,6 @@ int main(int argc, char **argv)
 	float window_width = get_width(ecran);
 	float x1, x2, y1, y2;
 
-	// int couleur = 0;		//0xff0000FF; 
-
-	// for (p = fileACM->suiv; p != fileACM; p = p->suiv) {
-	// 	arc =  *((Arc* ) p->val);
-	// 	draw_arc(ecran, arc, tab_sommet);
-	// }
-
-	/* NE PAS OUBLIER D'AFFICHER LE DERNIER, cf afficher_file */
-	// arc =  *((Arc* ) fileACM->val);
-	// draw_arc(ecran, arc, tab_sommet);
-
-
 	float offset = 25;
 	int couleur = 0;
 	

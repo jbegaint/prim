@@ -37,6 +37,10 @@ int main(int argc, char** argv) {
 	num_depart = get_param_sommet(num_depart, len_tab_sommet);
 	printf("Départ: %s\n", tab_sommet[num_depart].nom);
 
+
+	printf("----------------\n");
+	printf("| Algo FileACM |\n");
+	printf("----------------\n");
 	File fileACM;
 	float cout = 0;
 	fileACM = algo_fileACM(tab_sommet, tab_arc, len_tab_sommet, len_tab_arc, num_depart, &cout);	
@@ -46,6 +50,10 @@ int main(int argc, char** argv) {
 	Arbre arbreACM;
 	arbreACM = algo_arbreACM(fileACM, tab_sommet, num_depart);
 
+
+	printf("----------------\n");
+	printf("| Algo ArbreACM |\n");
+	printf("----------------\n");
 	printf("arbreACM (recursif): ");
 	printf("[ ");
 	afficheRSB(arbreACM);

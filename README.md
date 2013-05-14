@@ -5,7 +5,7 @@ Projet Programmation : Le Tour du Monde le moins cher
 
 Compilation
 -----------
-Exécutez les commandes suivantes dans le répertoire du projet pour compiler:
+Exécutez les commandes suivantes dans le répertoire racine du projet pour compiler:
 * ./configure
 * make
 
