@@ -38,8 +38,8 @@ while (continuer) {
 
 		case SDL_KEYDOWN:
 			 switch (event.key.keysym.sym){
-				case SDLK_m:
-					printf("hakuna matata \n");
+				case SDLK_q:
+					printf("quit...\n");
 					continuer = 0 ;
 					break;
 				default:
