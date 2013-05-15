@@ -193,7 +193,8 @@ DEPS = liste.c file.c utils.c algo.c arbre.c
 programme1_SOURCES = programme1.c $(DEPS)
 programme2_SOURCES = programme2.c $(DEPS)
 view_SOURCES = mainview.c view.c $(DEPS)
-#view_LDFLAGS = -L$(DIRSDL)/lib -lSDL_draw
+DIRSDL = /users/prog1a/C/librairie/2011
+view_LDFLAGS = -L$(DIRSDL)/lib -lSDL_draw
 tests_SOURCES = tests.c $(DEPS)
 CLEANFILES = *~
 all: all-am
