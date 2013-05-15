@@ -4470,7 +4470,7 @@ _ACEOF
 fi
 
 
- if test "$ac_cv_lib_sdl_draw_draw_line" = no; then
+ if test "$ac_cv_lib_sdl_draw_draw_line" != yes; then
   PHELMA_TRUE=
   PHELMA_FALSE='#'
 else
@@ -4478,8 +4478,6 @@ else
   PHELMA_FALSE=
 fi
 
-
-DIRSDL=/users/prog1a/C/librairie/2011
 
 CFLAGS="$CFLAGS $SDL_CFLAGS"
 LIBS="$LIBS $SDL_LIBS"
