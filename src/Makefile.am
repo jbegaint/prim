@@ -8,9 +8,10 @@ programme1_SOURCES = programme1.c $(DEPS)
 programme2_SOURCES = programme2.c $(DEPS)
 view_SOURCES = mainview.c view.c $(DEPS)
 
-#ifdef PHELMA_FLAG
-	view_LDFLAGS=-L$(DIRSDL)/lib -lSDL_draw
-#endif
+if PHELMA
+DIRSDL=/users/prog1a/C/librairie/2011
+view_LDFLAGS=-L$(DIRSDL)/lib -lSDL_draw
+endif
 
 tests_SOURCES = tests.c $(DEPS)
 

@@ -77,6 +77,8 @@ tests_LDADD = $(LDADD)
 am_view_OBJECTS = mainview.$(OBJEXT) view.$(OBJEXT) $(am__objects_1)
 view_OBJECTS = $(am_view_OBJECTS)
 view_LDADD = $(LDADD)
+view_LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(view_LDFLAGS) $(LDFLAGS) \
+	-o $@
 DEFAULT_INCLUDES = -I. -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -97,12 +99,12 @@ am__can_run_installinfo = \
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /home/sylvain/Documents/Info/projet_info/missing --run aclocal-1.12
+ACLOCAL = ${SHELL} /home/jean/Documents/Cours/Info/C/S2/projet_info/missing --run aclocal-1.12
 AMTAR = $${TAR-tar}
-AUTOCONF = ${SHELL} /home/sylvain/Documents/Info/projet_info/missing --run autoconf
-AUTOHEADER = ${SHELL} /home/sylvain/Documents/Info/projet_info/missing --run autoheader
-AUTOMAKE = ${SHELL} /home/sylvain/Documents/Info/projet_info/missing --run automake-1.12
-AWK = mawk
+AUTOCONF = ${SHELL} /home/jean/Documents/Cours/Info/C/S2/projet_info/missing --run autoconf
+AUTOHEADER = ${SHELL} /home/jean/Documents/Cours/Info/C/S2/projet_info/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/jean/Documents/Cours/Info/C/S2/projet_info/missing --run automake-1.12
+AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2 -I/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT
@@ -111,13 +113,12 @@ CPPFLAGS =
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
-DIRSDL = /users/prog1a/C/librairie/2011
 ECHO_C = 
 ECHO_N = -n
 ECHO_T = 
-EGREP = /bin/grep -E
+EGREP = /usr/bin/grep -E
 EXEEXT = 
-GREP = /bin/grep
+GREP = /usr/bin/grep
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
@@ -125,10 +126,10 @@ INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 LDFLAGS = 
 LIBOBJS = 
-LIBS = -lSDL_draw -lSDL_ttf  -L/usr/lib/x86_64-linux-gnu -lSDL
+LIBS = -lSDL_draw -lSDL_ttf  -lSDL -lpthread
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /home/sylvain/Documents/Info/projet_info/missing --run makeinfo
-MKDIR_P = /bin/mkdir -p
+MAKEINFO = ${SHELL} /home/jean/Documents/Cours/Info/C/S2/projet_info/missing --run makeinfo
+MKDIR_P = /usr/bin/mkdir -p
 OBJEXT = o
 PACKAGE = projet_info
 PACKAGE_BUGREPORT = 
@@ -140,15 +141,15 @@ PACKAGE_VERSION = Begaint_Rochet
 PATH_SEPARATOR = :
 SDL_CFLAGS = -I/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT
 SDL_CONFIG = /usr/bin/sdl-config
-SDL_LIBS = -L/usr/lib/x86_64-linux-gnu -lSDL
+SDL_LIBS = -lSDL -lpthread
 SET_MAKE = 
-SHELL = /bin/bash
+SHELL = /bin/sh
 STRIP = 
 VERSION = Begaint_Rochet
-abs_builddir = /home/sylvain/Documents/Info/projet_info/src
-abs_srcdir = /home/sylvain/Documents/Info/projet_info/src
-abs_top_builddir = /home/sylvain/Documents/Info/projet_info
-abs_top_srcdir = /home/sylvain/Documents/Info/projet_info
+abs_builddir = /home/jean/Documents/Cours/Info/C/S2/projet_info/src
+abs_srcdir = /home/jean/Documents/Cours/Info/C/S2/projet_info/src
+abs_top_builddir = /home/jean/Documents/Cours/Info/C/S2/projet_info
+abs_top_srcdir = /home/jean/Documents/Cours/Info/C/S2/projet_info
 ac_ct_CC = gcc
 am__include = include
 am__leading_dot = .
@@ -167,7 +168,7 @@ host_alias =
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/sylvain/Documents/Info/projet_info/install-sh
+install_sh = ${SHELL} /home/jean/Documents/Cours/Info/C/S2/projet_info/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -192,7 +193,7 @@ DEPS = liste.c file.c utils.c algo.c arbre.c
 programme1_SOURCES = programme1.c $(DEPS)
 programme2_SOURCES = programme2.c $(DEPS)
 view_SOURCES = mainview.c view.c $(DEPS)
-#endif
+#view_LDFLAGS = -L$(DIRSDL)/lib -lSDL_draw
 tests_SOURCES = tests.c $(DEPS)
 CLEANFILES = *~
 all: all-am
@@ -280,7 +281,7 @@ tests$(EXEEXT): $(tests_OBJECTS) $(tests_DEPENDENCIES) $(EXTRA_tests_DEPENDENCIE
 	$(LINK) $(tests_OBJECTS) $(tests_LDADD) $(LIBS)
 view$(EXEEXT): $(view_OBJECTS) $(view_DEPENDENCIES) $(EXTRA_view_DEPENDENCIES) 
 	@rm -f view$(EXEEXT)
-	$(LINK) $(view_OBJECTS) $(view_LDADD) $(LIBS)
+	$(view_LINK) $(view_OBJECTS) $(view_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -531,9 +532,6 @@ uninstall-am: uninstall-binPROGRAMS
 	mostlyclean-generic pdf pdf-am ps ps-am tags uninstall \
 	uninstall-am uninstall-binPROGRAMS
 
-
-#ifdef PHELMA_FLAG
-	view_LDFLAGS=-L$(DIRSDL)/lib -lSDL_draw
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

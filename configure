@@ -621,7 +621,8 @@ ac_includes_default="\
 ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
-DIRSDL
+PHELMA_FALSE
+PHELMA_TRUE
 SDL_LIBS
 SDL_CFLAGS
 SDL_CONFIG
@@ -4466,20 +4467,19 @@ _ACEOF
 
   LIBS="-lSDL_draw $LIBS"
 
-else
-
-$as_echo "#define PHELMA_FLAG /**/" >>confdefs.h
-
-
-
-
 fi
 
 
-#ifdef PHELMA_FLAG
-	DIRSDL=/users/prog1a/C/librairie/2011
+ if test "$ac_cv_lib_sdl_draw_draw_line" = no; then
+  PHELMA_TRUE=
+  PHELMA_FALSE='#'
+else
+  PHELMA_TRUE='#'
+  PHELMA_FALSE=
+fi
 
-#endif
+
+DIRSDL=/users/prog1a/C/librairie/2011
 
 CFLAGS="$CFLAGS $SDL_CFLAGS"
 LIBS="$LIBS $SDL_LIBS"
@@ -4619,6 +4619,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${am__fastdepCC_TRUE}" && test -z "${am__fastdepCC_FALSE}"; then
   as_fn_error $? "conditional \"am__fastdepCC\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${PHELMA_TRUE}" && test -z "${PHELMA_FALSE}"; then
+  as_fn_error $? "conditional \"PHELMA\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 
