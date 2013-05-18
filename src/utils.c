@@ -41,7 +41,7 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 	char s[256], line[256];
 	char* base;
 
-	int k=0;
+	int k=0; // indice de ligne
 
 	Sommet sommet;
 	int arrive, depart;
@@ -65,6 +65,7 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 	}
 	
 	fgets(s, 256, f);
+	printf("%s", s);
 
 	printf("Sommets:\n");
 	for (i=0; i<*len_tab_sommet; i++) {
@@ -93,17 +94,20 @@ void lecture(char* filename, Sommet** tab_sommet, Arc** tab_arc, int* len_tab_so
 
 	fgets(s, 256, f);
 
-	base = basename(filename);
+	/* obsolète depuis la maj des fichiers monde et france */
+
+	// base = basename(filename);
 	// les fichiers graphe*.txt listes les arretes 
 	// alors que monde.txt et france.txt listent les Arcs
 
-	if ( (strcmp(base, "monde.txt") == 0) || (strcmp(base, "france.txt") == 0)) {
-		*tab_arc = malloc((*len_tab_arc)*sizeof(Arc));
+	// if ( (strcmp(base, "monde.txt") == 0) || (strcmp(base, "france.txt") == 0)) {
+	// 	*tab_arc = malloc((*len_tab_arc)*sizeof(Arc));
 
-	} else {
-		*len_tab_arc *= 2;
-	}
+	// } else {
+		
+	// }
 
+	*len_tab_arc *= 2;
 	*tab_arc = malloc((*len_tab_arc)*sizeof(Arc));
 
 	printf("Arcs:\n");
