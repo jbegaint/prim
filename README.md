@@ -1,7 +1,8 @@
 Projet Programmation : Le Tour du Monde le moins cher
 =====================================================
 
-_Projet informatique, première année: [sujet](http://tdinfo.phelma.grenoble-inp.fr/1Apet/td/projet2013.pdf)__
+_Projet informatique, première année:
+[sujet](http://tdinfo.phelma.grenoble-inp.fr/1Apet/td/projet2013.pdf)_
 
 Compilation
 -----------
