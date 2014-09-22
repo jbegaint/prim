@@ -145,7 +145,7 @@ void afficher_arc(Arc arc)
 	printf("a%d_%d", arc.sommet_depart, arc.sommet_arrive);
 }
 
-int recherche_elt_liste(Liste L, void *elt)
+int recherche_elt_list(Liste L, void *elt)
 {
 	Liste p;
 	for (p = L; !est_vide_liste(p); p = p->suiv) {
